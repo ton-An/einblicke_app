@@ -25,8 +25,8 @@ class _FeatureTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: DispatchProperties.mediumPadding,
+      padding: EdgeInsets.symmetric(
+        vertical: IOSTheme.of(context).spacing.medium,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +35,7 @@ class _FeatureTile extends StatelessWidget {
             icon,
             size: DispatchProperties.largeIconSize,
           ),
-          const SizedBox(width: DispatchProperties.mediumPadding),
+          SizedBox(width: IOSTheme.of(context).spacing.medium),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -44,7 +44,6 @@ class DispatchPiApp extends StatelessWidget {
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case "/select_image":
-        // default:
         return CupertinoPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt<SelectImageCubit>(),

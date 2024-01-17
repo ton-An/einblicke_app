@@ -3,7 +3,6 @@ library select_image_page;
 import 'dart:io';
 
 import 'package:dispatch_pi_app/core/dependency_injector.dart';
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
 import 'package:dispatch_pi_app/core/l10n/app_localizations.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
@@ -30,11 +29,12 @@ class SelectImage extends StatelessWidget {
           Navigator.popAndPushNamed(context, "/sign_in");
         }
       },
-      child: const CupertinoPageScaffold(
+      child: CupertinoPageScaffold(
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: DispatchProperties.largePadding),
-          child: Column(
+          padding: EdgeInsets.symmetric(
+            horizontal: IOSTheme.of(context).spacing.xMedium,
+          ),
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

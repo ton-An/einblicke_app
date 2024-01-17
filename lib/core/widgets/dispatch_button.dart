@@ -1,4 +1,5 @@
 import 'package:dispatch_pi_app/core/dispatch_properties.dart';
+import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class DispatchButton extends StatelessWidget {
@@ -20,8 +21,8 @@ class DispatchButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(
         DispatchProperties.buttonBorderRadius,
       ),
-      padding: const EdgeInsets.symmetric(
-        vertical: DispatchProperties.mediumPadding,
+      padding: EdgeInsets.symmetric(
+        vertical: IOSTheme.of(context).spacing.medium,
       ),
       child: child,
       onPressed: onPressed,

@@ -1,4 +1,4 @@
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
+import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class SmallerGap extends StatelessWidget {
@@ -6,8 +6,6 @@ class SmallerGap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: DispatchProperties.smallerPadding,
-    );
+    return SizedBox(height: IOSTheme.of(context).spacing.xTiny);
   }
 }

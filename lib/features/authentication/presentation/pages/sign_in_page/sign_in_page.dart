@@ -1,6 +1,5 @@
 library login_page;
 
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
 import 'package:dispatch_pi_app/core/l10n/app_localizations.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
@@ -63,29 +62,29 @@ class _LoginPageState extends State<LoginPage> {
           bottom: false,
           child: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(
-                left: DispatchProperties.largePadding,
-                right: DispatchProperties.largePadding,
-                bottom: DispatchProperties.largestPadding,
+              padding: EdgeInsets.only(
+                left: IOSTheme.of(context).spacing.xMedium,
+                right: IOSTheme.of(context).spacing.xMedium,
+                bottom: IOSTheme.of(context).spacing.xMedium,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: ListView(
-                      children: const [
+                      children: [
                         SizedBox(
-                          height: DispatchProperties.largerPadding * 2,
+                          height: IOSTheme.of(context).spacing.xxxLarge,
                         ),
-                        _Title(),
+                        const _Title(),
                         SizedBox(
-                          height: DispatchProperties.largerPadding * 4,
+                          height: IOSTheme.of(context).spacing.xxLarge,
                         ),
-                        _UsernameField(),
-                        MediumGap(),
-                        _PasswordField(),
+                        const _UsernameField(),
+                        const MediumGap(),
+                        const _PasswordField(),
                         SizedBox(
-                          height: DispatchProperties.mediumPadding,
+                          height: IOSTheme.of(context).spacing.medium,
                         ),
                       ],
                     ),

@@ -34,25 +34,25 @@ class WelcomeModal extends StatelessWidget {
         child: CupertinoPageScaffold(
           child: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(
-                left: DispatchProperties.largePadding,
-                right: DispatchProperties.largePadding,
-                bottom: DispatchProperties.largestPadding,
+              padding: EdgeInsets.only(
+                left: IOSTheme.of(context).spacing.xMedium,
+                right: IOSTheme.of(context).spacing.xMedium,
+                bottom: IOSTheme.of(context).spacing.xMedium,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: ListView(
-                      children: const [
+                      children: [
                         SizedBox(
-                          height: DispatchProperties.largerPadding * 2,
+                          height: IOSTheme.of(context).spacing.xxxLarge,
                         ),
-                        _Title(),
+                        const _Title(),
                         SizedBox(
-                          height: DispatchProperties.mediumPadding,
+                          height: IOSTheme.of(context).spacing.medium,
                         ),
-                        _Features(),
+                        const _Features(),
                       ],
                     ),
                   ),

@@ -7,9 +7,9 @@ class _Features extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: DispatchProperties.smallPadding,
-        vertical: DispatchProperties.mediumPadding,
+      padding: EdgeInsets.symmetric(
+        horizontal: IOSTheme.of(context).spacing.xSmall,
+        vertical: IOSTheme.of(context).spacing.medium,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
