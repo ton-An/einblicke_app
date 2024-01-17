@@ -2,11 +2,13 @@ library ios_theme;
 
 import 'package:flutter/cupertino.dart';
 
+part '_default_spacing.dart';
 part '_default_text_styles.dart';
 part '_inherited_simply_theme.dart';
 part '_text_theme_defaults_builder.dart';
 part 'ios_color_theme_data.dart';
 part 'ios_colors.dart';
+part 'ios_spacing_theme_data.dart';
 part 'ios_text_theme_data.dart';
 part 'ios_theme_data.dart';
 
@@ -23,7 +25,7 @@ class IOSTheme extends StatelessWidget {
   static IOSThemeData of(BuildContext context) {
     final _InheritedIOSTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedIOSTheme>();
-    return inheritedTheme?.theme.data ?? const IOSThemeData.IOSThemeData();
+    return inheritedTheme?.theme.data ?? const IOSThemeData();
   }
 
   @override
