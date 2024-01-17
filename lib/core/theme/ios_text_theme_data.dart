@@ -9,7 +9,7 @@ class IOSTextThemeData {
     TextStyle? smallLabel,
   }) : this._raw(
           const _TextThemeDefaultsBuilder(
-            IOSColors.white,
+            IOSColors.black,
             IOSColors.description,
           ),
           navTitle,

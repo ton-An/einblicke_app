@@ -1,4 +1,17 @@
 {
     "appName": "Dispatch Pi",
-    "login": "Login"
+    "login": "Login",
+    "continueLabel": "Continue",
+    "welcomeTo": "Welcome to",
+
+    "loremTitle": "Lorem ipsum dolor sit",
+    "loremDescription": "Integer rutrum quam nec mattis aliquet. Proin placerat vehicula nisi non finibus.",
+
+    "username": "Username",
+    "password": "Password",
+
+    "error": "Error",
+    "success": "Success",
+    "sendImage": "Send Image"
+
 }

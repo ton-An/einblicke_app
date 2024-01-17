@@ -1,7 +1,7 @@
 part of ios_theme;
 
-class SimplyThemeData {
-  const SimplyThemeData.IOSThemeData({
+class IOSThemeData {
+  const IOSThemeData.IOSThemeData({
     this.colors = const IOSColorThemeData(),
     this.text = const IOSTextThemeData(),
   });

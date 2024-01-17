@@ -17,13 +17,13 @@ class IOSTheme extends StatelessWidget {
     required this.child,
   });
 
-  final SimplyThemeData data;
+  final IOSThemeData data;
   final Widget child;
 
-  static SimplyThemeData of(BuildContext context) {
+  static IOSThemeData of(BuildContext context) {
     final _InheritedIOSTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedIOSTheme>();
-    return inheritedTheme?.theme.data ?? const SimplyThemeData.IOSThemeData();
+    return inheritedTheme?.theme.data ?? const IOSThemeData.IOSThemeData();
   }
 
   @override

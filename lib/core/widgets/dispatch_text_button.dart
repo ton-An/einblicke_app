@@ -1,24 +1,31 @@
+import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
+import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
 import 'package:flutter/cupertino.dart';
 
 class DispatchTextButton extends StatelessWidget {
   const DispatchTextButton({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.disabledColor,
+    this.onPressed,
   });
 
   final String text;
-  final VoidCallback onPressed;
+  final Color? disabledColor;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton.filled(
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(
-                color: CupertinoColors.white,
-              ),
-        ));
+    return DispatchButton(
+      disabledColor: disabledColor,
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: IOSTheme.of(context)
+            .text
+            .buttonLabel
+            .copyWith(color: IOSTheme.of(context).colors.primaryContrast),
+      ),
+    );
   }
 }
