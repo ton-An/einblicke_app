@@ -35,7 +35,7 @@ class DispatchPiApp extends StatelessWidget {
         Locale("en"),
       ],
       theme: const CupertinoThemeData(
-        scaffoldBackgroundColor: IOSColors.lightGray,
+        scaffoldBackgroundColor: IOSColors.white,
       ),
       onGenerateRoute: (settings) => onGenerateRoute(settings),
     );

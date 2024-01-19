@@ -44,3 +44,14 @@ const TextStyle _kSmallLabelTextStyle = TextStyle(
   letterSpacing: 0.24,
   color: CupertinoColors.white,
 );
+
+const TextStyle _kLargeTitle = TextStyle(
+  inherit: false,
+  fontFamily: '.SF Pro Display',
+  fontSize: 34.0,
+  fontWeight: FontWeight.w700,
+  letterSpacing: -1.25,
+  wordSpacing: -1.1,
+  height: 1.2,
+  color: CupertinoColors.label,
+);

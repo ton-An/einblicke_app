@@ -26,6 +26,8 @@ class _TextThemeDefaultsBuilder {
 
   TextStyle get smallLabel => _applyLabelColor(_kSmallLabelTextStyle, color);
 
+  TextStyle get largeTitle => _applyLabelColor(_kLargeTitle, color);
+
   _TextThemeDefaultsBuilder resolveFrom(BuildContext context) {
     final Color resolvedColor = IOSTheme.of(context).colors.text;
     final Color resolvedDescriptionColor =

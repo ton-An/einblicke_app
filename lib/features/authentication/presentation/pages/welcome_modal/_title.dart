@@ -6,15 +6,10 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
+    return Text(
+      "${AppLocalizations.of(context)!.welcomeTo}\n${AppLocalizations.of(context)!.shortAppName}",
       textAlign: TextAlign.center,
-      text: TextSpan(
-        style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
-        children: [
-          TextSpan(text: "${AppLocalizations.of(context)!.welcomeTo}\n"),
-          TextSpan(text: AppLocalizations.of(context)!.appName),
-        ],
-      ),
+      style: IOSTheme.of(context).text.largeTitle,
     );
   }
 }

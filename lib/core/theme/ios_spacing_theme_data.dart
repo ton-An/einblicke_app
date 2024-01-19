@@ -62,6 +62,6 @@ class IOSSpacingThemeData {
   double get xMedium => _xMedium ?? _DefaultSpacing.xMedium;
   double get xxMedium => _xxMedium ?? _DefaultSpacing.xxMedium;
   double get large => _large ?? _DefaultSpacing.large;
-  double get xxLarge => _xxLarge ?? _DefaultSpacing.xxLarge;
-  double get xxxLarge => _xxxLarge ?? _DefaultSpacing.xxxLarge;
+  double get xxLarge => _xxLarge ?? _DefaultSpacing.xLarge;
+  double get xxxLarge => _xxxLarge ?? _DefaultSpacing.xxLarge;
 }

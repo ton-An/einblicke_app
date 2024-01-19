@@ -1,5 +1,6 @@
 {
     "appName": "Dispatch Pi",
+    "shortAppName": "Dispatch",
     "login": "Login",
     "continueLabel": "Continue",
     "welcomeTo": "Welcome to",
