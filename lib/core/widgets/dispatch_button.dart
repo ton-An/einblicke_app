@@ -20,7 +20,7 @@ class DispatchButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(
         DispatchProperties.buttonBorderRadius,
       ),
-      minSize: 51,
+      minSize: 50,
       // padding: EdgeInsets.symmetric(
       //   vertical: IOSTheme.of(context).spacing.medium,
       // ),

@@ -1,4 +1,4 @@
-part of login_page;
+part of sign_in_page;
 
 class _UsernameField extends StatelessWidget {
   const _UsernameField({super.key});

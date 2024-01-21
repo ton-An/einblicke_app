@@ -8,6 +8,7 @@ class IOSTextThemeData {
     TextStyle? title,
     TextStyle? smallLabel,
     TextStyle? largeTitle,
+    TextStyle? body,
   }) : this._raw(
           const _TextThemeDefaultsBuilder(
             IOSColors.black,
@@ -19,10 +20,18 @@ class IOSTextThemeData {
           title,
           smallLabel,
           largeTitle,
+          body,
         );
 
-  const IOSTextThemeData._raw(this._defaults, this._navTitle, this._description,
-      this._buttonLabel, this._title, this._smallLabel, this._largeTitle);
+  const IOSTextThemeData._raw(
+      this._defaults,
+      this._navTitle,
+      this._description,
+      this._buttonLabel,
+      this._title,
+      this._smallLabel,
+      this._largeTitle,
+      this._body);
 
   final _TextThemeDefaultsBuilder _defaults;
   final TextStyle? _navTitle;
@@ -31,6 +40,7 @@ class IOSTextThemeData {
   final TextStyle? _title;
   final TextStyle? _smallLabel;
   final TextStyle? _largeTitle;
+  final TextStyle? _body;
 
   TextStyle get navTitle => _navTitle ?? _defaults.navTitle;
 
@@ -44,6 +54,8 @@ class IOSTextThemeData {
 
   TextStyle get largeTitle => _largeTitle ?? _defaults.largeTitle;
 
+  TextStyle get body => _body ?? _defaults.body;
+
   /// Returns a copy of the current [IOSTextThemeData] with all the colors
   /// resolved against the given [BuildContext].
   IOSTextThemeData resolveFrom(BuildContext context) {
@@ -55,6 +67,7 @@ class IOSTextThemeData {
       _resolveTextStyle(_title, context),
       _resolveTextStyle(_smallLabel, context),
       _resolveTextStyle(_largeTitle, context),
+      _resolveTextStyle(_body, context),
     );
   }
 

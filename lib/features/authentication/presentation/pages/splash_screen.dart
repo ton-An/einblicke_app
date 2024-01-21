@@ -1,6 +1,7 @@
 import 'package:dispatch_pi_app/core/dependency_injector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,9 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
     getIt<FlutterSecureStorage>().containsKey(key: "access_token").then(
       (bool isSignedIn) {
         if (isSignedIn) {
-          Navigator.popAndPushNamed(context, "/select_image");
+          context.go("/select_image");
         } else {
-          Navigator.popAndPushNamed(context, "/sign_in");
+          context.go("/sign_in");
         }
       },
     );

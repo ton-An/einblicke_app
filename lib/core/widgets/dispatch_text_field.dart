@@ -21,6 +21,11 @@ class DispatchTextField extends StatelessWidget {
         placeholder: hint,
         obscureText: obscureText,
         style: IOSTheme.of(context).text.description,
+        placeholderStyle: IOSTheme.of(context).text.description.copyWith(
+              color: IOSTheme.of(context).colors.hint,
+            ),
+        padding: EdgeInsets.symmetric(
+            horizontal: IOSTheme.of(context).spacing.xxSmall),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           color: IOSTheme.of(context).colors.fieldColor,

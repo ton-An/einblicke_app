@@ -5,24 +5,14 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       """
-This app brings your health
-information together in one place.
+This app lets you send your favourite moments right to your loved ones picture frames.
 
-You can see important changes or
-alerts, get insights from your data
-and learn about essential topics.
+You can send photos along with personal messages to your friends and family. The only thing they need is a disptach frame.
     """,
       textAlign: TextAlign.center,
-      style: TextStyle(
-        inherit: false,
-        fontFamily: '.SF Pro Text',
-        fontSize: 17.0,
-        letterSpacing: -0.4,
-        height: 1.29,
-        color: CupertinoColors.label,
-      ),
+      style: IOSTheme.of(context).text.body,
     );
   }
 }

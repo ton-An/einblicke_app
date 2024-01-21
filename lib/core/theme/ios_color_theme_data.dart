@@ -11,10 +11,12 @@ class IOSColorThemeData {
     this.buttonLabel = IOSColors.white,
     this.description = IOSColors.description,
     this.activityIndicator = IOSColors.white,
-    this.fieldColor = IOSColors.white,
+    this.fieldColor = IOSColors.lightGray,
     this.background = IOSColors.lightGray,
     this.error = IOSColors.red,
     this.success = IOSColors.green,
+    this.border = IOSColors.border,
+    this.hint = IOSColors.hint,
   });
 
   final Color primary;
@@ -30,4 +32,6 @@ class IOSColorThemeData {
   final Color background;
   final Color error;
   final Color success;
+  final Color border;
+  final Color hint;
 }

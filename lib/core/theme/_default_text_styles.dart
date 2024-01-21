@@ -55,3 +55,12 @@ const TextStyle _kLargeTitle = TextStyle(
   height: 1.2,
   color: CupertinoColors.label,
 );
+
+const TextStyle _kBody = TextStyle(
+  inherit: false,
+  fontFamily: '.SF Pro Text',
+  fontSize: 17.0,
+  letterSpacing: -0.4,
+  height: 1.29,
+  color: CupertinoColors.label,
+);

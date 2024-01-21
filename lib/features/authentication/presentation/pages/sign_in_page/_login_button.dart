@@ -1,12 +1,11 @@
-part of login_page;
+part of sign_in_page;
 
-/// This is the continue button of the [LoginPage].
+/// This is the continue button of the [SignIn].
 /// If pressed it will finish the onboarding process.
 class _SignInButton extends StatelessWidget {
   const _SignInButton();
 
   void onLoginPressed(BuildContext context) {
-    print("object");
     context.read<SignInCubit>().signIn();
   }
 
