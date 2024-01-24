@@ -16,18 +16,33 @@ class DispatchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 44,
       child: CupertinoTextField(
         placeholder: hint,
         obscureText: obscureText,
-        style: IOSTheme.of(context).text.description,
-        placeholderStyle: IOSTheme.of(context).text.description.copyWith(
-              color: IOSTheme.of(context).colors.hint,
-            ),
+        style: TextStyle(
+          inherit: false,
+          fontFamily: '.SF Pro Display',
+          fontSize: 17.0,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.41,
+          color: IOSTheme.of(context).colors.text,
+        ),
+        // placeholderStyle: IOSTheme.of(context).text.description.copyWith(
+        //       color: IOSTheme.of(context).colors.hint,
+        //     ),
+        placeholderStyle: TextStyle(
+          inherit: false,
+          fontFamily: '.SF Pro Display',
+          fontSize: 17.0,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.41,
+          color: IOSTheme.of(context).colors.hint,
+        ),
         padding: EdgeInsets.symmetric(
             horizontal: IOSTheme.of(context).spacing.xxSmall),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(9),
           color: IOSTheme.of(context).colors.fieldColor,
         ),
         onChanged: onChanged,

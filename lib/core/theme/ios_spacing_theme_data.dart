@@ -11,8 +11,8 @@ class IOSSpacingThemeData {
     double? xMedium,
     double? xxMedium,
     double? large,
+    double? xLarge,
     double? xxLarge,
-    double? xxxLarge,
   }) : this._(
           tiny,
           xTiny,
@@ -23,8 +23,8 @@ class IOSSpacingThemeData {
           xMedium,
           xxMedium,
           large,
+          xLarge,
           xxLarge,
-          xxxLarge,
         );
 
   const IOSSpacingThemeData._(
@@ -37,8 +37,8 @@ class IOSSpacingThemeData {
     this._xMedium,
     this._xxMedium,
     this._large,
+    this._xLarge,
     this._xxLarge,
-    this._xxxLarge,
   );
 
   final double? _tiny;
@@ -50,8 +50,8 @@ class IOSSpacingThemeData {
   final double? _xMedium;
   final double? _xxMedium;
   final double? _large;
+  final double? _xLarge;
   final double? _xxLarge;
-  final double? _xxxLarge;
 
   double get tiny => _tiny ?? _DefaultSpacing.tiny;
   double get xTiny => _xTiny ?? _DefaultSpacing.xTiny;
@@ -62,6 +62,6 @@ class IOSSpacingThemeData {
   double get xMedium => _xMedium ?? _DefaultSpacing.xMedium;
   double get xxMedium => _xxMedium ?? _DefaultSpacing.xxMedium;
   double get large => _large ?? _DefaultSpacing.large;
-  double get xxLarge => _xxLarge ?? _DefaultSpacing.xLarge;
-  double get xxxLarge => _xxxLarge ?? _DefaultSpacing.xxLarge;
+  double get xLarge => _xLarge ?? _DefaultSpacing.xLarge;
+  double get xxLarge => _xxLarge ?? _DefaultSpacing.xxLarge;
 }

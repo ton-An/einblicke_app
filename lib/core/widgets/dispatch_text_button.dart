@@ -21,6 +21,7 @@ class DispatchTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
+        textAlign: TextAlign.center,
         style: IOSTheme.of(context).text.buttonLabel.copyWith(
               color: IOSTheme.of(context).colors.primaryContrast,
             ),

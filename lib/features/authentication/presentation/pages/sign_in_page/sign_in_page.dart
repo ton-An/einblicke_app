@@ -6,6 +6,8 @@ import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_text_button.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_text_field.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/medium_gap.dart';
+import 'package:dispatch_pi_app/core/widgets/gaps/x_large_gap.dart';
+import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_states.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,47 +65,36 @@ class _SignInState extends State<SignIn> {
       },
       child: CupertinoPageScaffold(
         child: SafeArea(
-          bottom: false,
-          child: SafeArea(
-            child: Container(
-              padding: EdgeInsets.only(
-                left: IOSTheme.of(context).spacing.xMedium,
-                right: IOSTheme.of(context).spacing.xMedium,
-                bottom: IOSTheme.of(context).spacing.xMedium,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        SizedBox(
-                          height: IOSTheme.of(context).spacing.xxLarge + 30,
-                        ),
-                        const _Cover(),
-                        SizedBox(
-                          height: IOSTheme.of(context).spacing.xxLarge,
-                        ),
-                        const _Title(),
-                        SizedBox(
-                          height: IOSTheme.of(context).spacing.xMedium,
-                        ),
-                        const _UsernameField(),
-                        const MediumGap(),
-                        const _PasswordField(),
-                        SizedBox(
-                          height: IOSTheme.of(context).spacing.xSmall,
-                        ),
-                        const _NoAccountButton(),
-                        SizedBox(
-                          height: IOSTheme.of(context).spacing.medium,
-                        ),
-                      ],
-                    ),
+          top: false,
+          child: Container(
+            padding: EdgeInsets.only(
+              left: IOSTheme.of(context).spacing.xMedium,
+              right: IOSTheme.of(context).spacing.xMedium,
+              bottom: IOSTheme.of(context).spacing.xLarge,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SizedBox(
+                        height: IOSTheme.of(context).spacing.xLarge + 30,
+                      ),
+                      const _Cover(),
+                      const XLargeGap(),
+                      const _Title(),
+                      const XMediumGap(),
+                      const _UsernameField(),
+                      const MediumGap(),
+                      const _PasswordField(),
+                      const MediumGap(),
+                    ],
                   ),
-                  const _SignInButton(),
-                ],
-              ),
+                ),
+                const XMediumGap(),
+                const _SignInButton(),
+              ],
             ),
           ),
         ),

@@ -42,7 +42,7 @@ class WelcomeModal extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: IOSTheme.of(context).spacing.xMedium,
                   right: IOSTheme.of(context).spacing.xMedium,
-                  bottom: IOSTheme.of(context).spacing.xxLarge,
+                  bottom: IOSTheme.of(context).spacing.xLarge,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,7 +52,7 @@ class WelcomeModal extends StatelessWidget {
                         // reverse: true,
                         children: [
                           SizedBox(
-                            height: IOSTheme.of(context).spacing.xxLarge,
+                            height: IOSTheme.of(context).spacing.xLarge,
                           ),
                           const _Cover(),
                           Padding(
@@ -63,7 +63,7 @@ class WelcomeModal extends StatelessWidget {
                               children: [
                                 SizedBox(
                                   height:
-                                      IOSTheme.of(context).spacing.xxLarge - 20,
+                                      IOSTheme.of(context).spacing.xLarge - 20,
                                 ),
                                 const _Title(),
                                 SizedBox(
