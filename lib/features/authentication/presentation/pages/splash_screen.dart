@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getIt<FlutterSecureStorage>().containsKey(key: "access_token").then(
       (bool isSignedIn) {
         if (isSignedIn) {
-          context.go("/select_image");
+          context.go("/select_frame");
         } else {
           context.go("/sign_in");
         }

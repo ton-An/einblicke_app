@@ -55,6 +55,8 @@ dependencies:
       url: https://github.com/jamesblasco/modal_bottom_sheet
       ref: d5c9ceb
       path: sheet/
+  infinite_carousel: ^1.0.3
+  flutter_carousel_widget: ^2.2.0
 
 dev_dependencies:
   flutter_test:

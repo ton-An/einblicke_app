@@ -47,8 +47,6 @@ class _SignInState extends State<SignIn> {
 
   void _showWelcomeModal() {
     context.go("/sign_in/welcome_modal");
-    // showIOSModal(
-    //     context: context, builder: ((context) => const WelcomeModal()));
   }
 
   @override

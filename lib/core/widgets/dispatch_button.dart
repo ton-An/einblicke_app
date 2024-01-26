@@ -21,9 +21,6 @@ class DispatchButton extends StatelessWidget {
         DispatchProperties.buttonBorderRadius,
       ),
       minSize: 50,
-      // padding: EdgeInsets.symmetric(
-      //   vertical: IOSTheme.of(context).spacing.medium,
-      // ),
       child: child,
       onPressed: onPressed,
     );
