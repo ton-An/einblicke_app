@@ -8,11 +8,13 @@ import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_text_button.dart';
 import 'package:dispatch_pi_app/core/widgets/disptach_modal.dart';
+import 'package:dispatch_pi_app/core/widgets/gaps/small_gap.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,7 +29,7 @@ class SelectImage extends StatelessWidget {
     return BlocListener<SelectImageCubit, SelectImageState>(
       listener: (context, state) {
         if (state is SelectImageAuthFailure) {
-          Navigator.popAndPushNamed(context, "/sign_in");
+          context.go("/sign_in");
         }
       },
       child: const DispatchModal(

@@ -10,16 +10,15 @@ import 'package:go_router/go_router.dart';
 
 part '_frame.dart';
 part '_online_indicator.dart';
-part '_queque_indicator.dart';
 
 class SelectFramePage extends StatelessWidget {
   const SelectFramePage({super.key});
 
-  static const List<PictureFrame> _frames = [
-    PictureFrame(
+  static const List<_PictureFrameModel> _frames = [
+    _PictureFrameModel(
         title: "Home", imgPath: "assets/images/unlicensed/dummy_image2.jpeg"),
-    PictureFrame(
-        title: "Home", imgPath: "assets/images/unlicensed/dummy_image1.jpeg"),
+    _PictureFrameModel(
+        title: "Oskar", imgPath: "assets/images/unlicensed/dummy_image1.jpeg"),
   ];
 
   @override
@@ -56,8 +55,8 @@ class SelectFramePage extends StatelessWidget {
   }
 }
 
-class PictureFrame {
-  const PictureFrame({
+class _PictureFrameModel {
+  const _PictureFrameModel({
     required this.title,
     required this.imgPath,
   });
