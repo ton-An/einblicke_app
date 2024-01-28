@@ -13,6 +13,6 @@
 
     "error": "Error",
     "success": "Success",
-    "sendImage": "Send Image"
-
+    "sendImage": "Send Image",
+    "welcomeDescription": "This app lets you send your favourite moments right to your loved ones picture frames.\n\nYou can send photos along with personal messages to your friends and family. The only thing they need is a disptach frame."
 }

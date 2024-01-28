@@ -1,7 +1,9 @@
 part of sign_in_page;
 
-/// This is the continue button of the [SignIn].
-/// If pressed it will finish the onboarding process.
+/// This is the sign in button of the [SignInPage].
+///
+/// If pressed it will trigger a sign in request and
+/// redirect the user to the [SelectFramePage] if successful.
 class _SignInButton extends StatelessWidget {
   const _SignInButton();
 

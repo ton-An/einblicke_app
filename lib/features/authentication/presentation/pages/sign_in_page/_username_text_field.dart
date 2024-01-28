@@ -1,7 +1,8 @@
 part of sign_in_page;
 
-class _UsernameField extends StatelessWidget {
-  const _UsernameField({super.key});
+/// This is the username text field of the [SignInPage]
+class _UsernameTextField extends StatelessWidget {
+  const _UsernameTextField();
 
   @override
   Widget build(BuildContext context) {

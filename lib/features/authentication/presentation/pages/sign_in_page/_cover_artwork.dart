@@ -1,7 +1,8 @@
 part of sign_in_page;
 
-class _Cover extends StatelessWidget {
-  const _Cover({super.key});
+/// This is the cover artwork of the [SignInPage]
+class _CoverArtwork extends StatelessWidget {
+  const _CoverArtwork();
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
 part of welcome_modal;
 
-class _Cover extends StatelessWidget {
-  const _Cover({super.key});
+/// This is the cover artwork of the [WelcomeModal]
+class _CoverArtwork extends StatelessWidget {
+  const _CoverArtwork();
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
 part of sign_in_page;
 
-class _PasswordField extends StatelessWidget {
-  const _PasswordField({super.key});
+/// This is the password text field of the [SignInPage]
+class _PasswordTextField extends StatelessWidget {
+  const _PasswordTextField();
 
   @override
   Widget build(BuildContext context) {

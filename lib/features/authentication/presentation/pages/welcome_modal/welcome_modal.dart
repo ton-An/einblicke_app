@@ -4,90 +4,75 @@ import 'package:dispatch_pi_app/core/dispatch_properties.dart';
 import 'package:dispatch_pi_app/core/l10n/app_localizations.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:dispatch_pi_app/core/widgets/dispatch_text_button.dart';
+import 'package:dispatch_pi_app/core/widgets/gaps/x_large_gap.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
+import 'package:dispatch_pi_app/core/widgets/gaps/xx_medium_gap.dart';
+import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 part '_continue_button.dart';
-part '_cover.dart';
+part '_cover_artwork.dart';
 part '_description.dart';
 part '_title.dart';
+part '_wrapper.dart';
 
 /// __Welcome Modal__
 ///
 /// This modal is shown when the user opens the app for the first time.
-/// It contains a short description of the app and its features.
+/// It contains a short description of the app and its features and a button
+/// to request permissions and to continue to the sign in page.
 ///
 /// Main contents:
-/// - [_Cover]
+/// - [_CoverArtwork]
 /// - [_Title]
 /// - [_Description]
 /// - [_ContinueButton]
 class WelcomeModal extends StatelessWidget {
   const WelcomeModal({super.key});
 
+  static const String pageName = "welcome_modal";
+  static const String route = "${SignInPage.route}/$pageName";
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: IOSTheme.of(context).spacing.xSmall,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(DispatchProperties.borderRadius),
-          child: CupertinoPageScaffold(
-            child: SafeArea(
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: IOSTheme.of(context).spacing.xMedium,
-                  right: IOSTheme.of(context).spacing.xMedium,
-                  bottom: IOSTheme.of(context).spacing.xLarge,
+    return _Wrapper(
+      children: [
+        Expanded(
+          child: ListView(
+            children: [
+              const XLargeGap(),
+
+              // -- Cover Artwork --
+              const _CoverArtwork(),
+
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: IOSTheme.of(context).spacing.xMedium,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: const Column(
                   children: [
-                    Expanded(
-                      child: ListView(
-                        // reverse: true,
-                        children: [
-                          SizedBox(
-                            height: IOSTheme.of(context).spacing.xLarge,
-                          ),
-                          const _Cover(),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    IOSTheme.of(context).spacing.xMedium),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height:
-                                      IOSTheme.of(context).spacing.xLarge - 20,
-                                ),
-                                const _Title(),
-                                SizedBox(
-                                  height: IOSTheme.of(context).spacing.xMedium,
-                                ),
-                                const _Description(),
-                                SizedBox(
-                                  height: IOSTheme.of(context).spacing.large,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const XMediumGap(),
-                    const _ContinueButton(),
+                    XXMediumGap(),
+
+                    // -- Title --
+                    _Title(),
+                    XMediumGap(),
+
+                    // -- Description --
+                    _Description(),
+                    XLargeGap(),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
         ),
-      ),
+        const XMediumGap(),
+
+        // -- Continue button --
+        const _ContinueButton(),
+      ],
     );
   }
 }

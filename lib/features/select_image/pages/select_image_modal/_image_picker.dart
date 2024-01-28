@@ -1,5 +1,7 @@
-part of select_image_page;
+part of select_image_modal;
 
+/// The image picker of the [SelectImageModal] which allows the user
+/// to select an image from their device.
 class _ImagePicker extends StatefulWidget {
   const _ImagePicker({super.key});
 

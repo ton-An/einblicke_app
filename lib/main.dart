@@ -46,49 +46,49 @@ class DispatchPiApp extends StatelessWidget {
   }
 
   final GoRouter _router = GoRouter(
-    initialLocation: "/",
+    initialLocation: SplashScreen.route,
     routes: <RouteBase>[
       GoRoute(
-        path: "/",
-        builder: (BuildContext context, GoRouterState state) {
-          return const SplashScreen();
-        },
-        routes: <RouteBase>[
+        path: SplashScreen.pageName,
+        pageBuilder: (context, state) =>
+            const CupertinoExtendedPage(child: SplashScreen()),
+        routes: [
           GoRoute(
-            path: "select_frame",
+            path: SelectFramePage.pageName,
             pageBuilder: (context, state) =>
                 const CupertinoExtendedPage(child: SelectFramePage()),
             routes: [
               GoRoute(
-                path: "select_image",
+                path: SelectImageModal.pageName,
                 pageBuilder: (context, state) => CupertinoSheetPage(
                   child: BlocProvider(
                     create: (context) => getIt<SelectImageCubit>(),
-                    child: const SelectImage(),
+                    child: const SelectImageModal(),
                   ),
                 ),
               ),
             ],
           ),
           GoRoute(
-              path: "sign_in",
-              pageBuilder: (context, state) => CupertinoExtendedPage(
-                    child: BlocProvider(
-                      create: (context) => getIt<SignInCubit>(),
-                      child: const SignIn(),
-                    ),
-                  ),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: "welcome_modal",
-                  pageBuilder: (context, state) => CupertinoSheetPage(
-                    child: BlocProvider(
-                      create: (context) => getIt<SignInCubit>(),
-                      child: const WelcomeModal(),
-                    ),
+            path: SignInPage.pageName,
+            pageBuilder: (context, state) => CupertinoExtendedPage(
+              child: BlocProvider(
+                create: (context) => getIt<SignInCubit>(),
+                child: const SignInPage(),
+              ),
+            ),
+            routes: <RouteBase>[
+              GoRoute(
+                path: WelcomeModal.pageName,
+                pageBuilder: (context, state) => CupertinoSheetPage(
+                  child: BlocProvider(
+                    create: (context) => getIt<SignInCubit>(),
+                    child: const WelcomeModal(),
                   ),
                 ),
-              ]),
+              ),
+            ],
+          ),
         ],
       ),
     ],

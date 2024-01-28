@@ -1,7 +1,9 @@
-part of select_image_page;
+part of select_image_modal;
 
+/// The send button of the [_ImagePicker] which initiates
+/// the server request to send an image to the selected frame.
 class _SendImageButton extends StatelessWidget {
-  const _SendImageButton({super.key});
+  const _SendImageButton();
 
   void onSendImagePressed(BuildContext context) {
     context.read<SelectImageCubit>().sendImage();

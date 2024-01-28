@@ -1,19 +1,13 @@
-library select_frame_page;
-
-import 'dart:ui';
-
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
+import 'package:dispatch_pi_app/features/select_frame/widgets/frame_card/frame_card.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
 
-part '_frame.dart';
-part '_online_indicator.dart';
-
 class SelectFramePage extends StatelessWidget {
   const SelectFramePage({super.key});
+
+  static const String pageName = "select_frame";
+  static const String route = "/$pageName";
 
   static const List<_PictureFrameModel> _frames = [
     _PictureFrameModel(
@@ -40,7 +34,7 @@ class SelectFramePage extends StatelessWidget {
             ),
             itemBuilder: (context, i, _) {
               return Center(
-                child: _Frame(
+                child: FrameCard(
                   imgPath: _frames[i].imgPath,
                   title: _frames[i].title,
                   onPressed: () {

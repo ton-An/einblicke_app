@@ -1,5 +1,6 @@
-part of select_frame_page;
+part of frame_card;
 
+/// The online indicator of the [FrameCard]
 class _OnlineIndicator extends StatelessWidget {
   const _OnlineIndicator();
 

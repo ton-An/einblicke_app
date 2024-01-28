@@ -1,16 +1,13 @@
 part of welcome_modal;
 
+/// This is the description of the [WelcomeModal]
 class _Description extends StatelessWidget {
-  const _Description({super.key});
+  const _Description();
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      """
-This app lets you send your favourite moments right to your loved ones picture frames.
-
-You can send photos along with personal messages to your friends and family. The only thing they need is a disptach frame.
-    """,
+      AppLocalizations.of(context)!.welcomeDescription,
       textAlign: TextAlign.center,
       style: IOSTheme.of(context).text.body,
     );

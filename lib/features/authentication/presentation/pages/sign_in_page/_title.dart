@@ -1,6 +1,6 @@
 part of sign_in_page;
 
-/// This is the title of the [SignIn]
+/// This is the title of the [SignInPage]
 class _Title extends StatelessWidget {
   const _Title();
 
