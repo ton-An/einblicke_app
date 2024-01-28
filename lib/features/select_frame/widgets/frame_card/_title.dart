@@ -13,7 +13,7 @@ class _Title extends StatelessWidget {
     return Text(
       title,
       style: IOSTheme.of(context).text.largeTitle.copyWith(
-            color: Colors.white,
+            color: IOSTheme.of(context).colors.background,
           ),
     );
   }

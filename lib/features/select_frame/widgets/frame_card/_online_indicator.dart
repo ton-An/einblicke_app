@@ -15,21 +15,21 @@ class _OnlineIndicator extends StatelessWidget {
             sigmaY: 6,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+            padding: EdgeInsets.all(IOSTheme.of(context).spacing.xTiny),
             child: Container(
               width: 12,
               height: 12,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: CupertinoColors.activeGreen,
+                  color: IOSTheme.of(context).colors.success,
                   width: 1,
                 ),
                 shape: BoxShape.circle,
               ),
               child: Container(
-                margin: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                  color: CupertinoColors.activeGreen,
+                margin: EdgeInsets.all(IOSTheme.of(context).spacing.xTiny),
+                decoration: BoxDecoration(
+                  color: IOSTheme.of(context).colors.success,
                   shape: BoxShape.circle,
                 ),
               ),

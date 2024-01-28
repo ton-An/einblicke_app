@@ -1,11 +1,14 @@
 library welcome_modal;
 
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
+import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
-class DispatchModal extends StatelessWidget {
-  const DispatchModal({super.key, required this.child});
+/// __IOS Modal__
+///
+/// A modal that is styled like an iOS modal.
+class IOSModal extends StatelessWidget {
+  const IOSModal({super.key, required this.child});
 
   final Widget child;
 
@@ -18,7 +21,7 @@ class DispatchModal extends StatelessWidget {
           top: IOSTheme.of(context).spacing.xSmall,
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(DispatchProperties.borderRadius),
+          borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
           child: CupertinoPageScaffold(
             child: SafeArea(
               child: Container(

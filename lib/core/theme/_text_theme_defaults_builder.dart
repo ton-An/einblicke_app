@@ -19,8 +19,8 @@ class _TextThemeDefaultsBuilder {
   TextStyle get description =>
       _applyLabelColor(_kDescriptionTextStyle, descriptionColor);
 
-  TextStyle get buttonLabel => _applyLabelColor(
-      _kDefaultButtonLabelTextStyle, CupertinoColors.activeBlue);
+  TextStyle get buttonLabel =>
+      _applyLabelColor(_kDefaultButtonLabelTextStyle, IOSColors.primary);
 
   TextStyle get title => _applyLabelColor(_kTitleTextStyle, color);
 

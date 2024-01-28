@@ -16,19 +16,19 @@ class _SignInButton extends StatelessWidget {
     return BlocBuilder<SignInCubit, SignInState>(
       builder: (context, state) {
         if (state is SignInLoading) {
-          return const DispatchButton(
+          return const IOSButton(
             child: CupertinoActivityIndicator(),
           );
         }
 
         if (state is SignInFailure) {
-          return DispatchTextButton(
+          return IOSTextButton(
             text: AppLocalizations.of(context)!.error,
             disabledColor: IOSTheme.of(context).colors.error,
           );
         }
 
-        return DispatchTextButton(
+        return IOSTextButton(
           text: AppLocalizations.of(context)!.login,
           onPressed: () => onLoginPressed(context),
         );

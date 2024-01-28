@@ -14,30 +14,30 @@ class _SendImageButton extends StatelessWidget {
     return BlocBuilder<SelectImageCubit, SelectImageState>(
       builder: (context, state) {
         if (state is SelectImageInitial) {
-          return DispatchTextButton(
+          return IOSTextButton(
             text: AppLocalizations.of(context)!.sendImage,
           );
         }
 
         if (state is SelectImageLoading) {
-          return const DispatchButton(child: CupertinoActivityIndicator());
+          return const IOSButton(child: CupertinoActivityIndicator());
         }
 
         if (state is SelectImageSuccess) {
-          return DispatchTextButton(
+          return IOSTextButton(
             text: AppLocalizations.of(context)!.success,
             disabledColor: IOSTheme.of(context).colors.success,
           );
         }
 
         if (state is SelectImageFailure) {
-          return DispatchTextButton(
+          return IOSTextButton(
             text: AppLocalizations.of(context)!.error,
             disabledColor: IOSTheme.of(context).colors.error,
           );
         }
 
-        return DispatchTextButton(
+        return IOSTextButton(
           text: AppLocalizations.of(context)!.sendImage,
           onPressed: () => onSendImagePressed(context),
         );

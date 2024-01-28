@@ -17,6 +17,9 @@ class IOSColorThemeData {
     this.success = IOSColors.green,
     this.border = IOSColors.border,
     this.hint = IOSColors.hint,
+    this.disabledButton = IOSColors.disabled,
+    this.transparent = IOSColors.transparent,
+    this.backgroundContrast = IOSColors.black,
   });
 
   final Color primary;
@@ -34,4 +37,7 @@ class IOSColorThemeData {
   final Color success;
   final Color border;
   final Color hint;
+  final Color disabledButton;
+  final Color transparent;
+  final Color backgroundContrast;
 }

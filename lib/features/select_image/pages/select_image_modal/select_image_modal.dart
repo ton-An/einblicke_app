@@ -3,13 +3,14 @@ library select_image_modal;
 import 'dart:io';
 
 import 'package:dispatch_pi_app/core/dependency_injector.dart';
+import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/l10n/app_localizations.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
-import 'package:dispatch_pi_app/core/widgets/dispatch_text_button.dart';
-import 'package:dispatch_pi_app/core/widgets/disptach_modal.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/small_gap.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
+import 'package:dispatch_pi_app/core/widgets/ios_button.dart';
+import 'package:dispatch_pi_app/core/widgets/ios_modal.dart';
+import 'package:dispatch_pi_app/core/widgets/ios_text_button.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_states.dart';
@@ -43,7 +44,7 @@ class SelectImageModal extends StatelessWidget {
           context.go(SignInPage.route);
         }
       },
-      child: const DispatchModal(
+      child: const IOSModal(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

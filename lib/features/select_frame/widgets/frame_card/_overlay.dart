@@ -12,7 +12,10 @@ class _Overlay extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.transparent, Colors.black.withOpacity(0.2)],
+          colors: [
+            IOSTheme.of(context).colors.transparent,
+            IOSTheme.of(context).colors.backgroundContrast.withOpacity(.2),
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -20,7 +23,7 @@ class _Overlay extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(IOSTheme.of(context).spacing.xxSmall),
           child: Stack(
             clipBehavior: Clip.none,
             children: [

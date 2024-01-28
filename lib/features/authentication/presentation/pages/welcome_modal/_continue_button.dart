@@ -17,7 +17,7 @@ class _ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DispatchTextButton(
+    return IOSTextButton(
       text: AppLocalizations.of(context)!.continueLabel,
       onPressed: () => onContinuePressed(context),
     );

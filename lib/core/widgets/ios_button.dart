@@ -1,8 +1,12 @@
-import 'package:dispatch_pi_app/core/dispatch_properties.dart';
+import 'package:dispatch_pi_app/core/ios_properties.dart';
+import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
-class DispatchButton extends StatelessWidget {
-  const DispatchButton({
+/// __IOS Button__
+///
+/// A button that is styled like an iOS button.
+class IOSButton extends StatelessWidget {
+  const IOSButton({
     super.key,
     required this.child,
     this.disabledColor,
@@ -16,13 +20,14 @@ class DispatchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton.filled(
-      disabledColor: disabledColor ?? CupertinoColors.quaternarySystemFill,
+      disabledColor:
+          disabledColor ?? IOSTheme.of(context).colors.disabledButton,
       borderRadius: BorderRadius.circular(
-        DispatchProperties.buttonBorderRadius,
+        IOSProperties.buttonBorderRadius,
       ),
       minSize: 50,
-      child: child,
       onPressed: onPressed,
+      child: child,
     );
   }
 }

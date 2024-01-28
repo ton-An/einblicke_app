@@ -1,9 +1,12 @@
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/core/widgets/dispatch_button.dart';
+import 'package:dispatch_pi_app/core/widgets/ios_button.dart';
 import 'package:flutter/cupertino.dart';
 
-class DispatchTextButton extends StatelessWidget {
-  const DispatchTextButton({
+/// __IOS Text Button__
+///
+/// A button that is styled like an iOS text button.
+class IOSTextButton extends StatelessWidget {
+  const IOSTextButton({
     super.key,
     required this.text,
     this.disabledColor,
@@ -16,7 +19,7 @@ class DispatchTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DispatchButton(
+    return IOSButton(
       disabledColor: disabledColor,
       onPressed: onPressed,
       child: Text(

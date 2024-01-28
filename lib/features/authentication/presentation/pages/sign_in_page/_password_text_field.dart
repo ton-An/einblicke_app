@@ -6,7 +6,7 @@ class _PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DispatchTextField(
+    return IOSTextField(
       hint: AppLocalizations.of(context)!.password,
       obscureText: false,
       onChanged: (String username) =>

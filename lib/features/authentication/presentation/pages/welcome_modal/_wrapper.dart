@@ -13,7 +13,7 @@ class _Wrapper extends StatelessWidget {
         top: IOSTheme.of(context).spacing.xSmall,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(DispatchProperties.borderRadius),
+        borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
         child: CupertinoPageScaffold(
           child: SafeArea(
             child: Container(

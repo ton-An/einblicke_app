@@ -47,14 +47,17 @@ class _WrapperState extends State<_Wrapper>
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: IOSTheme.of(context)
+                  .colors
+                  .backgroundContrast
+                  .withOpacity(.2),
               blurRadius: 10,
               spreadRadius: 5,
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(DispatchProperties.borderRadius),
+          borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
           child: GestureDetector(
             onTap: () {
               _controller.forward().then((_) => _controller.reverse());

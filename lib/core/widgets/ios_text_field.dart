@@ -1,8 +1,12 @@
+import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
-class DispatchTextField extends StatelessWidget {
-  const DispatchTextField({
+/// __IOS Text Field__
+///
+/// A text field that is styled like an iOS text field.
+class IOSTextField extends StatelessWidget {
+  const IOSTextField({
     required this.hint,
     required this.onChanged,
     this.obscureText = false,
@@ -28,9 +32,6 @@ class DispatchTextField extends StatelessWidget {
           letterSpacing: -0.41,
           color: IOSTheme.of(context).colors.text,
         ),
-        // placeholderStyle: IOSTheme.of(context).text.description.copyWith(
-        //       color: IOSTheme.of(context).colors.hint,
-        //     ),
         placeholderStyle: TextStyle(
           inherit: false,
           fontFamily: '.SF Pro Display',
@@ -42,7 +43,7 @@ class DispatchTextField extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: IOSTheme.of(context).spacing.xxSmall),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: BorderRadius.circular(IOSProperties.fieldBorderRadius),
           color: IOSTheme.of(context).colors.fieldColor,
         ),
         onChanged: onChanged,

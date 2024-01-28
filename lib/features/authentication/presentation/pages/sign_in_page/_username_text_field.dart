@@ -6,7 +6,7 @@ class _UsernameTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DispatchTextField(
+    return IOSTextField(
       hint: AppLocalizations.of(context)!.username,
       onChanged: (String username) =>
           context.read<SignInCubit>().updateUsername(username),

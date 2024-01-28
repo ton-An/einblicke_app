@@ -49,7 +49,7 @@ class _ImagePickerState extends State<_ImagePicker>
   Widget build(BuildContext context) {
     final double displayWidth = MediaQuery.of(context).size.width;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
       child: SizedBox(
         width: displayWidth * .8,
         height: 400,
@@ -76,7 +76,7 @@ class _ImagePickerState extends State<_ImagePicker>
                       ),
                       const SmallGap(),
                       Text(
-                        "Add Image",
+                        AppLocalizations.of(context)!.selectImage,
                         style: IOSTheme.of(context).text.body.copyWith(
                               color: IOSTheme.of(context).colors.primary,
                             ),

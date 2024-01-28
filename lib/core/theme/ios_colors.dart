@@ -14,4 +14,6 @@ class IOSColors {
   static const Color green = Color.fromARGB(255, 47, 229, 40);
   static const Color border = Color.fromARGB(255, 134, 134, 139);
   static const Color hint = Color.fromARGB(255, 142, 142, 147);
+  static const Color disabled = Color.fromARGB(20, 116, 116, 128);
+  static const Color transparent = Color(0x00000000);
 }
