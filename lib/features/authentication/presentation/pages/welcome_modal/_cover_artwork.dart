@@ -1,5 +1,10 @@
 part of welcome_modal;
 
+/*
+  To-Dos:
+  - [ ] Design a proper cover artwork
+*/
+
 /// This is the cover artwork of the [WelcomeModal]
 class _CoverArtwork extends StatelessWidget {
   const _CoverArtwork();

@@ -5,6 +5,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
+/*
+  To-Dos:
+  - [ ] Remove ability to go back to this screen
+*/
+
+/// __Splash Screen__
+///
+/// The splash screen of the app.
+/// Checks if the user is signed in and redirects to the appropriate page.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -36,6 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(child: Container());
+    return const CupertinoPageScaffold(
+      child: Center(
+        child: CupertinoActivityIndicator(),
+      ),
+    );
   }
 }

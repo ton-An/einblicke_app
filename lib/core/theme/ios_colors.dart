@@ -1,5 +1,13 @@
 part of ios_theme;
 
+/*
+  To-Dos:
+  - [ ] Organize colors
+*/
+
+/// __IOS Colors__
+///
+/// A collection of iOS colors
 class IOSColors {
   static const Color primary = Color(0xFF007AFF);
   static const Color translucentBackground = Color(0x73000000);

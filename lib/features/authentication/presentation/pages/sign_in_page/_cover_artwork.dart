@@ -1,5 +1,10 @@
 part of sign_in_page;
 
+/*
+  To-Dos:
+  - [ ] Add more content to the artwork
+*/
+
 /// This is the cover artwork of the [SignInPage]
 class _CoverArtwork extends StatelessWidget {
   const _CoverArtwork();

@@ -1,5 +1,11 @@
 part of frame_card;
 
+/*
+  To-Dos:
+  - [ ] Check/standardize animation values
+  - [ ] Check/standardize shadow
+*/
+
 /// The wrapper for the [FrameCard] that adds a shadow and a tap animation.
 class _Wrapper extends StatefulWidget {
   const _Wrapper({

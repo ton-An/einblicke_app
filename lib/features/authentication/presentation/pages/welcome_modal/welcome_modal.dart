@@ -18,6 +18,11 @@ part '_description.dart';
 part '_title.dart';
 part '_wrapper.dart';
 
+/*
+  To-Dos:
+  - [ ] Remove ability to dismiss by scrolling or tapping outside of the modal
+*/
+
 /// __Welcome Modal__
 ///
 /// This modal is shown when the user opens the app for the first time.

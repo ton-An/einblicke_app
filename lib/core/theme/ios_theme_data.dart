@@ -1,5 +1,8 @@
 part of ios_theme;
 
+/// __IOS Theme Data__
+///
+/// The theme data of the [IOSTheme].
 class IOSThemeData {
   const IOSThemeData({
     this.colors = const IOSColorThemeData(),

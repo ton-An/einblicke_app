@@ -4,6 +4,12 @@ import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
+/*
+  To-Dos:
+  - [ ] Add option for ability to disable/enable dismiss by scrolling or tapping outside of the modal
+  - [ ] Add option for cancel button at the top
+*/
+
 /// __IOS Modal__
 ///
 /// A modal that is styled like an iOS modal.

@@ -2,6 +2,13 @@ import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
+/* 
+  To-Dos:
+  - [ ] Add transitions (maybe)
+  - [ ] Add ability to change button color
+  - [ ] Add ability to enable/disable button
+*/
+
 /// __IOS Button__
 ///
 /// A button that is styled like an iOS button.

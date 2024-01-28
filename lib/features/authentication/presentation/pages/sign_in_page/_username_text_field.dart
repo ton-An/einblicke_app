@@ -8,6 +8,7 @@ class _UsernameTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return IOSTextField(
       hint: AppLocalizations.of(context)!.username,
+      // hint: "Email or Phone Number",
       onChanged: (String username) =>
           context.read<SignInCubit>().updateUsername(username),
     );

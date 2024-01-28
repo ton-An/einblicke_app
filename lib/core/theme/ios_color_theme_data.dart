@@ -1,5 +1,13 @@
 part of ios_theme;
 
+/*
+  To-Dos:
+  - [ ] Organize colors
+*/
+
+/// __IOS Color Theme Data__
+///
+/// A collection of iOS colors for the [IOSTheme].
 class IOSColorThemeData {
   const IOSColorThemeData({
     this.primary = IOSColors.primary,

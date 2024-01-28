@@ -1,5 +1,11 @@
 part of select_image_modal;
 
+/*
+  To-Do:
+    - [ ] Simplify the different states
+    - [ ] Add transition (e.g. a fade using [AnimatedContainer])
+*/
+
 /// The send button of the [_ImagePicker] which initiates
 /// the server request to send an image to the selected frame.
 class _SendImageButton extends StatelessWidget {

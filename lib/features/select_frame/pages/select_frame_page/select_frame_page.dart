@@ -4,6 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
 
+/// __Select Frame Page__
+///
+/// This page is a view of the available picture frames that the user can select
+/// from. The user can scroll through the frames and select one to continue on
+///
+/// Main contents:
+/// - [FrameCard]s
 class SelectFramePage extends StatelessWidget {
   const SelectFramePage({super.key});
 

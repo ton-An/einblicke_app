@@ -49,8 +49,11 @@ class SelectImageModal extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            // -- Image Picker --
             Expanded(child: Center(child: _ImagePicker())),
             XMediumGap(),
+
+            // -- Send Image Button --
             _SendImageButton(),
           ],
         ),

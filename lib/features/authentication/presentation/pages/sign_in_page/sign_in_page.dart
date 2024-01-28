@@ -22,7 +22,7 @@ part '_sign_in_button.dart';
 part '_title.dart';
 part '_username_text_field.dart';
 
-/// Sign In Page__
+/// __Sign In Page__
 ///
 /// ...
 ///

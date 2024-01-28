@@ -2,6 +2,11 @@ import 'package:dispatch_pi_app/core/ios_properties.dart';
 import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 
+/*
+  To-Dos:
+  - [ ] Check spacing and border radius
+*/
+
 /// __IOS Text Field__
 ///
 /// A text field that is styled like an iOS text field.
@@ -24,24 +29,12 @@ class IOSTextField extends StatelessWidget {
       child: CupertinoTextField(
         placeholder: hint,
         obscureText: obscureText,
-        style: TextStyle(
-          inherit: false,
-          fontFamily: '.SF Pro Display',
-          fontSize: 17.0,
-          fontWeight: FontWeight.w400,
-          letterSpacing: -0.41,
-          color: IOSTheme.of(context).colors.text,
-        ),
-        placeholderStyle: TextStyle(
-          inherit: false,
-          fontFamily: '.SF Pro Display',
-          fontSize: 17.0,
-          fontWeight: FontWeight.w400,
-          letterSpacing: -0.41,
-          color: IOSTheme.of(context).colors.hint,
-        ),
+        style: IOSTheme.of(context).text.textField,
+        placeholderStyle: IOSTheme.of(context).text.textField.copyWith(
+              color: IOSTheme.of(context).colors.hint,
+            ),
         padding: EdgeInsets.symmetric(
-            horizontal: IOSTheme.of(context).spacing.xxSmall),
+            horizontal: IOSTheme.of(context).spacing.medium + 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(IOSProperties.fieldBorderRadius),
           color: IOSTheme.of(context).colors.fieldColor,

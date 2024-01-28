@@ -1,5 +1,8 @@
 part of ios_theme;
 
+/// __IOS Spacing Theme Data__
+///
+/// A collection of iOS spacing values for the [IOSTheme].
 class IOSSpacingThemeData {
   const IOSSpacingThemeData({
     double? tiny,

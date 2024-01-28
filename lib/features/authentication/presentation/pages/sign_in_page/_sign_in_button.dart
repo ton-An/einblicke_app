@@ -1,5 +1,10 @@
 part of sign_in_page;
 
+/*
+  To-Dos:
+  - [ ] Add fade transitions (maybe)
+*/
+
 /// This is the sign in button of the [SignInPage].
 ///
 /// If pressed it will trigger a sign in request and
@@ -29,7 +34,8 @@ class _SignInButton extends StatelessWidget {
         }
 
         return IOSTextButton(
-          text: AppLocalizations.of(context)!.login,
+          // text: AppLocalizations.of(context)!.login,
+          text: "Continue",
           onPressed: () => onLoginPressed(context),
         );
       },

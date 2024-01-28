@@ -14,21 +14,19 @@ class _TextThemeDefaultsBuilder {
     return original.color == color ? original : original.copyWith(color: color);
   }
 
-  TextStyle get navTitle => _applyLabelColor(_kNavDefaultTitleTextStyle, color);
-
-  TextStyle get description =>
-      _applyLabelColor(_kDescriptionTextStyle, descriptionColor);
-
   TextStyle get buttonLabel =>
-      _applyLabelColor(_kDefaultButtonLabelTextStyle, IOSColors.primary);
+      _applyLabelColor(_DefaultTextSyles.buttonLabel, IOSColors.primary);
 
-  TextStyle get title => _applyLabelColor(_kTitleTextStyle, color);
+  TextStyle get smallLabel =>
+      _applyLabelColor(_DefaultTextSyles.smallLabel, color);
 
-  TextStyle get smallLabel => _applyLabelColor(_kSmallLabelTextStyle, color);
+  TextStyle get largeTitle =>
+      _applyLabelColor(_DefaultTextSyles.largeTitle, color);
 
-  TextStyle get largeTitle => _applyLabelColor(_kLargeTitle, color);
+  TextStyle get body => _applyLabelColor(_DefaultTextSyles.body, color);
 
-  TextStyle get body => _applyLabelColor(_kBody, color);
+  TextStyle get textField =>
+      _applyLabelColor(_DefaultTextSyles.textField, color);
 
   _TextThemeDefaultsBuilder resolveFrom(BuildContext context) {
     final Color resolvedColor = IOSTheme.of(context).colors.text;

@@ -1,9 +1,14 @@
 part of select_image_modal;
 
+/*
+  To-Do:
+    - [ ] Untangle the spaghetti
+*/
+
 /// The image picker of the [SelectImageModal] which allows the user
 /// to select an image from their device.
 class _ImagePicker extends StatefulWidget {
-  const _ImagePicker({super.key});
+  const _ImagePicker();
 
   @override
   State<_ImagePicker> createState() => _ImagePickerState();
@@ -29,22 +34,6 @@ class _ImagePickerState extends State<_ImagePicker>
     super.initState();
   }
 
-  void onImageSelectorPressed(BuildContext context) async {
-    _controller.forward().then((_) => _controller.reverse());
-    await getIt<ImagePicker>()
-        .pickImage(source: ImageSource.gallery)
-        .then((image) async {
-      await ImageCropper()
-          .cropImage(
-        sourcePath: image!.path,
-        aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 3),
-      )
-          .then((CroppedFile? croppedImage) {
-        context.read<SelectImageCubit>().selectImage(File(croppedImage!.path));
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final double displayWidth = MediaQuery.of(context).size.width;
@@ -63,7 +52,7 @@ class _ImagePickerState extends State<_ImagePicker>
             }
 
             return GestureDetector(
-              onTap: () => onImageSelectorPressed(context),
+              onTap: () => _onImageSelectorPressed(context),
               child: Opacity(
                 opacity: _animation.value,
                 child: ColoredBox(
@@ -90,5 +79,21 @@ class _ImagePickerState extends State<_ImagePicker>
         ),
       ),
     );
+  }
+
+  void _onImageSelectorPressed(BuildContext context) async {
+    _controller.forward().then((_) => _controller.reverse());
+    await getIt<ImagePicker>()
+        .pickImage(source: ImageSource.gallery)
+        .then((image) async {
+      await ImageCropper()
+          .cropImage(
+        sourcePath: image!.path,
+        aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 3),
+      )
+          .then((CroppedFile? croppedImage) {
+        context.read<SelectImageCubit>().selectImage(File(croppedImage!.path));
+      });
+    });
   }
 }

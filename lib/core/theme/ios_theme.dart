@@ -1,6 +1,7 @@
 library ios_theme;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 part '_default_spacing.dart';
 part '_default_text_styles.dart';

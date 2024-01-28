@@ -1,5 +1,13 @@
 part of 'ios_theme.dart';
 
+/*
+To-Dos:
+- [ ] Check all spacing values and make sure they are correct (e.g. using a screenshot overlay)
+*/
+
+/// __Default Spacing__
+///
+/// The default spacing values for the [IOSTheme].
 class _DefaultSpacing {
   static const double tiny = 1;
   static const double xTiny = 2;

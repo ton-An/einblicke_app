@@ -1,5 +1,10 @@
 part of frame_card;
 
+/*
+  To-Dos:
+  - [ ] Check/standardize blur
+*/
+
 /// The online indicator of the [FrameCard]
 class _OnlineIndicator extends StatelessWidget {
   const _OnlineIndicator();
