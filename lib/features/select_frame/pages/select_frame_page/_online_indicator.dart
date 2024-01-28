@@ -1,23 +1,18 @@
 part of select_frame_page;
 
 class _OnlineIndicator extends StatelessWidget {
-  const _OnlineIndicator({super.key});
+  const _OnlineIndicator();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return ClipOval(
+      child: ColoredBox(
         color: IOSTheme.of(context).colors.background.withOpacity(.37),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(40),
         child: BackdropFilter(
           filter: ImageFilter.blur(
             sigmaX: 6,
             sigmaY: 6,
           ),
-          blendMode: BlendMode.srcATop,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
             child: Container(
