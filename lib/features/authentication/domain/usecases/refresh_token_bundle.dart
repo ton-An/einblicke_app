@@ -45,6 +45,7 @@ class RefreshTokenBundle {
   }
 
   Future<Either<Failure, None>> _saveTokens(TokenBundle tokenBundle) async {
-    return await authenticationRepository.saveTokens(tokenBundle: tokenBundle);
+    return await authenticationRepository.saveTokenBundle(
+        tokenBundle: tokenBundle);
   }
 }

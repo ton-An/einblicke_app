@@ -29,7 +29,7 @@ void main() {
         refreshToken: any(named: "refreshToken"))).thenAnswer(
       (_) async => Right(tTokenBundle),
     );
-    when(() => mockAuthenticationRepository.saveTokens(
+    when(() => mockAuthenticationRepository.saveTokenBundle(
           tokenBundle: any(named: "tokenBundle"),
         )).thenAnswer(
       (_) async => const Right(None()),
@@ -83,13 +83,13 @@ void main() {
     await refreshTokenBundle();
 
     // assert
-    verify(() =>
-        mockAuthenticationRepository.saveTokens(tokenBundle: tTokenBundle));
+    verify(() => mockAuthenticationRepository.saveTokenBundle(
+        tokenBundle: tTokenBundle));
   });
 
   test("should relay [Failure]s", () async {
     // arrange
-    when(() => mockAuthenticationRepository.saveTokens(
+    when(() => mockAuthenticationRepository.saveTokenBundle(
           tokenBundle: any(named: "tokenBundle"),
         )).thenAnswer(
       (_) async => const Left(SecureStorageWriteFailure()),

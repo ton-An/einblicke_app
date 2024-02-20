@@ -33,7 +33,7 @@ abstract class AuthenticationRepository {
   ///
   /// Failures:
   /// - TBD
-  Future<Either<Failure, None>> saveTokens({
+  Future<Either<Failure, None>> saveTokenBundle({
     required TokenBundle tokenBundle,
   });
 
