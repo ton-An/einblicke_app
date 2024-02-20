@@ -65,4 +65,13 @@ abstract class AuthenticationRepository {
   Future<Either<Failure, TokenBundle>> refreshTokenBundle({
     required AuthenticationToken refreshToken,
   });
+
+  /// Checks if the device's secure storage contains a [TokenBundle].
+  ///
+  /// Returns:
+  /// - [bool]: true if a [TokenBundle] is present, otherwise false.
+  ///
+  /// Failures:
+  /// - TBD
+  Future<Either<Failure, bool>> isTokenBundlePresent();
 }
