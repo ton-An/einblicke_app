@@ -39,6 +39,7 @@ dependencies:
   equatable: ^2.0.5
   dispatch_pi_shared:
     path: ../dispatch_pi_shared/
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
