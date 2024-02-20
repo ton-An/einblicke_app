@@ -9,7 +9,6 @@ import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/small_gap.dart';
 import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:dispatch_pi_app/core/widgets/ios_button.dart';
-import 'package:dispatch_pi_app/core/widgets/ios_modal.dart';
 import 'package:dispatch_pi_app/core/widgets/ios_text_button.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
@@ -34,7 +33,8 @@ class SelectImageModal extends StatelessWidget {
   const SelectImageModal({super.key});
 
   static const String pageName = "select_image";
-  static const String route = "/select_frame/$pageName";
+  // static const String route = "/select_frame/$pageName";
+  static const String route = "/$pageName";
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,8 @@ class SelectImageModal extends StatelessWidget {
           context.go(SignInPage.route);
         }
       },
-      child: const IOSModal(
+      child: _TempScaffold(
+        // const IOSModal(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,6 +57,28 @@ class SelectImageModal extends StatelessWidget {
             // -- Send Image Button --
             _SendImageButton(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TempScaffold extends StatelessWidget {
+  const _TempScaffold({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: IOSTheme.of(context).spacing.xMedium,
+            right: IOSTheme.of(context).spacing.xMedium,
+            bottom: IOSTheme.of(context).spacing.xLarge,
+          ),
+          child: child,
         ),
       ),
     );

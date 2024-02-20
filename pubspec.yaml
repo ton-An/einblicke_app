@@ -37,6 +37,8 @@ dependencies:
   infinite_carousel: ^1.0.3
   flutter_carousel_widget: ^2.2.0
   equatable: ^2.0.5
+  dispatch_pi_shared:
+    path: ../dispatch_pi_shared/
 
 dev_dependencies:
   flutter_test:

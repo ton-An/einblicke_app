@@ -4,7 +4,6 @@ import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/splash_screen.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
-import 'package:dispatch_pi_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
 import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:dispatch_pi_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,21 +53,30 @@ class DispatchPiApp extends StatelessWidget {
             const CupertinoExtendedPage(child: SplashScreen()),
         routes: [
           GoRoute(
-            path: SelectFramePage.pageName,
-            pageBuilder: (context, state) =>
-                const CupertinoExtendedPage(child: SelectFramePage()),
-            routes: [
-              GoRoute(
-                path: SelectImageModal.pageName,
-                pageBuilder: (context, state) => CupertinoSheetPage(
-                  child: BlocProvider(
-                    create: (context) => getIt<SelectImageCubit>(),
-                    child: const SelectImageModal(),
-                  ),
-                ),
+            path: SelectImageModal.pageName,
+            pageBuilder: (context, state) => CupertinoExtendedPage(
+              child: BlocProvider(
+                create: (context) => getIt<SelectImageCubit>(),
+                child: const SelectImageModal(),
               ),
-            ],
+            ),
           ),
+          // GoRoute(
+          //   path: SelectFramePage.pageName,
+          //   pageBuilder: (context, state) =>
+          //       const CupertinoExtendedPage(child: SelectFramePage()),
+          //   routes: [
+          //     GoRoute(
+          //       path: SelectImageModal.pageName,
+          //       pageBuilder: (context, state) => CupertinoSheetPage(
+          //         child: BlocProvider(
+          //           create: (context) => getIt<SelectImageCubit>(),
+          //           child: const SelectImageModal(),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           GoRoute(
             path: SignInPage.pageName,
             pageBuilder: (context, state) => CupertinoExtendedPage(

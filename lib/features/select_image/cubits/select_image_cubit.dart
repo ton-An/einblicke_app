@@ -75,7 +75,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
       _resetForm();
     } else if (sendImageResponse.statusCode == HttpStatus.unauthorized &&
         !hasRetried) {
-      _refreshTokens();
+      refreshTokens();
       sendImage();
     } else {
       print(sendImageResponse.data);
@@ -90,7 +90,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
     emit(const SelectImageInitial());
   }
 
-  void _refreshTokens() async {
+  void refreshTokens() async {
     dio.options.headers = null;
     dio.options.contentType = Headers.jsonContentType;
     dio.options.connectTimeout = const Duration(seconds: 5);
@@ -98,10 +98,9 @@ class SelectImageCubit extends Cubit<SelectImageState> {
     dio.options.receiveTimeout = const Duration(seconds: 5);
 
     final String refreshTokensUri =
-        secrets.serverUrl + "/curator/refresh_tokens";
+        secrets.serverUrl + "/curator/refresh_tokens/";
 
     String refreshToken = (await secureStorage.read(key: "refresh_token"))!;
-
     final Map<String, String> body = {
       "refresh_token": refreshToken,
     };
@@ -114,10 +113,12 @@ class SelectImageCubit extends Cubit<SelectImageState> {
         options: Options(validateStatus: (_) => true));
 
     if (refreshTokenResponse.statusCode == HttpStatus.ok) {
-      final Map<String, String> tokens = jsonDecode(refreshTokenResponse.data);
+      final Map<String, String> tokens =
+          Map.castFrom<String, dynamic, String, String>(
+              jsonDecode(refreshTokenResponse.data));
 
       final String accessToken = tokens["access_token"]!;
-      final String refreshToken = tokens["refreshToken"]!;
+      final String refreshToken = tokens["refresh_token"]!;
 
       await secureStorage.write(key: "access_token", value: accessToken);
       await secureStorage.write(key: "refresh_token", value: refreshToken);

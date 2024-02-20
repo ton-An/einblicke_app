@@ -55,7 +55,6 @@ class SignInCubit extends Cubit<SignInState> {
           validateStatus: (_) => true),
       onSendProgress: (count, total) => print("$count $total"),
     );
-    print(signInResponse.data);
 
     if (signInResponse.statusCode == HttpStatus.ok) {
       final Map<String, String> tokens =

@@ -12,6 +12,7 @@ import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign
 import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_states.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
 import 'package:dispatch_pi_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
+import 'package:dispatch_pi_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -59,7 +60,7 @@ class _SignInPageState extends State<SignInPage> {
       bloc: context.read<SignInCubit>(),
       listener: (context, state) {
         if (state is SignInSuccess) {
-          context.push(SelectFramePage.route);
+          context.push(SelectImageModal.route);
         }
       },
       child: CupertinoPageScaffold(

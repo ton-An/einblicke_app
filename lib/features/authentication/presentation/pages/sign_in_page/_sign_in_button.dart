@@ -34,8 +34,7 @@ class _SignInButton extends StatelessWidget {
         }
 
         return IOSTextButton(
-          // text: AppLocalizations.of(context)!.login,
-          text: "Continue",
+          text: AppLocalizations.of(context)!.continueLabel,
           onPressed: () => onLoginPressed(context),
         );
       },

@@ -8,11 +8,12 @@ class _ContinueButton extends StatelessWidget {
   const _ContinueButton();
 
   void onContinuePressed(BuildContext context) async {
-    await Permission.photos.request().then((status) {
-      if (status.isGranted) {
-        context.pop();
-      }
-    });
+    context.pop();
+    // await Permission.photos.request().then((status) {
+    //   if (status.isGranted) {
+    //     context.pop();
+    //   }
+    // });
   }
 
   @override

@@ -8,7 +8,7 @@ class _PasswordTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return IOSTextField(
       hint: AppLocalizations.of(context)!.password,
-      obscureText: false,
+      obscureText: true,
       onChanged: (String username) =>
           context.read<SignInCubit>().updatePassword(username),
     );
