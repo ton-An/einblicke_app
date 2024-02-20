@@ -37,6 +37,15 @@ abstract class AuthenticationRepository {
     required TokenBundle tokenBundle,
   });
 
+  /// Retrieves the refresh token from the device's secure storage.
+  ///
+  /// Returns:
+  /// - [AuthenticationToken]: refreshToken
+  ///
+  /// Failures:
+  /// - TBD
+  Future<Either<Failure, AuthenticationToken>> getRefreshToken();
+
   /// Deletes the authentication tokens from the device's secure storage.
   ///
   /// Failures:
