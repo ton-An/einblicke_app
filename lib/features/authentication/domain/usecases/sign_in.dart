@@ -4,7 +4,7 @@ import 'package:dispatch_pi_app/features/authentication/domain/repositories/auth
 import 'package:dispatch_pi_shared/dispatch_pi_shared.dart';
 
 /// {@template sign_in}
-/// Signs in a user using the provided username and password.
+/// Signs  the user in using the provided username and password.
 ///
 /// Parameters:
 /// - [String]: username
