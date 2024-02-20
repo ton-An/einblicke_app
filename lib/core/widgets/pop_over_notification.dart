@@ -27,9 +27,9 @@ class PopOverNotification extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(255, 0, 0, 0).withOpacity(.14),
+                color: const Color.fromARGB(255, 0, 0, 0).withOpacity(.14),
                 blurRadius: 10,
-                offset: Offset(0, 1),
+                offset: const Offset(0, 1),
               )
             ]),
             child: ClipRRect(
@@ -44,8 +44,8 @@ class PopOverNotification extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color:
-                          Color.fromARGB(255, 255, 255, 255).withOpacity(.7)),
+                      color: const Color.fromARGB(255, 255, 255, 255)
+                          .withOpacity(.7)),
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(
                     horizontal: IOSTheme.of(context).spacing.xMedium,
@@ -58,7 +58,7 @@ class PopOverNotification extends StatelessWidget {
                         color: IOSTheme.of(context).colors.error,
                         size: 24,
                       ),
-                      MediumGap(),
+                      const MediumGap(),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,7 @@ class PopOverNotification extends StatelessWidget {
                                   .copyWith(
                                       color:
                                           IOSTheme.of(context).colors.error)),
-                          SmallGap(),
+                          const SmallGap(),
                           Text(
                             "Please sign in again",
                             style: IOSTheme.of(context).text.body,
