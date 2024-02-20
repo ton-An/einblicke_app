@@ -38,7 +38,7 @@ class SignIn {
     );
 
     return signInEither.fold(
-      (failure) => Left(failure),
+      Left.new,
       (tokenBundle) => _saveTokens(tokenBundle),
     );
   }

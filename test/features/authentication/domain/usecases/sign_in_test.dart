@@ -43,7 +43,7 @@ void main() {
         username: tUsername, password: tPassword));
   });
 
-  test("should relay failures", () async {
+  test("should relay [Failure]s", () async {
     // arrange
     when(() => mockAuthenticationRepository.signIn(
           username: any(named: "username"),
@@ -68,7 +68,7 @@ void main() {
         mockAuthenticationRepository.saveTokens(tokenBundle: tTokenBundle));
   });
 
-  test("should relay failures", () async {
+  test("should relay [Failure]s", () async {
     // arrange
     when(() => mockAuthenticationRepository.saveTokens(
           tokenBundle: any(named: "tokenBundle"),
