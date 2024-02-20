@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:dispatch_pi_app/core/ios_properties.dart';
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/core/widgets/gaps/medium_gap.dart';
-import 'package:dispatch_pi_app/core/widgets/gaps/small_gap.dart';
+import 'package:einblicke_app/core/ios_properties.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
+import 'package:einblicke_app/core/widgets/gaps/small_gap.dart';
 import 'package:flutter/cupertino.dart';
 
 /*

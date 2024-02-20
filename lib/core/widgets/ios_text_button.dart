@@ -1,5 +1,5 @@
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/core/widgets/ios_button.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/widgets/ios_button.dart';
 import 'package:flutter/cupertino.dart';
 
 /// __IOS Text Button__

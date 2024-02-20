@@ -1,4 +1,4 @@
-# dispatch_pi_app
+# einblicke_app
 
 A new Flutter project.
 

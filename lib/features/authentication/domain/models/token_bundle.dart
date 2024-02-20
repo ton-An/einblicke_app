@@ -1,4 +1,4 @@
-import 'package:dispatch_pi_app/features/authentication/domain/models/authentication_token.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:equatable/equatable.dart';
 
 /// __Token Bundle__

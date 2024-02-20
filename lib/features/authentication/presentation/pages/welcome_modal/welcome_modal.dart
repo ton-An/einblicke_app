@@ -1,13 +1,13 @@
 library welcome_modal;
 
-import 'package:dispatch_pi_app/core/ios_properties.dart';
-import 'package:dispatch_pi_app/core/l10n/app_localizations.dart';
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/core/widgets/gaps/x_large_gap.dart';
-import 'package:dispatch_pi_app/core/widgets/gaps/x_medium_gap.dart';
-import 'package:dispatch_pi_app/core/widgets/gaps/xx_medium_gap.dart';
-import 'package:dispatch_pi_app/core/widgets/ios_text_button.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_app/core/ios_properties.dart';
+import 'package:einblicke_app/core/l10n/app_localizations.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
+import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
+import 'package:einblicke_app/core/widgets/gaps/xx_medium_gap.dart';
+import 'package:einblicke_app/core/widgets/ios_text_button.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 

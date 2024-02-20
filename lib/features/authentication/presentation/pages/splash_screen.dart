@@ -1,6 +1,6 @@
-import 'package:dispatch_pi_app/core/dependency_injector.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
-import 'package:dispatch_pi_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/core/dependency_injector.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';

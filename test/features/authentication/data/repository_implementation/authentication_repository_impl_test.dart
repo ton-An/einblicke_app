@@ -1,4 +1,4 @@
-import 'package:dispatch_pi_app/features/authentication/data/repository_implementation/authentication_repository_impl.dart';
+import 'package:einblicke_app/features/authentication/data/repository_implementation/authentication_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../mocks.dart';

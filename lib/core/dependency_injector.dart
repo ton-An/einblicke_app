@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:dispatch_pi_app/core/secrets.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
+import 'package:einblicke_app/core/secrets.dart';
+import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';

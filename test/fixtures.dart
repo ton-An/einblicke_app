@@ -1,5 +1,5 @@
-import 'package:dispatch_pi_app/features/authentication/domain/models/authentication_token.dart';
-import 'package:dispatch_pi_app/features/authentication/domain/models/token_bundle.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
+import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 
 // -- Authentication
 const String tUsername = "big-fudge";

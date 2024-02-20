@@ -1,4 +1,4 @@
-package com.example.dispatch_pi_app
+package com.example.einblicke_app
 
 import io.flutter.embedding.android.FlutterActivity
 

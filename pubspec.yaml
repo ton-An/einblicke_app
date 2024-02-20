@@ -1,5 +1,5 @@
-name: dispatch_pi_app
-description: A new Flutter project.
+name: einblicke_app
+description: The companion app for e-ink picture frames running Einblicke
 
 publish_to: "none"
 
@@ -36,8 +36,8 @@ dependencies:
   infinite_carousel: ^1.0.3
   flutter_carousel_widget: ^2.2.0
   equatable: ^2.0.5
-  dispatch_pi_shared:
-    path: ../dispatch_pi_shared/
+  einblicke_shared:
+    path: ../einblicke_shared/
   dartz: ^0.10.1
   mocktail: ^1.0.3
 

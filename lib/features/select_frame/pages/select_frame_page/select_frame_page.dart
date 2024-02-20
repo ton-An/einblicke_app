@@ -1,5 +1,5 @@
-import 'package:dispatch_pi_app/features/select_frame/widgets/frame_card/frame_card.dart';
-import 'package:dispatch_pi_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/features/select_frame/widgets/frame_card/frame_card.dart';
+import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';

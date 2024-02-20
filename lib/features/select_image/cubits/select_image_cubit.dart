@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dispatch_pi_app/core/secrets.dart';
-import 'package:dispatch_pi_app/features/select_image/cubits/select_image_states.dart';
+import 'package:einblicke_app/core/secrets.dart';
+import 'package:einblicke_app/features/select_image/cubits/select_image_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http_parser/http_parser.dart';

@@ -129,10 +129,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  dispatch_pi_shared:
+  einblicke_shared:
     dependency: "direct main"
     description:
-      path: "../dispatch_pi_shared"
+      path: "../einblicke_shared"
       relative: true
     source: path
     version: "0.0.1"

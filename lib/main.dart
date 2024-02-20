@@ -1,11 +1,11 @@
-import 'package:dispatch_pi_app/core/dependency_injector.dart';
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/pages/splash_screen.dart';
-import 'package:dispatch_pi_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
-import 'package:dispatch_pi_app/features/select_image/cubits/select_image_cubit.dart';
-import 'package:dispatch_pi_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/core/dependency_injector.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/splash_screen.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
+import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
+import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart' as l10n;
@@ -18,16 +18,16 @@ void main() {
 
   initGetIt();
 
-  runApp(DispatchPiApp());
+  runApp(EinblickeApp());
 }
 
-class DispatchPiApp extends StatelessWidget {
-  DispatchPiApp({super.key});
+class EinblickeApp extends StatelessWidget {
+  EinblickeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoApp.router(
-      title: "Dispatch Pi",
+      title: "Einblicke",
       localizationsDelegates: const [
         l10n.AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

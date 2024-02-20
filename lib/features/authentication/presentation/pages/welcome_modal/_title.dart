@@ -7,7 +7,7 @@ class _Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "${AppLocalizations.of(context)!.welcomeTo} ${AppLocalizations.of(context)!.shortAppName}",
+      "${AppLocalizations.of(context)!.welcomeTo} ${AppLocalizations.of(context)!.appName}",
       textAlign: TextAlign.center,
       style: IOSTheme.of(context).text.largeTitle,
     );

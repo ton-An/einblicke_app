@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:dispatch_pi_app/features/authentication/domain/models/authentication_token.dart';
-import 'package:dispatch_pi_app/features/authentication/domain/models/token_bundle.dart';
-import 'package:dispatch_pi_app/features/authentication/domain/repositories/authentication_repository.dart';
-import 'package:dispatch_pi_shared/dispatch_pi_shared.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
+import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
+import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:einblicke_shared/einblicke_shared.dart';
 
 /// {@template refresh_token_bundle}
 /// Refreshes the user's authentication tokens.

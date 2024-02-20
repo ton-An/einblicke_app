@@ -1,4 +1,4 @@
-import 'package:dispatch_pi_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
