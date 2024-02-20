@@ -34,7 +34,6 @@ class SelectImageCubit extends Cubit<SelectImageState> {
     emit(SelectImageLoading(image: selectedImage));
     final String uploadImageUrl = "${secrets.serverUrl}/curator/upload_image";
 
-    print(selectedImage);
     // final img.Image image = img.Image. fromBytes(
     //     width: 800,
     //     height: 400,
@@ -51,7 +50,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
     //   "frame_id": frameId,
     // });
 
-    formData.fields.add(MapEntry("frame_id", frameId));
+    formData.fields.add(const MapEntry("frame_id", frameId));
     formData.files.add(MapEntry(
         "photo",
         await MultipartFile.fromFile(selectedImage.path,
@@ -63,7 +62,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
 
     // dio.options.contentType = Headers.multipartFormDataContentType;
     dio.options.headers = {
-      "Authorization": "Bearer " + accessToken,
+      "Authorization": "Bearer $accessToken",
       Headers.contentTypeHeader: "multipart/form-data"
     };
 
@@ -78,8 +77,6 @@ class SelectImageCubit extends Cubit<SelectImageState> {
       refreshTokens();
       sendImage();
     } else {
-      print(sendImageResponse.data);
-      print(sendImageResponse.statusCode);
       emit(const SelectImageFailure());
       _resetForm();
     }
@@ -98,7 +95,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
     dio.options.receiveTimeout = const Duration(seconds: 5);
 
     final String refreshTokensUri =
-        secrets.serverUrl + "/curator/refresh_tokens/";
+        "${secrets.serverUrl}/curator/refresh_tokens/";
 
     String refreshToken = (await secureStorage.read(key: "refresh_token"))!;
     final Map<String, String> body = {

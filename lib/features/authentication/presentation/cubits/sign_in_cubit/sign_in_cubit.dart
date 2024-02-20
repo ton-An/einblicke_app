@@ -45,15 +45,11 @@ class SignInCubit extends Cubit<SignInState> {
     final Response signInResponse = await dio2.post<String>(
       loginUri.toString(),
       data: bodyJson,
-      onReceiveProgress: (count, total) {
-        print("$count $total");
-      },
       options: Options(
           headers: headers,
           contentType: Headers.jsonContentType,
-          receiveTimeout: Duration(seconds: 1),
+          receiveTimeout: const Duration(seconds: 1),
           validateStatus: (_) => true),
-      onSendProgress: (count, total) => print("$count $total"),
     );
 
     if (signInResponse.statusCode == HttpStatus.ok) {

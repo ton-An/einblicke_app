@@ -44,7 +44,7 @@ class SelectImageModal extends StatelessWidget {
           context.go(SignInPage.route);
         }
       },
-      child: _TempScaffold(
+      child: const _TempScaffold(
         // const IOSModal(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +64,7 @@ class SelectImageModal extends StatelessWidget {
 }
 
 class _TempScaffold extends StatelessWidget {
-  const _TempScaffold({super.key, required this.child});
+  const _TempScaffold({required this.child});
 
   final Widget child;
 
