@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dispatch_pi_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:dispatch_pi_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:dispatch_pi_shared/dispatch_pi_shared.dart';
 
@@ -9,10 +10,10 @@ abstract class AuthenticationRepository {
   ///{@macro authentication_repository}
   const AuthenticationRepository();
 
-  /// Signs in a user using the provided email and password.
+  /// Signs in a user using the provided username and password.
   ///
   /// Parameters:
-  /// - [String]: email
+  /// - [String]: username
   /// - [String]: password
   ///
   /// Returns:
@@ -21,7 +22,7 @@ abstract class AuthenticationRepository {
   /// Failures:
   /// - TBD
   Future<Either<Failure, TokenBundle>> signIn({
-    required String email,
+    required String username,
     required String password,
   });
 
@@ -53,6 +54,6 @@ abstract class AuthenticationRepository {
   /// Failures:
   /// - TBD
   Future<Either<Failure, TokenBundle>> refreshTokenBundle({
-    required String refreshToken,
+    required AuthenticationToken refreshToken,
   });
 }
