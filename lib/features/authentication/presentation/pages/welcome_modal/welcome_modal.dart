@@ -10,7 +10,6 @@ import 'package:dispatch_pi_app/core/widgets/ios_text_button.dart';
 import 'package:dispatch_pi_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 part '_continue_button.dart';
 part '_cover_artwork.dart';
