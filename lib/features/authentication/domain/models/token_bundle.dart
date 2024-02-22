@@ -1,5 +1,10 @@
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'token_bundle.g.dart';
+
+@JsonSerializable()
 
 /// __Token Bundle__
 ///
@@ -15,6 +20,11 @@ class TokenBundle extends Equatable {
 
   final AuthenticationToken accessToken;
   final AuthenticationToken refreshToken;
+
+  factory TokenBundle.fromJson(Map<String, dynamic> json) =>
+      _$TokenBundleFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TokenBundleToJson(this);
 
   @override
   List<Object?> get props => [accessToken, refreshToken];

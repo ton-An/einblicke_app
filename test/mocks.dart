@@ -2,6 +2,7 @@ import 'package:einblicke_app/core/data/repository_impl/failure_handler.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mocktail/mocktail.dart';
 
 // -- Core
@@ -16,3 +17,5 @@ class MockAuthenticationLocalDataSource extends Mock
 
 class MockAuthenticationRemoteDataSource extends Mock
     implements AuthenticationRemoteDataSource {}
+
+class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}

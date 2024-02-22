@@ -29,6 +29,9 @@ final TokenBundle tTokenBundle = TokenBundle(
   refreshToken: tRefreshToken,
 );
 
+final String tTokenBundleJsonString =
+    '{"accessToken":{"token":"you shall pass","expiresAt":"2022-12-01T00:00:00.000"},"refreshToken":{"token":"you shall refresh","expiresAt":"2022-12-31T00:00:00.000"}}';
+
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(
   code: "i_am_a_teapot",

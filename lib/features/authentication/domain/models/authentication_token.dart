@@ -1,4 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'authentication_token.g.dart';
+
+@JsonSerializable()
 
 /// __Authentication Token__
 ///
@@ -12,6 +17,11 @@ class AuthenticationToken extends Equatable {
 
   final String token;
   final DateTime expiresAt;
+
+  factory AuthenticationToken.fromJson(Map<String, dynamic> json) =>
+      _$AuthenticationTokenFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AuthenticationTokenToJson(this);
 
   @override
   List<Object?> get props => [token, expiresAt];
