@@ -18,14 +18,10 @@ void main() {
       authenticationRepository: mockAuthenticationRepository,
     );
 
-    // -- Fallbacks
-    registerFallbackValue(tTokenBundle);
-    registerFallbackValue(tAccessToken);
-
     // -- Stubs
-    when(() => mockAuthenticationRepository.getRefreshToken())
-        .thenAnswer((_) async => Right(tRefreshToken));
-    when(() => mockAuthenticationRepository.refreshTokenBundle(
+    when(() => mockAuthenticationRepository.getTokenBundleFromStorage())
+        .thenAnswer((_) async => Right(tTokenBundle));
+    when(() => mockAuthenticationRepository.getNewTokenBundle(
         refreshToken: any(named: "refreshToken"))).thenAnswer(
       (_) async => Right(tTokenBundle),
     );
@@ -36,17 +32,23 @@ void main() {
     );
   });
 
+  setUpAll(() {
+    // -- Fallbacks
+    registerFallbackValue(tTokenBundle);
+    registerFallbackValue(tAccessToken);
+  });
+
   test("should get the user's refresh token", () async {
     // act
     await refreshTokenBundle();
 
     // assert
-    verify(() => mockAuthenticationRepository.getRefreshToken());
+    verify(() => mockAuthenticationRepository.getTokenBundleFromStorage());
   });
 
   test("should relay [Failure]s", () async {
     // arrange
-    when(() => mockAuthenticationRepository.getRefreshToken())
+    when(() => mockAuthenticationRepository.getTokenBundleFromStorage())
         .thenAnswer((_) async => const Left(StorageReadFailure()));
 
     // act
@@ -61,13 +63,13 @@ void main() {
     await refreshTokenBundle();
 
     // assert
-    verify(() => mockAuthenticationRepository.refreshTokenBundle(
+    verify(() => mockAuthenticationRepository.getNewTokenBundle(
         refreshToken: tRefreshToken));
   });
 
   test("should relay [Failure]s", () async {
     // arrange
-    when(() => mockAuthenticationRepository.refreshTokenBundle(
+    when(() => mockAuthenticationRepository.getNewTokenBundle(
             refreshToken: any(named: "refreshToken")))
         .thenAnswer((_) async => const Left(ServerConnectionFailure()));
 

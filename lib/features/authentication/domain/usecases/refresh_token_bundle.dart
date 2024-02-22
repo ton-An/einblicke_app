@@ -22,19 +22,23 @@ class RefreshTokenBundle {
   }
 
   Future<Either<Failure, None>> _getRefreshToken() async {
-    final Either<Failure, AuthenticationToken> refreshTokenEither =
-        await authenticationRepository.getRefreshToken();
+    final Either<Failure, TokenBundle> refreshTokenEither =
+        await authenticationRepository.getTokenBundleFromStorage();
 
     return refreshTokenEither.fold(
       Left.new,
-      (AuthenticationToken refreshToken) => _refreshTokenBundle(refreshToken),
+      (TokenBundle tokenBundle) {
+        final AuthenticationToken refreshToken = tokenBundle.refreshToken;
+
+        return _refreshTokenBundle(refreshToken);
+      },
     );
   }
 
   Future<Either<Failure, None>> _refreshTokenBundle(
       AuthenticationToken refreshToken) async {
     final Either<Failure, TokenBundle> refreshTokenBundleEither =
-        await authenticationRepository.refreshTokenBundle(
+        await authenticationRepository.getNewTokenBundle(
       refreshToken: refreshToken,
     );
 

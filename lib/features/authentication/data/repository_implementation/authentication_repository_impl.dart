@@ -1,10 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:einblicke_app/core/data/repository_impl/failure_handler.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:flutter/services.dart';
 
 /// {@template authentication_repository_impl}
 /// __Authentication Repository Implementation__ is the concrete implementation of
@@ -16,47 +19,102 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   const AuthenticationRepositoryImpl({
     required this.authenticationLocalDataSource,
     required this.authenticationRemoteDataSource,
+    required this.failureHandler,
   });
 
   final AuthenticationLocalDataSource authenticationLocalDataSource;
   final AuthenticationRemoteDataSource authenticationRemoteDataSource;
+  final FailureHandler failureHandler;
 
   @override
-  Future<Either<Failure, None>> deleteTokens() {
-    // TODO: implement deleteTokens
-    throw UnimplementedError();
+  Future<Either<Failure, None>> deleteTokens() async {
+    try {
+      await authenticationLocalDataSource.deleteTokens();
+
+      return const Right(None());
+    } on PlatformException {
+      return const Left(SecureStorageWriteFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, AuthenticationToken>> getRefreshToken() {
-    // TODO: implement getRefreshToken
-    throw UnimplementedError();
+  Future<Either<Failure, TokenBundle>> getTokenBundleFromStorage() async {
+    try {
+      final TokenBundle? tokenBundle =
+          await authenticationLocalDataSource.getTokenBundle();
+
+      if (tokenBundle == null) {
+        return const Left(SecureStorageReadFailure());
+      }
+
+      return Right(tokenBundle);
+    } on PlatformException {
+      return const Left(SecureStorageReadFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, bool>> isTokenBundlePresent() {
-    // TODO: implement isTokenBundlePresent
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, bool>> isTokenBundlePresent() async {
+    try {
+      final bool isTokenBundlePresent =
+          await authenticationLocalDataSource.isTokenBundlePresent();
 
-  @override
-  Future<Either<Failure, TokenBundle>> refreshTokenBundle(
-      {required AuthenticationToken refreshToken}) {
-    // TODO: implement refreshTokenBundle
-    throw UnimplementedError();
+      return Right(isTokenBundlePresent);
+    } on PlatformException {
+      return const Left(SecureStorageReadFailure());
+    }
   }
 
   @override
   Future<Either<Failure, None>> saveTokenBundle(
-      {required TokenBundle tokenBundle}) {
-    // TODO: implement saveTokens
-    throw UnimplementedError();
+      {required TokenBundle tokenBundle}) async {
+    try {
+      await authenticationLocalDataSource.saveTokenBundle(
+          tokenBundle: tokenBundle);
+
+      return const Right(None());
+    } on PlatformException {
+      return const Left(SecureStorageWriteFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, TokenBundle>> getNewTokenBundle(
+      {required AuthenticationToken refreshToken}) async {
+    try {
+      final TokenBundle tokenBundle = await authenticationRemoteDataSource
+          .getNewTokenBundle(refreshToken: refreshToken);
+
+      return Right(tokenBundle);
+    } catch (exception) {
+      if (exception is UnauthorizedFailure) {
+        return Left(exception);
+      } else if (exception is DioException) {
+        return Left(failureHandler.dioExceptionMapper(exception));
+      } else {
+        rethrow;
+      }
+    }
   }
 
   @override
   Future<Either<Failure, TokenBundle>> signIn(
-      {required String username, required String password}) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+      {required String username, required String password}) async {
+    try {
+      final TokenBundle tokenBundle = await authenticationRemoteDataSource
+          .signIn(username: username, password: password);
+
+      return Right(tokenBundle);
+    } catch (exception) {
+      if (exception is UnauthorizedFailure ||
+          exception is UserNotFoundFailure ||
+          exception is DatabaseReadFailure) {
+        return Left(exception as Failure);
+      } else if (exception is DioException) {
+        return Left(failureHandler.dioExceptionMapper(exception));
+      } else {
+        rethrow;
+      }
+    }
   }
 }

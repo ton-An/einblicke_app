@@ -32,24 +32,24 @@ abstract class AuthenticationRepository {
   /// - [TokenBundle]: containing authentication tokens.
   ///
   /// Failures:
-  /// - TBD
+  /// - [SecureStorageWriteFailure]
   Future<Either<Failure, None>> saveTokenBundle({
     required TokenBundle tokenBundle,
   });
 
-  /// Retrieves the refresh token from the device's secure storage.
+  /// Retrieves the [TokenBundle] from the device's secure storage.
   ///
   /// Returns:
   /// - [AuthenticationToken]: refreshToken
   ///
   /// Failures:
-  /// - TBD
-  Future<Either<Failure, AuthenticationToken>> getRefreshToken();
+  /// - [SecureStorageReadFailure]
+  Future<Either<Failure, TokenBundle>> getTokenBundleFromStorage();
 
   /// Deletes the authentication tokens from the device's secure storage.
   ///
   /// Failures:
-  /// - TBD
+  /// - [SecureStorageWriteFailure]
   Future<Either<Failure, None>> deleteTokens();
 
   /// Refreshes the authentication tokens using the provided [refreshToken].
@@ -62,7 +62,7 @@ abstract class AuthenticationRepository {
   ///
   /// Failures:
   /// - TBD
-  Future<Either<Failure, TokenBundle>> refreshTokenBundle({
+  Future<Either<Failure, TokenBundle>> getNewTokenBundle({
     required AuthenticationToken refreshToken,
   });
 
@@ -72,6 +72,6 @@ abstract class AuthenticationRepository {
   /// - [bool]: true if a [TokenBundle] is present, otherwise false.
   ///
   /// Failures:
-  /// - TBD
+  /// - [SecureStorageReadFailure]
   Future<Either<Failure, bool>> isTokenBundlePresent();
 }

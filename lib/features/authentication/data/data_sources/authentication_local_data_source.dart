@@ -1,6 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
+import 'package:flutter/services.dart';
 
 /// {@template authentication_local_data_source}
 /// __Authentication Local Data Source__ is the contract for the authentication related
@@ -16,8 +15,17 @@ abstract class AuthenticationLocalDataSource {
   /// - [TokenBundle]: containing authentication tokens
   ///
   /// Throws:
-  /// - TBD
-  Future<TokenBundle> saveTokenBundle({required TokenBundle tokenBundle});
+  /// - [PlatformException]
+  Future<void> saveTokenBundle({required TokenBundle tokenBundle});
+
+  /// Checks if the authentication tokens are present in the device's secure storage.
+  ///
+  /// Returns:
+  /// - [bool]: true if the tokens are present, false otherwise
+  ///
+  /// Throws:
+  /// - [PlatformException]
+  Future<bool> isTokenBundlePresent();
 
   /// Retrieves the refresh token from the device's secure storage.
   ///
@@ -25,12 +33,12 @@ abstract class AuthenticationLocalDataSource {
   /// - [AuthenticationToken]: refreshToken
   ///
   /// Throws:
-  /// - TBD
-  Future<AuthenticationToken> getRefreshToken();
+  /// - [PlatformException]
+  Future<TokenBundle?> getTokenBundle();
 
   /// Deletes the authentication tokens from the device's secure storage.
   ///
   /// Throws:
-  /// - TBD
-  Future<None> deleteTokens();
+  /// - [PlatformException]
+  Future<void> deleteTokens();
 }

@@ -40,6 +40,7 @@ dependencies:
     path: ../einblicke_shared/
   dartz: ^0.10.1
   mocktail: ^1.0.3
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
