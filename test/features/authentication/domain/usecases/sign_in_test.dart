@@ -14,15 +14,16 @@ void main() {
   setUp(() {
     // -- Definitions
     mockAuthenticationRepository = MockAuthenticationRepository();
-    signIn = SignIn(authenticationRepository: mockAuthenticationRepository);
-
-    // -- Fallbacks
-    registerFallbackValue(tTokenBundle);
+    signIn = SignIn(
+      authenticationRepository: mockAuthenticationRepository,
+      secrets: tFakeSecrets,
+    );
 
     // -- Stubs
     when(() => mockAuthenticationRepository.signIn(
           username: any(named: "username"),
           password: any(named: "password"),
+          secrets: any(named: "secrets"),
         )).thenAnswer(
       (_) async => Right(tTokenBundle),
     );
@@ -33,14 +34,25 @@ void main() {
     );
   });
 
+  setUpAll(() {
+    // -- Fallbacks
+    registerFallbackValue(tTokenBundle);
+    registerFallbackValue(tFakeSecrets);
+  });
+
   test("should sign in a user using the provided username and password",
       () async {
     // act
     await signIn(username: tUsername, password: tPassword);
 
     // assert
-    verify(() => mockAuthenticationRepository.signIn(
-        username: tUsername, password: tPassword));
+    verify(
+      () => mockAuthenticationRepository.signIn(
+        username: tUsername,
+        password: tPassword,
+        secrets: tFakeSecrets,
+      ),
+    );
   });
 
   test("should relay [Failure]s", () async {
@@ -48,6 +60,7 @@ void main() {
     when(() => mockAuthenticationRepository.signIn(
           username: any(named: "username"),
           password: any(named: "password"),
+          secrets: any(named: "secrets"),
         )).thenAnswer(
       (_) async => const Left(InvalidPasswordFailure()),
     );

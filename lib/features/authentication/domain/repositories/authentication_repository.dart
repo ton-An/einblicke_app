@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:einblicke_app/core/secrets.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -24,6 +25,7 @@ abstract class AuthenticationRepository {
   Future<Either<Failure, TokenBundle>> signIn({
     required String username,
     required String password,
+    required Secrets secrets,
   });
 
   /// Saves the provided [TokenBundle] to the device's secure storage.

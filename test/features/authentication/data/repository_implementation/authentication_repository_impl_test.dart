@@ -30,6 +30,7 @@ void main() {
     registerFallbackValue(tTokenBundle);
     registerFallbackValue(tDioException);
     registerFallbackValue(tAccessToken);
+    registerFallbackValue(tFakeSecrets);
   });
 
   group("deleteTokens()", () {
@@ -200,6 +201,7 @@ void main() {
         when(() => mockRemoteDataSource.signIn(
               username: any(named: "username"),
               password: any(named: "password"),
+              secrets: any(named: "secrets"),
             )).thenAnswer((_) async => tTokenBundle);
       },
     );
@@ -211,6 +213,7 @@ void main() {
       final result = await authenticationRepositoryImpl.signIn(
         username: tUsername,
         password: tPassword,
+        secrets: tFakeSecrets,
       );
 
       // assert
@@ -219,6 +222,7 @@ void main() {
         () => mockRemoteDataSource.signIn(
           username: tUsername,
           password: tPassword,
+          secrets: tFakeSecrets,
         ),
       );
     });
@@ -228,6 +232,7 @@ void main() {
       when(() => mockRemoteDataSource.signIn(
             username: any(named: "username"),
             password: any(named: "password"),
+            secrets: any(named: "secrets"),
           )).thenThrow(tDioException);
       when(
         () => mockFailureHandler.dioExceptionMapper(any()),
@@ -237,6 +242,7 @@ void main() {
       final result = await authenticationRepositoryImpl.signIn(
         username: tUsername,
         password: tPassword,
+        secrets: tFakeSecrets,
       );
 
       // assert

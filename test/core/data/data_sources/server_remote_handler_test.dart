@@ -26,6 +26,7 @@ void main() {
       when(() => mockDio.post(
             any(),
             data: any(named: "data"),
+            options: any(named: "options"),
           )).thenAnswer((_) async => tGetNewTokenBundleSuccessfulResponse);
     });
 
@@ -33,20 +34,29 @@ void main() {
         () async {
       // act
       await serverRemoteHandler.post(
-          tGetNewTokenBundleRequestPath, tGetNewTokenBundleRequestMap);
+        path: tGetNewTokenBundleRequestPath,
+        body: tGetNewTokenBundleRequestMap,
+        headers: tHeadersMap,
+      );
 
       // assert
-      verify(() => mockDio.post(
-            tGetNewTokenBundleRequestPath,
-            data: tGetNewTokenBundleRequestString,
-          ));
+      verify(
+        () => mockDio.post(
+          tGetNewTokenBundleRequestPath,
+          data: tGetNewTokenBundleRequestString,
+          options: any(named: "options"),
+        ),
+      );
     });
 
     test("should return the response data if the request was successful",
         () async {
       // act
       final result = await serverRemoteHandler.post(
-          tGetNewTokenBundleRequestPath, tGetNewTokenBundleRequestMap);
+        path: tGetNewTokenBundleRequestPath,
+        body: tGetNewTokenBundleRequestMap,
+        headers: tHeadersMap,
+      );
 
       // assert
       expect(result, tTokenBundleMap);
@@ -56,23 +66,27 @@ void main() {
         "should throw the corresponding [Failure] if the request was unsuccessful",
         () async {
       // arrange
-      when(() => mockDio.post(
-                any(),
-                data: any(named: "data"),
-              ))
-          .thenAnswer((invocation) =>
-              Future.value(tGetNewTokenBundleUnsuccessfulResponse));
+      when(
+        () => mockDio.post(
+          any(),
+          data: any(named: "data"),
+          options: any(named: "options"),
+        ),
+      ).thenAnswer(
+          (invocation) => Future.value(tGetNewTokenBundleUnsuccessfulResponse));
       when(
         () => mockFailureMapper.mapCodeToFailure(any()),
       ).thenAnswer((invocation) => const DatabaseReadFailure());
 
       // act
-      final call = serverRemoteHandler.post;
-      final result =
-          call(tGetNewTokenBundleRequestPath, tGetNewTokenBundleRequestMap);
+      call() => serverRemoteHandler.post(
+            path: tGetNewTokenBundleRequestPath,
+            body: tGetNewTokenBundleRequestMap,
+            headers: tHeadersMap,
+          );
 
       // assert
-      expect(result, throwsA(const DatabaseReadFailure()));
+      expect(call(), throwsA(const DatabaseReadFailure()));
     });
   });
 }

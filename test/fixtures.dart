@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:einblicke_app/core/secrets.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -43,6 +44,10 @@ final Map<String, String> tGetNewTokenBundleRequestMap = {
   "refresh_token": tRefreshTokenString,
 };
 
+final Map<String, dynamic> tHeadersMap = {
+  "Content-Type": "application/json",
+};
+
 final String tGetNewTokenBundleRequestString =
     jsonEncode(tGetNewTokenBundleRequestMap);
 
@@ -59,6 +64,32 @@ final Response tGetNewTokenBundleUnsuccessfulResponse = Response(
   requestOptions: RequestOptions(path: tGetNewTokenBundleRequestPath),
   statusCode: 500,
 );
+
+final Map<String, dynamic> tSignInRequestMap = {
+  "username": tUsername,
+  "password": tPassword,
+};
+
+class FakeSecret extends Secrets {
+  @override
+  // TODO: implement clientId
+  String get clientId => "einblicke client id";
+
+  @override
+  // TODO: implement clientSecret
+  String get clientSecret => "einblicke client secret";
+
+  @override
+  // TODO: implement serverUrl
+  String get serverUrl => "einblicke server url";
+}
+
+final FakeSecret tFakeSecrets = FakeSecret();
+
+final Map<String, dynamic> tSignInRequestHeaders = {
+  "client_id": tFakeSecrets.clientId,
+  "client_secret": tFakeSecrets.clientSecret,
+};
 
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(

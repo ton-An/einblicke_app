@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
+import 'package:einblicke_app/core/secrets.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -22,8 +23,11 @@ abstract class AuthenticationRemoteDataSource {
   /// - [UserNotFoundFailure]
   /// - [DatabaseReadFailure]
   /// - [DioException]
-  Future<TokenBundle> signIn(
-      {required String username, required String password});
+  Future<TokenBundle> signIn({
+    required String username,
+    required String password,
+    required Secrets secrets,
+  });
 
   /// Refreshes the authentication tokens using the provided [refreshToken].
   ///
@@ -33,8 +37,9 @@ abstract class AuthenticationRemoteDataSource {
   /// Throws:
   /// - [UnauthorizedFailure]
   /// - [DioException]
-  Future<TokenBundle> getNewTokenBundle(
-      {required AuthenticationToken refreshToken});
+  Future<TokenBundle> getNewTokenBundle({
+    required AuthenticationToken refreshToken,
+  });
 }
 
 class AuthenticationRemoteDataSourceImpl
@@ -52,8 +57,8 @@ class AuthenticationRemoteDataSourceImpl
     };
 
     final Map<String, dynamic> response = await serverRemoteHandler.post(
-      "/refresh_tokens",
-      requestMap,
+      path: "/refresh_tokens",
+      body: requestMap,
     );
 
     return TokenBundle.fromJson(response);
@@ -61,15 +66,23 @@ class AuthenticationRemoteDataSourceImpl
 
   @override
   Future<TokenBundle> signIn(
-      {required String username, required String password}) async {
+      {required String username,
+      required String password,
+      required Secrets secrets}) async {
+    final Map<String, dynamic> headers = {
+      "client_id": secrets.clientId,
+      "client_secret": secrets.clientSecret,
+    };
+
     final Map<String, String> requestMap = {
       "username": username,
       "password": password,
     };
 
     final Map<String, dynamic> response = await serverRemoteHandler.post(
-      "/sign_in",
-      requestMap,
+      path: "/sign_in",
+      body: requestMap,
+      headers: headers,
     );
 
     return TokenBundle.fromJson(response);

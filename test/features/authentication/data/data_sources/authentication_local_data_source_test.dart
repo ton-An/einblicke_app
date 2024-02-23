@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -23,7 +21,6 @@ void main() {
       // arrange
       when(() => mockSecureStorage.deleteAll())
           .thenAnswer((_) => Future.value());
-      print(jsonEncode(tTokenBundle.toJson()));
 
       // act
       await authenticationLocalDataSourceImpl.deleteTokens();

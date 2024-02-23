@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:einblicke_app/core/secrets.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -15,9 +16,10 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// {@endtemplate}
 class SignIn {
   /// {@macro sign_in}
-  SignIn({required this.authenticationRepository});
+  SignIn({required this.authenticationRepository, required this.secrets});
 
   final AuthenticationRepository authenticationRepository;
+  final Secrets secrets;
 
   /// {@macro sign_in}
   Future<Either<Failure, None>> call({
@@ -35,6 +37,7 @@ class SignIn {
         await authenticationRepository.signIn(
       username: username,
       password: password,
+      secrets: secrets,
     );
 
     return signInEither.fold(

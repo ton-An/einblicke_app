@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/data/repository_impl/repository_failure_handler.dart';
+import 'package:einblicke_app/core/secrets.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
@@ -98,11 +99,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<Either<Failure, TokenBundle>> signIn(
-      {required String username, required String password}) async {
+  Future<Either<Failure, TokenBundle>> signIn({
+    required String username,
+    required String password,
+    required Secrets secrets,
+  }) async {
     try {
       final TokenBundle tokenBundle = await authenticationRemoteDataSource
-          .signIn(username: username, password: password);
+          .signIn(username: username, password: password, secrets: secrets);
 
       return Right(tokenBundle);
     } catch (exception) {

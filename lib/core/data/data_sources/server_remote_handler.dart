@@ -12,11 +12,15 @@ class ServerRemoteHandler {
     required this.failureMapper,
   });
 
-  Future<Map<String, dynamic>> post(
-      String path, Map<String, dynamic> data) async {
-    final String requestDataString = jsonEncode(data);
+  Future<Map<String, dynamic>> post({
+    required String path,
+    required Map<String, dynamic> body,
+    Map<String, dynamic>? headers,
+  }) async {
+    final String requestDataString = jsonEncode(body);
 
-    final Response response = await dio.post(path, data: requestDataString);
+    final Response response = await dio.post(path,
+        data: requestDataString, options: Options(headers: headers));
 
     final Map<String, dynamic> responseBody = jsonDecode(response.data);
 

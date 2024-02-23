@@ -16,14 +16,19 @@ void main() {
     );
   });
 
-  group("getNewTokenBundle()", () {
-    setUp(() {
-      when(() => mockServerRemoteHandler.post(any(), any()))
-          .thenAnswer((_) async => tTokenBundleMap);
-    });
+  setUpAll(() {
+    registerFallbackValue(tFakeSecrets);
+  });
 
+  group("getNewTokenBundle()", () {
     test("should call the server to get a new [TokenBundle] and return it",
         () async {
+// arrange
+      when(() => mockServerRemoteHandler.post(
+            path: any(named: "path"),
+            body: any(named: "body"),
+          )).thenAnswer((_) async => tTokenBundleMap);
+
       // act
       final result = await authenticationRemoteDataSourceImpl.getNewTokenBundle(
           refreshToken: tRefreshToken);
@@ -32,8 +37,8 @@ void main() {
       expect(result, tTokenBundle);
       verify(
         () => mockServerRemoteHandler.post(
-          "/refresh_tokens",
-          {"refresh_token": tRefreshTokenString},
+          path: "/refresh_tokens",
+          body: {"refresh_token": tRefreshTokenString},
         ),
       );
     });
@@ -44,22 +49,28 @@ void main() {
         "should call the server to sign in the user and return a [TokenBundle]",
         () async {
       // arrange
-      when(() => mockServerRemoteHandler.post(any(), any()))
-          .thenAnswer((_) async => tTokenBundleMap);
+      when(
+        () => mockServerRemoteHandler.post(
+          path: any(named: "path"),
+          body: any(named: "body"),
+          headers: any(named: "headers"),
+        ),
+      ).thenAnswer((_) async => tTokenBundleMap);
 
       // act
       final result = await authenticationRemoteDataSourceImpl.signIn(
         username: tUsername,
         password: tPassword,
+        secrets: tFakeSecrets,
       );
 
       // assert
       expect(result, tTokenBundle);
       verify(
         () => mockServerRemoteHandler.post(
-          "/sign_in",
-          {"username": tUsername, "password": tPassword},
-        ),
+            path: "/sign_in",
+            body: tSignInRequestMap,
+            headers: tSignInRequestHeaders),
       );
     });
   });
