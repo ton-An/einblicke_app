@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:einblicke_app/core/data/repository_impl/failure_handler.dart';
+import 'package:einblicke_app/core/data/repository_impl/repository_failure_handler.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
@@ -24,7 +24,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   final AuthenticationLocalDataSource authenticationLocalDataSource;
   final AuthenticationRemoteDataSource authenticationRemoteDataSource;
-  final FailureHandler failureHandler;
+  final RepositoryFailureHandler failureHandler;
 
   @override
   Future<Either<Failure, None>> deleteTokens() async {

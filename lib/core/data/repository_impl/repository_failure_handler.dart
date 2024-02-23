@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
-class FailureHandler {
+class RepositoryFailureHandler {
   Failure dioExceptionMapper(DioException exception) {
     switch (exception.type) {
       case DioExceptionType.connectionTimeout ||
@@ -17,7 +17,7 @@ class FailureHandler {
       case DioExceptionType.connectionError:
         return const ServerConnectionFailure();
       case DioExceptionType.unknown:
-        return const UnkownServerRequestFailure();
+        return const UnknownServerRequestFailure();
     }
   }
 }

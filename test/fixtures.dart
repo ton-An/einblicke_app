@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
@@ -29,8 +31,34 @@ final TokenBundle tTokenBundle = TokenBundle(
   refreshToken: tRefreshToken,
 );
 
-final String tTokenBundleJsonString =
-    '{"accessToken":{"token":"you shall pass","expiresAt":"2022-12-01T00:00:00.000"},"refreshToken":{"token":"you shall refresh","expiresAt":"2022-12-31T00:00:00.000"}}';
+final Map<String, dynamic> tTokenBundleMap = tTokenBundle.toJson();
+
+const String tTokenBundleJsonString =
+    '{"access_token":{"token":"you shall pass","expires_at":"2022-12-01T00:00:00.000"},"refresh_token":{"token":"you shall refresh","expires_at":"2022-12-31T00:00:00.000"}}';
+
+const String tDatabaseFailureJsonString =
+    '{"name":"Database Read Failure","message":"An error occurred while reading from the database.","categoryCode":"database","code":"database_read_failure"}';
+
+final Map<String, String> tGetNewTokenBundleRequestMap = {
+  "refresh_token": tRefreshTokenString,
+};
+
+final String tGetNewTokenBundleRequestString =
+    jsonEncode(tGetNewTokenBundleRequestMap);
+
+const String tGetNewTokenBundleRequestPath = "/refresh_tokens";
+
+final Response tGetNewTokenBundleSuccessfulResponse = Response(
+  data: tTokenBundleJsonString,
+  requestOptions: RequestOptions(path: tGetNewTokenBundleRequestPath),
+  statusCode: 200,
+);
+
+final Response tGetNewTokenBundleUnsuccessfulResponse = Response(
+  data: tDatabaseFailureJsonString,
+  requestOptions: RequestOptions(path: tGetNewTokenBundleRequestPath),
+  statusCode: 500,
+);
 
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(

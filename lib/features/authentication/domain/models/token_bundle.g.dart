@@ -8,13 +8,13 @@ part of 'token_bundle.dart';
 
 TokenBundle _$TokenBundleFromJson(Map<String, dynamic> json) => TokenBundle(
       accessToken: AuthenticationToken.fromJson(
-          json['accessToken'] as Map<String, dynamic>),
+          json['access_token'] as Map<String, dynamic>),
       refreshToken: AuthenticationToken.fromJson(
-          json['refreshToken'] as Map<String, dynamic>),
+          json['refresh_token'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TokenBundleToJson(TokenBundle instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
+      'access_token': instance.accessToken.toJson(),
+      'refresh_token': instance.refreshToken.toJson(),
     };
