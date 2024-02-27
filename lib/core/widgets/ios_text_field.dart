@@ -29,10 +29,19 @@ class IOSTextField extends StatelessWidget {
       child: CupertinoTextField(
         placeholder: hint,
         obscureText: obscureText,
-        style: IOSTheme.of(context).text.textField,
+        style: obscureText
+            ? TextStyle(
+                inherit: false,
+                fontFamily: '.SF Pro Display',
+                fontSize: 23.0,
+                fontWeight: FontWeight.w900,
+                letterSpacing: -1.1,
+                color: CupertinoColors.label)
+            : IOSTheme.of(context).text.textField,
         placeholderStyle: IOSTheme.of(context).text.textField.copyWith(
               color: IOSTheme.of(context).colors.hint,
             ),
+        cursorHeight: 20,
         padding: EdgeInsets.symmetric(
             horizontal: IOSTheme.of(context).spacing.medium + 2),
         decoration: BoxDecoration(

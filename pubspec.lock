@@ -684,6 +684,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  motion_toast:
+    dependency: "direct main"
+    description:
+      name: motion_toast
+      sha256: e423584213b459d021fbdfcd8e02b22e3480ff0b3cef05dc4cde040595ebf084
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.8.0"
   nested:
     dependency: transitive
     description:
@@ -692,6 +700,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  overlayment:
+    dependency: "direct main"
+    description:
+      name: overlayment
+      sha256: "01f490c1c5d377eae737370e5eaad5500c2205b2cf2185a42bfb87bc7748763c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   package_config:
     dependency: transitive
     description:

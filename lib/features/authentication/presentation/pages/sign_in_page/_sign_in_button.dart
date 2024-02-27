@@ -26,13 +26,6 @@ class _SignInButton extends StatelessWidget {
           );
         }
 
-        if (state is SignInFailure) {
-          return IOSTextButton(
-            text: AppLocalizations.of(context)!.error,
-            disabledColor: IOSTheme.of(context).colors.error,
-          );
-        }
-
         return IOSTextButton(
           text: AppLocalizations.of(context)!.continueLabel,
           onPressed: () => onLoginPressed(context),

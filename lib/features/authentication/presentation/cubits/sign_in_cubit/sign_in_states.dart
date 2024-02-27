@@ -1,3 +1,5 @@
+import 'package:einblicke_shared/einblicke_shared.dart';
+
 abstract class SignInState {
   const SignInState();
 }
@@ -15,5 +17,9 @@ class SignInSuccess extends SignInState {
 }
 
 class SignInFailure extends SignInState {
-  const SignInFailure();
+  const SignInFailure({
+    required this.failure,
+  });
+
+  final Failure failure;
 }
