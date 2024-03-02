@@ -8,6 +8,7 @@ import 'package:einblicke_app/features/authentication/data/repository_implementa
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
 import 'package:einblicke_app/features/authentication/domain/usecases/sign_in.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -53,6 +54,9 @@ void _registerCore() {
     () => ServerRemoteHandler(dio: getIt(), failureMapper: getIt()),
   );
   getIt.registerLazySingleton(() => RepositoryFailureHandler());
+
+  // -- Presentation -- //
+  getIt.registerFactory(() => InAppNotificationCubit());
 }
 
 void _registerAuthentication() {

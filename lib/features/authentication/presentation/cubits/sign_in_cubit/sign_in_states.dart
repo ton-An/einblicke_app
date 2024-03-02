@@ -1,5 +1,10 @@
 import 'package:einblicke_shared/einblicke_shared.dart';
 
+/*
+  To-Dos:
+  - [ ] Re-do naming os states
+*/
+
 abstract class SignInState {
   const SignInState();
 }

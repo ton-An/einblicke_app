@@ -4,6 +4,9 @@ import 'package:einblicke_app/features/authentication/presentation/cubits/sign_i
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/splash_screen.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/widgets/in_app_notification_listener.dart';
+import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,74 +29,84 @@ class EinblickeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp.router(
-      title: "Einblicke",
-      localizationsDelegates: const [
-        l10n.AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale("en"),
-      ],
-      theme: const CupertinoThemeData(
-        scaffoldBackgroundColor: IOSColors.white,
+    return BlocProvider(
+      create: (context) => getIt<InAppNotificationCubit>(),
+      child: CupertinoApp.router(
+        title: "Einblicke",
+        localizationsDelegates: const [
+          l10n.AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale("en"),
+        ],
+        theme: const CupertinoThemeData(
+          scaffoldBackgroundColor: IOSColors.white,
+        ),
+        routerConfig: _router,
       ),
-      routerConfig: _router,
     );
   }
 
   final GoRouter _router = GoRouter(
     initialLocation: SplashScreen.route,
     routes: <RouteBase>[
-      GoRoute(
-        path: SplashScreen.pageName,
-        pageBuilder: (context, state) =>
-            const CupertinoExtendedPage(child: SplashScreen()),
+      ShellRoute(
+        builder: (context, state, child) =>
+            InAppNotificationListener(child: child),
         routes: [
           GoRoute(
-            path: SelectImageModal.pageName,
-            pageBuilder: (context, state) => CupertinoExtendedPage(
-              child: BlocProvider(
-                create: (context) => getIt<SelectImageCubit>(),
-                child: const SelectImageModal(),
-              ),
+            path: SplashScreen.pageName,
+            pageBuilder: (context, state) => const CupertinoExtendedPage(
+              child: SplashScreen(),
             ),
-          ),
-          // GoRoute(
-          //   path: SelectFramePage.pageName,
-          //   pageBuilder: (context, state) =>
-          //       const CupertinoExtendedPage(child: SelectFramePage()),
-          //   routes: [
-          //     GoRoute(
-          //       path: SelectImageModal.pageName,
-          //       pageBuilder: (context, state) => CupertinoSheetPage(
-          //         child: BlocProvider(
-          //           create: (context) => getIt<SelectImageCubit>(),
-          //           child: const SelectImageModal(),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          GoRoute(
-            path: SignInPage.pageName,
-            pageBuilder: (context, state) => CupertinoExtendedPage(
-              child: BlocProvider(
-                create: (context) => getIt<SignInCubit>(),
-                child: const SignInPage(),
-              ),
-            ),
-            routes: <RouteBase>[
+            routes: [
               GoRoute(
-                path: WelcomeModal.pageName,
-                pageBuilder: (context, state) => CupertinoSheetPage(
+                path: SelectImageModal.pageName,
+                pageBuilder: (context, state) => CupertinoExtendedPage(
                   child: BlocProvider(
-                    create: (context) => getIt<SignInCubit>(),
-                    child: const WelcomeModal(),
+                    create: (context) => getIt<SelectImageCubit>(),
+                    child: const SelectImageModal(),
                   ),
                 ),
+              ),
+              GoRoute(
+                path: SelectFramePage.pageName,
+                pageBuilder: (context, state) =>
+                    const CupertinoExtendedPage(child: SelectFramePage()),
+                routes: [
+                  GoRoute(
+                    path: SelectImageModal.pageName,
+                    pageBuilder: (context, state) => CupertinoSheetPage(
+                      child: BlocProvider(
+                        create: (context) => getIt<SelectImageCubit>(),
+                        child: const SelectImageModal(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: SignInPage.pageName,
+                pageBuilder: (context, state) => CupertinoExtendedPage(
+                  child: BlocProvider(
+                    create: (context) => getIt<SignInCubit>(),
+                    child: const SignInPage(),
+                  ),
+                ),
+                routes: <RouteBase>[
+                  GoRoute(
+                    path: WelcomeModal.pageName,
+                    pageBuilder: (context, state) => CupertinoSheetPage(
+                      child: BlocProvider(
+                        create: (context) => getIt<SignInCubit>(),
+                        child: const WelcomeModal(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -2,24 +2,21 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:einblicke_app/features/failure_notification/presentation/cubit/failure_notification_cubit.dart';
-import 'package:einblicke_app/features/failure_notification/presentation/cubit/failure_notification_states.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of in_app_notification;
 
 const double _kMinFlingVelocity = 700.0;
 const double _kMinFlingVelocityDelta = 400.0;
 const double _kFlingVelocityScale = 1.0 / 300.0;
-const double _kDismissThreshold = 0.4;
 
 enum _FlingGestureKind { none, forward, reverse }
 
-class EinblickeDismissible extends StatefulWidget {
-  const EinblickeDismissible({
+/// This is a cut down version of the Dismissible widget from Flutter.
+class _Dismissible extends StatefulWidget {
+  const _Dismissible({
     required Key key,
     required this.child,
     this.onDismissed,
-    this.dismissThreshold = _kDismissThreshold,
+    this.dismissThreshold = 0.4,
     this.movementDuration = const Duration(milliseconds: 200),
     this.reverseMovementDuration = const Duration(milliseconds: 200),
     this.entryDuration = const Duration(milliseconds: 200),
@@ -38,10 +35,10 @@ class EinblickeDismissible extends StatefulWidget {
   final Duration entryDuration;
 
   @override
-  State<EinblickeDismissible> createState() => _EinblickeDismissibleState();
+  State<_Dismissible> createState() => _DismissibleState();
 }
 
-class _EinblickeDismissibleState extends State<EinblickeDismissible>
+class _DismissibleState extends State<_Dismissible>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   @override
   void initState() {
@@ -60,7 +57,7 @@ class _EinblickeDismissibleState extends State<EinblickeDismissible>
       })
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          context.read<FailureNotificationCubit>().setNotificationDelivered();
+          context.read<InAppNotificationCubit>().confirmNotificationDelivered();
         }
       });
 
@@ -73,8 +70,8 @@ class _EinblickeDismissibleState extends State<EinblickeDismissible>
     ).chain(CurveTween(curve: Curves.easeOutCubic)));
 
     // ToDo: might restart if init state is called again? during the animation. Might not be a problem tho because of wantKeepAlive ??
-    if (context.read<FailureNotificationCubit>().state
-        is FailureNotificationEntering) {
+    if (context.read<InAppNotificationCubit>().state
+        is InAppNotificationDelivering) {
       _entryController!.forward();
     }
   }
@@ -106,24 +103,20 @@ class _EinblickeDismissibleState extends State<EinblickeDismissible>
   Widget build(BuildContext context) {
     super.build(context); // See AutomaticKeepAliveClientMixin.
 
-    Widget content =
-        BlocConsumer<FailureNotificationCubit, FailureNotificationState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return SlideTransition(
-          position: state is FailureNotificationEntering
-              ? _entryAnimation
-              : _moveAnimation,
-          child: KeyedSubtree(key: _contentKey, child: widget.child),
-        );
-      },
-    );
-
     return GestureDetector(
       onVerticalDragStart: _handleDragStart,
       onVerticalDragUpdate: _handleDragUpdate,
       onVerticalDragEnd: _handleDragEnd,
-      child: content,
+      child: BlocBuilder<InAppNotificationCubit, InAppNotificationState>(
+        builder: (context, state) {
+          return SlideTransition(
+            position: state is InAppNotificationDelivering
+                ? _entryAnimation
+                : _moveAnimation,
+            child: KeyedSubtree(key: _contentKey, child: widget.child),
+          );
+        },
+      ),
     );
   }
 

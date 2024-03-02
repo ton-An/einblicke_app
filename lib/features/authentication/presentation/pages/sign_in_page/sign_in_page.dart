@@ -11,7 +11,7 @@ import 'package:einblicke_app/core/widgets/ios_text_field.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_states.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
-import 'package:einblicke_app/features/failure_notification/presentation/presentation/failure_overlay_extension.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,7 +63,9 @@ class _SignInPageState extends State<SignInPage> {
         if (state is SignInSuccess) {
           context.push(SelectImageModal.route);
         } else if (state is SignInFailure) {
-          context.showFailureNotification(state.failure);
+          context
+              .read<InAppNotificationCubit>()
+              .sendFailureNotification(state.failure);
         }
       },
       child: CupertinoPageScaffold(
