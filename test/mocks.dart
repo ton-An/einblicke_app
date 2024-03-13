@@ -4,6 +4,8 @@ import 'package:einblicke_app/core/data/repository_impl/repository_failure_handl
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:einblicke_app/features/authentication/domain/usecases/refresh_token_bundle.dart';
+import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,6 +19,8 @@ class MockFailureHandler extends Mock implements RepositoryFailureHandler {}
 class MockServerRemoteHandler extends Mock implements ServerRemoteHandler {}
 
 // -- Authentication
+class MockRefreshTokenBundle extends Mock implements RefreshTokenBundle {}
+
 class MockAuthenticationRepository extends Mock
     implements AuthenticationRepository {}
 
@@ -26,7 +30,10 @@ class MockAuthenticationLocalDataSource extends Mock
 class MockAuthenticationRemoteDataSource extends Mock
     implements AuthenticationRemoteDataSource {}
 
-class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
+// -- Select Image
+class MockSelectImageRepository extends Mock implements SelectImageRepository {}
 
 // -- Third Party
 class MockDio extends Mock implements Dio {}
+
+class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}

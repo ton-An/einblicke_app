@@ -72,15 +72,12 @@ final Map<String, dynamic> tSignInRequestMap = {
 
 class FakeSecret extends Secrets {
   @override
-  // TODO: implement clientId
   String get clientId => "einblicke client id";
 
   @override
-  // TODO: implement clientSecret
   String get clientSecret => "einblicke client secret";
 
   @override
-  // TODO: implement serverUrl
   String get serverUrl => "einblicke server url";
 }
 
@@ -90,6 +87,12 @@ final Map<String, dynamic> tSignInRequestHeaders = {
   "client_id": tFakeSecrets.clientId,
   "client_secret": tFakeSecrets.clientSecret,
 };
+
+// -- Select Image
+const String tImagePath =
+    "/this/is/an/image/path/to/wherever/you/want/let/your/imagination/run/free.jpg";
+
+const String tFrameId = "my_unique_frame";
 
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(
