@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
 /// {@template select_image_repository}
@@ -10,11 +11,13 @@ abstract class SelectImageRepository {
   /// Parameters:
   /// - [String]: imagePath
   /// - [String]: frameId
+  /// - [AuthenticationToken]: accessToken
   ///
   /// Failures:
   /// - TBD
   Future<Either<Failure, None>> sendImage({
     required String imagePath,
     required String frameId,
+    required AuthenticationToken accessToken,
   });
 }
