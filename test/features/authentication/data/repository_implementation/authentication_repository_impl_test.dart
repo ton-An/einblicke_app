@@ -227,7 +227,7 @@ void main() {
       );
     });
 
-    test("should call the re-map [DioException]s if they are thrown", () async {
+    test("should re-map [DioException]s if they are thrown", () async {
       // arrange
       when(() => mockRemoteDataSource.signIn(
             username: any(named: "username"),
@@ -275,7 +275,7 @@ void main() {
       );
     });
 
-    test("should call the re-map [DioException]s if they are thrown", () async {
+    test("should re-map [DioException]s if they are thrown", () async {
       // arrange
       when(() => mockRemoteDataSource.getNewTokenBundle(
             refreshToken: any(named: "refreshToken"),
