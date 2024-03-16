@@ -6,6 +6,9 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// __Select Image Repository__ is a contract for repository operations helping select an image destined to be sent to a frame.
 /// {@endtemplate}
 abstract class SelectImageRepository {
+  /// {@macro select_image_repository}
+  const SelectImageRepository();
+
   /// Sends an image to the server to be distributed to a frame
   ///
   /// Parameters:
