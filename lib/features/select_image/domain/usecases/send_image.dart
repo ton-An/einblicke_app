@@ -14,7 +14,12 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// - [String]: frameId
 ///
 /// Failures:
-/// - TBD
+/// - [DatabaseReadFailure]
+/// - [DatabaseWriteFailure]
+/// - [NotPairedFailure]
+/// - [StorageWriteFailure]
+/// - [UnauthorizedFailure]
+/// - {@macro converted_dio_exceptions}
 /// {@endtemplate}
 class SendImage {
   /// {@macro send_image}

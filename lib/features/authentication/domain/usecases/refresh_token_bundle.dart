@@ -12,7 +12,10 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// Refreshes the user's authentication tokens.
 ///
 /// Failures:
-/// - TBD
+/// - [SecureStorageReadFailure]
+/// - [SecureStorageWriteFailure]
+/// - [UnauthorizedFailure]
+/// - {@macro converted_dio_exceptions}
 /// {@endtemplate}
 class RefreshTokenBundle {
   /// {@macro refresh_token_bundle}

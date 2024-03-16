@@ -12,7 +12,11 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// - [String]: password
 ///
 /// Failures:
-/// - TBD
+/// - [UnauthorizedFailure]
+/// - [UserNotFoundFailure]
+/// - [DatabaseReadFailure]
+/// - [SecureStorageWriteFailure]
+/// - {@macro converted_dio_exceptions}
 /// {@endtemplate}
 class SignIn {
   /// {@macro sign_in}

@@ -6,7 +6,7 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// Signs  the user out by deleting their tokens
 ///
 /// Failures:
-/// - TBD
+/// - [SecureStorageWriteFailure]
 /// {@endtemplate}
 class SignOut {
   /// {@macro sign_out}

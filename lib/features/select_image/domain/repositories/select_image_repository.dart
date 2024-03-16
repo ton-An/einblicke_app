@@ -17,7 +17,12 @@ abstract class SelectImageRepository {
   /// - [AuthenticationToken]: accessToken
   ///
   /// Failures:
-  /// - TBD
+  /// - [DatabaseReadFailure]
+  /// - [DatabaseWriteFailure]
+  /// - [NotPairedFailure]
+  /// - [StorageWriteFailure]
+  /// - [UnauthorizedFailure]
+  /// - {@macro converted_dio_exceptions}
   Future<Either<Failure, None>> sendImage({
     required String imagePath,
     required String frameId,

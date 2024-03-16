@@ -21,7 +21,10 @@ abstract class AuthenticationRepository {
   /// - [TokenBundle]: containing authentication tokens.
   ///
   /// Failures:
-  /// - TBD
+  /// - [UnauthorizedFailure]
+  /// = [UserNotFoundFailure]
+  /// - [DatabaseReadFailure]
+  /// - {@macro converted_dio_exceptions}
   Future<Either<Failure, TokenBundle>> signIn({
     required String username,
     required String password,
@@ -63,7 +66,8 @@ abstract class AuthenticationRepository {
   /// - [TokenBundle]: containing authentication tokens.
   ///
   /// Failures:
-  /// - TBD
+  /// - [UnauthorizedFailure]
+  /// - {@macro converted_dio_exceptions}
   Future<Either<Failure, TokenBundle>> getNewTokenBundle({
     required AuthenticationToken refreshToken,
   });
