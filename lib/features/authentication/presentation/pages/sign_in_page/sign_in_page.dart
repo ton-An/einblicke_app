@@ -13,7 +13,7 @@ import 'package:einblicke_app/features/authentication/presentation/cubits/sign_i
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
-import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

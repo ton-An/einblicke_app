@@ -9,7 +9,7 @@ import 'package:einblicke_app/features/authentication/domain/repositories/authen
 import 'package:einblicke_app/features/authentication/domain/usecases/sign_in.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
-import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
+import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';

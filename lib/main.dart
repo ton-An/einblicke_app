@@ -7,8 +7,8 @@ import 'package:einblicke_app/features/authentication/presentation/pages/welcome
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/widgets/in_app_notification_listener.dart';
 import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
-import 'package:einblicke_app/features/select_image/cubits/select_image_cubit.dart';
-import 'package:einblicke_app/features/select_image/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
+import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart' as l10n;
