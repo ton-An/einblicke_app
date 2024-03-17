@@ -7,6 +7,8 @@ import 'package:einblicke_app/features/authentication/domain/models/token_bundle
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/services.dart';
 
+import 'mocks.dart';
+
 // -- Authentication
 const String tUsername = "big-fudge";
 const String tPassword = "lillypad123";
@@ -59,6 +61,22 @@ final Response tGetNewTokenBundleSuccessfulResponse = Response(
   statusCode: 200,
 );
 
+const String tUploadImageRequestPath = "/curator/upload_image";
+
+final FormData tFormData = FormData();
+
+final Response tEmptySuccessfulResponse = Response(
+  data: null,
+  requestOptions: RequestOptions(path: tUploadImageRequestPath),
+  statusCode: 200,
+);
+
+final Response tEmptyUnsuccessfulResponse = Response(
+  data: tDatabaseFailureJsonString,
+  requestOptions: RequestOptions(path: tUploadImageRequestPath),
+  statusCode: 401,
+);
+
 final Response tGetNewTokenBundleUnsuccessfulResponse = Response(
   data: tDatabaseFailureJsonString,
   requestOptions: RequestOptions(path: tGetNewTokenBundleRequestPath),
@@ -89,10 +107,13 @@ final Map<String, dynamic> tSignInRequestHeaders = {
 };
 
 // -- Select Image
-const String tImagePath =
-    "/this/is/an/image/path/to/wherever/you/want/let/your/imagination/run/free.jpg";
+const String tImagePath = "../../../fixtures/test_image.jpg";
 
 const String tFrameId = "my_unique_frame";
+
+final Uint8List tImageBytes = Uint8List.fromList([1, 2, 3, 4, 5]);
+
+final MockFile tMockImageFile = MockFile();
 
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(

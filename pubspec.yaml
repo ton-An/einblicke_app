@@ -45,6 +45,7 @@ dependencies:
   json_annotation: ^4.8.1
   overlayment: ^0.2.1
   motion_toast: ^2.8.0
+  file: ^7.0.0
   
 
 dev_dependencies:

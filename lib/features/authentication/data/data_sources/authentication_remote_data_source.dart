@@ -56,12 +56,12 @@ class AuthenticationRemoteDataSourceImpl
       "refresh_token": refreshToken.token,
     };
 
-    final Map<String, dynamic> response = await serverRemoteHandler.post(
+    final Map<String, dynamic>? response = await serverRemoteHandler.post(
       path: "/refresh_tokens",
       body: requestMap,
     );
 
-    return TokenBundle.fromJson(response);
+    return TokenBundle.fromJson(response!);
   }
 
   @override
@@ -79,12 +79,12 @@ class AuthenticationRemoteDataSourceImpl
       "password": password,
     };
 
-    final Map<String, dynamic> response = await serverRemoteHandler.post(
+    final Map<String, dynamic>? response = await serverRemoteHandler.post(
       path: "/sign_in",
       body: requestMap,
       headers: headers,
     );
 
-    return TokenBundle.fromJson(response);
+    return TokenBundle.fromJson(response!);
   }
 }

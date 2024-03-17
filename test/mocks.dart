@@ -8,6 +8,7 @@ import 'package:einblicke_app/features/authentication/domain/usecases/refresh_to
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:file/file.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -41,3 +42,7 @@ class MockSelectImageRemoteDataSource extends Mock
 class MockDio extends Mock implements Dio {}
 
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
+
+class MockFileSystem extends Mock implements FileSystem {}
+
+class MockFile extends Mock implements File {}

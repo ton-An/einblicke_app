@@ -7,7 +7,7 @@ import '../../../../fixtures.dart';
 import '../../../../mocks.dart';
 
 void main() {
-  late SelectImageRepositoryImpl repository;
+  late SelectImageRepositoryImpl selectImageRepositoryImpl;
   late MockSelectImageRemoteDataSource mockRemoteDataSource;
   late MockFailureHandler mockFailureHandler;
 
@@ -15,7 +15,7 @@ void main() {
     // -- Definitions
     mockRemoteDataSource = MockSelectImageRemoteDataSource();
     mockFailureHandler = MockFailureHandler();
-    repository = SelectImageRepositoryImpl(
+    selectImageRepositoryImpl = SelectImageRepositoryImpl(
       selectImageRemoteDataSource: mockRemoteDataSource,
       failureHandler: mockFailureHandler,
     );
@@ -35,47 +35,47 @@ void main() {
             accessToken: any(named: "accessToken"),
           )).thenAnswer((_) async => Future.value());
     });
-  });
 
-  test("should send the image to the server and return [None]", () async {
-    // act
-    final result = await repository.sendImage(
-      imagePath: tImagePath,
-      frameId: tFrameId,
-      accessToken: tAccessToken,
-    );
-
-    // assert
-    expect(result, const Right(None()));
-    verify(
-      () => mockRemoteDataSource.sendImage(
+    test("should send the image to the server and return [None]", () async {
+      // act
+      final result = await selectImageRepositoryImpl.sendImage(
         imagePath: tImagePath,
         frameId: tFrameId,
         accessToken: tAccessToken,
-      ),
-    );
-  });
+      );
 
-  test("should re-map [DioException]s to [Failure]s if they are thrown",
-      () async {
-    // arrange
-    when(() => mockRemoteDataSource.sendImage(
-          imagePath: any(named: "imagePath"),
-          frameId: any(named: "frameId"),
-          accessToken: any(named: "accessToken"),
-        )).thenThrow(tDioException);
-    when(() => mockFailureHandler.dioExceptionMapper(tDioException))
-        .thenReturn(tMappedDioFailure);
+      // assert
+      expect(result, const Right(None()));
+      verify(
+        () => mockRemoteDataSource.sendImage(
+          imagePath: tImagePath,
+          frameId: tFrameId,
+          accessToken: tAccessToken,
+        ),
+      );
+    });
 
-    // act
-    final result = await repository.sendImage(
-      imagePath: tImagePath,
-      frameId: tFrameId,
-      accessToken: tAccessToken,
-    );
+    test("should re-map [DioException]s to [Failure]s if they are thrown",
+        () async {
+      // arrange
+      when(() => mockRemoteDataSource.sendImage(
+            imagePath: any(named: "imagePath"),
+            frameId: any(named: "frameId"),
+            accessToken: any(named: "accessToken"),
+          )).thenThrow(tDioException);
+      when(() => mockFailureHandler.dioExceptionMapper(tDioException))
+          .thenReturn(tMappedDioFailure);
 
-    // assert
-    expect(result, const Left(tMappedDioFailure));
-    verify(() => mockFailureHandler.dioExceptionMapper(tDioException));
+      // act
+      final result = await selectImageRepositoryImpl.sendImage(
+        imagePath: tImagePath,
+        frameId: tFrameId,
+        accessToken: tAccessToken,
+      );
+
+      // assert
+      expect(result, const Left(tMappedDioFailure));
+      verify(() => mockFailureHandler.dioExceptionMapper(tDioException));
+    });
   });
 }

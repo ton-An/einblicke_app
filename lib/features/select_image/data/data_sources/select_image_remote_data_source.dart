@@ -1,10 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
+import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:file/file.dart';
+import 'package:http_parser/http_parser.dart';
 
 /// {@template select_image_remote_data_source}
 /// __Select Image Remote Data Source__ is a contract for remote data source operations
-/// helping select an image destined to be sent to a frame.
+/// responsible for selecting an image destined to be sent to a frame.
 /// {@endtemplate}
 abstract class SelectImageRemoteDataSource {
   /// {@macro select_image_remote_data_source}
@@ -29,4 +34,49 @@ abstract class SelectImageRemoteDataSource {
     required String frameId,
     required AuthenticationToken accessToken,
   });
+}
+
+/// {@template select_image_remote_data_source_impl}
+/// __Select Image Remote Data Source Impl__ is a concrete implementation of [SelectImageRemoteDataSource]
+/// and is responsible for selecting an image destined to be sent to a frame.
+/// {@endtemplate}
+class SelectImageRemoteDataSourceImpl extends SelectImageRemoteDataSource {
+  /// {@macro select_image_remote_data_source_impl}
+  const SelectImageRemoteDataSourceImpl({
+    required this.serverRemoteHandler,
+    required this.fileSystem,
+  });
+
+  final ServerRemoteHandler serverRemoteHandler;
+  final FileSystem fileSystem;
+
+  @override
+  Future<void> sendImage({
+    required String imagePath,
+    required String frameId,
+    required AuthenticationToken accessToken,
+  }) async {
+    final Uint8List imageBytes = await fileSystem.file(imagePath).readAsBytes();
+
+    final MultipartFile image = MultipartFile.fromBytes(
+      imageBytes,
+      contentType: MediaType("image", "jpg"),
+    );
+
+    final FormData formData = FormData.fromMap({
+      "photo": image,
+      "frame_id": frameId,
+    });
+
+    final Map<String, dynamic> headers = {
+      "Authorization": "Bearer ${accessToken.token}",
+    };
+
+    // create new method file upload in serverRemoteHandler
+    await serverRemoteHandler.multipartPost(
+      path: "/curator/upload_image",
+      formData: formData,
+      headers: headers,
+    );
+  }
 }

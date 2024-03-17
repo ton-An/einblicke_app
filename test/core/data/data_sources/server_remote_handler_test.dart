@@ -30,7 +30,8 @@ void main() {
           )).thenAnswer((_) async => tGetNewTokenBundleSuccessfulResponse);
     });
 
-    test("should call the server with the provided path and the json [String]",
+    test(
+        "should call the server with the provided path, the body json [String] and headers",
         () async {
       // act
       await serverRemoteHandler.post(
@@ -82,6 +83,64 @@ void main() {
       call() => serverRemoteHandler.post(
             path: tGetNewTokenBundleRequestPath,
             body: tGetNewTokenBundleRequestMap,
+            headers: tHeadersMap,
+          );
+
+      // assert
+      expect(call(), throwsA(const DatabaseReadFailure()));
+    });
+  });
+
+  group("multipartPost()", () {
+    // should throw the corresponding [Failure] if the response was unsuccessful
+    setUp(() {
+      when(() => mockDio.post(
+            any(),
+            data: any(named: "data"),
+            options: any(named: "options"),
+          )).thenAnswer(
+        (_) async => tEmptySuccessfulResponse,
+      );
+    });
+
+    test("should call the server with the provided path, formData and headers",
+        () async {
+      // act
+      await serverRemoteHandler.multipartPost(
+        path: tUploadImageRequestPath,
+        formData: tFormData,
+        headers: tHeadersMap,
+      );
+
+      // assert
+      verify(
+        () => mockDio.post(
+          tUploadImageRequestPath,
+          data: tFormData,
+          options: any(named: "options"),
+        ),
+      );
+    });
+
+    test(
+        "should throw the corresponding [Failure] if the request was unsuccessful",
+        () async {
+      // arrange
+      when(
+        () => mockDio.post(
+          any(),
+          data: any(named: "data"),
+          options: any(named: "options"),
+        ),
+      ).thenAnswer((invocation) => Future.value(tEmptyUnsuccessfulResponse));
+      when(
+        () => mockFailureMapper.mapCodeToFailure(any()),
+      ).thenAnswer((invocation) => const DatabaseReadFailure());
+
+      // act
+      call() => serverRemoteHandler.multipartPost(
+            path: tUploadImageRequestPath,
+            formData: tFormData,
             headers: tHeadersMap,
           );
 

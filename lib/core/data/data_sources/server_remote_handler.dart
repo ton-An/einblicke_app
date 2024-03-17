@@ -23,7 +23,7 @@ class ServerRemoteHandler {
   /// - [Map<String, dynamic>]: headers
   ///
   /// Returns:
-  /// - [Map<String, dynamic>]: response body
+  /// - [Map<String, dynamic>?]: response body (if any)
   ///
   /// Throws:
   /// - [Failure]
@@ -43,6 +43,35 @@ class ServerRemoteHandler {
     if (response.statusCode == 200) {
       return responseBody;
     } else {
+      final Failure failure =
+          failureMapper.mapCodeToFailure(responseBody["code"]);
+
+      throw failure;
+    }
+  }
+
+  /// Sends a Multipart POST request to the server
+  ///
+  /// Parameters:
+  /// - [String]: path on the server
+  /// - [FormData]: formData
+  /// - [Map<String, dynamic>]: headers
+  ///
+  /// Throws:
+  /// - [Failure]
+  /// - [DioException]
+  Future<void> multipartPost({
+    required String path,
+    required FormData formData,
+    Map<String, dynamic> headers = const {},
+  }) async {
+    headers["Content-Type"] = "multipart/form-data";
+
+    final Response response = await dio.post(path,
+        data: formData, options: Options(headers: headers));
+
+    if (response.statusCode != 200) {
+      final Map<String, dynamic> responseBody = jsonDecode(response.data);
       final Failure failure =
           failureMapper.mapCodeToFailure(responseBody["code"]);
 
