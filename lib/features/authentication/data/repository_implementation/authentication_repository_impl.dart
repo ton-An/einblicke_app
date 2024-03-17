@@ -92,9 +92,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         return Left(exception);
       } else if (exception is DioException) {
         return Left(failureHandler.dioExceptionMapper(exception));
-      } else {
-        rethrow;
       }
+
+      rethrow;
     }
   }
 
@@ -116,9 +116,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         return Left(exception as Failure);
       } else if (exception is DioException) {
         return Left(failureHandler.dioExceptionMapper(exception));
-      } else {
-        rethrow;
       }
+
+      rethrow;
     }
   }
 }

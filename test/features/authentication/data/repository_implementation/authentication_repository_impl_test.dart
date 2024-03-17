@@ -249,6 +249,28 @@ void main() {
       expect(result, const Left(tMappedDioFailure));
       verify(() => mockFailureHandler.dioExceptionMapper(tDioException));
     });
+
+    test("should re-throw exceptions that are not accounted for", () async {
+      // arrange
+      when(() => mockRemoteDataSource.signIn(
+            username: any(named: "username"),
+            password: any(named: "password"),
+            secrets: any(named: "secrets"),
+          )).thenThrow(Exception());
+
+      // act
+      final call = authenticationRepositoryImpl.signIn;
+
+      // assert
+      expect(
+        () => call(
+          username: tUsername,
+          password: tPassword,
+          secrets: tFakeSecrets,
+        ),
+        throwsException,
+      );
+    });
   });
 
   group("getNewTokenBundle()", () {
@@ -292,6 +314,24 @@ void main() {
       // assert
       expect(result, const Left(tMappedDioFailure));
       verify(() => mockFailureHandler.dioExceptionMapper(tDioException));
+    });
+
+    test("should re-throw exceptions that are not accounted for", () async {
+      // arrange
+      when(() => mockRemoteDataSource.getNewTokenBundle(
+            refreshToken: any(named: "refreshToken"),
+          )).thenThrow(Exception());
+
+      // act
+      final call = authenticationRepositoryImpl.getNewTokenBundle;
+
+      // assert
+      expect(
+        () => call(
+          refreshToken: tRefreshToken,
+        ),
+        throwsException,
+      );
     });
   });
 }
