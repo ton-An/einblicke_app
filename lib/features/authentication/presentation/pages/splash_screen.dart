@@ -1,8 +1,8 @@
-import 'package:einblicke_app/core/dependency_injector.dart';
-import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
-import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_states.dart';
+import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
+import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 /*
@@ -17,8 +17,8 @@ import 'package:go_router/go_router.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-  static const String pageName = "/";
-  static const String route = pageName;
+  static const String pageName = "splash_screen";
+  static const String route = "/$pageName";
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -28,27 +28,29 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _checkSignInStatus());
-  }
-
-  void _checkSignInStatus() async {
-    getIt<FlutterSecureStorage>().containsKey(key: "access_token").then(
-      (bool isSignedIn) {
-        if (isSignedIn) {
-          context.go(SelectImageModal.route);
-          // context.go(SelectFramePage.route);
-        } else {
-          context.go(SignInPage.route);
-        }
-      },
-    );
+    context.read<AuthenticationStatusCubit>().ceckAuthenticationStatus();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      child: Center(
-        child: CupertinoActivityIndicator(),
+    return BlocListener<AuthenticationStatusCubit, AuthenticationState>(
+      bloc: context.read<AuthenticationStatusCubit>(),
+      listener: (context, state) {
+        // if (state is AuthenticationSignedIn) {
+        context.go(SelectFramePage.route);
+        // } else if (state is AuthenticationSignedOut) {
+        //   context.go(SignInPage.route);
+        // } else if (state is AuthenticationFailureState) {
+        //   context
+        //       .read<InAppNotificationCubit>()
+        //       .sendFailureNotification(state.failure);
+        //   context.go(SignInPage.route);
+        // }
+      },
+      child: const CupertinoPageScaffold(
+        child: Center(
+          child: CupertinoActivityIndicator(),
+        ),
       ),
     );
   }

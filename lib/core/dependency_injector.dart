@@ -6,7 +6,9 @@ import 'package:einblicke_app/features/authentication/data/data_sources/authenti
 import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:einblicke_app/features/authentication/data/repository_implementation/authentication_repository_impl.dart';
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:einblicke_app/features/authentication/domain/usecases/is_signed_in.dart';
 import 'package:einblicke_app/features/authentication/domain/usecases/sign_in.dart';
+import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
@@ -53,7 +55,7 @@ void _registerCore() {
   getIt.registerLazySingleton(
     () => ServerRemoteHandler(dio: getIt(), failureMapper: getIt()),
   );
-  getIt.registerLazySingleton(() => RepositoryFailureHandler());
+  getIt.registerLazySingleton(() => const RepositoryFailureHandler());
 
   // -- Presentation -- //
   getIt.registerFactory(() => InAppNotificationCubit());
@@ -83,8 +85,11 @@ void _registerAuthentication() {
   // -- Domain -- //
   getIt.registerLazySingleton(
       () => SignIn(authenticationRepository: getIt(), secrets: getIt()));
+  getIt.registerLazySingleton(
+      () => IsSingnedIn(authenticationRepository: getIt()));
 
   // -- Presentation -- //
+  getIt.registerFactory(() => AuthenticationStatusCubit(isSignedIn: getIt()));
   getIt.registerFactory(
     () => SignInCubit(
       signInUsecase: getIt(),
