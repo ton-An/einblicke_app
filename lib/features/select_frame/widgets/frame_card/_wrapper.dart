@@ -61,6 +61,7 @@ class _WrapperState extends State<_Wrapper>
               spreadRadius: 5,
             ),
           ],
+          borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
