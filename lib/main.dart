@@ -7,7 +7,7 @@ import 'package:einblicke_app/features/authentication/presentation/pages/splash_
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/widgets/in_app_notification_listener.dart';
-import 'package:einblicke_app/features/select_frame/pages/select_frame_page/select_frame_page.dart';
+import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
