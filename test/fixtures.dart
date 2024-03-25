@@ -11,6 +11,7 @@ import 'mocks.dart';
 
 // -- Authentication
 const String tUsername = "big-fudge";
+const String tAnotherUsername = "small-fudge";
 const String tPassword = "lillypad123";
 
 const String tAccessTokenString = "you shall pass";
@@ -114,6 +115,21 @@ const String tFrameId = "my_unique_frame";
 final Uint8List tImageBytes = Uint8List.fromList([1, 2, 3, 4, 5]);
 
 final MockFile tMockImageFile = MockFile();
+
+// -- Select Frame
+const String tPictureFrameId = "testPictureFrameId";
+const String tPictureFrameId2 = "testPictureFrameId2";
+
+const List<PairedFrameInfo> tPairedFrameInfos = [
+  PairedFrameInfo(
+    id: tPictureFrameId,
+    name: tUsername,
+  ),
+  PairedFrameInfo(
+    id: tPictureFrameId2,
+    name: tAnotherUsername,
+  ),
+];
 
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(
