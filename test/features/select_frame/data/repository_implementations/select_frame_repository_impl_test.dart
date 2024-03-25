@@ -21,6 +21,44 @@ void main() {
     );
   });
 
+  group("getMostRecentImageOfFrame()", () {
+    test("should return a [File]", () async {
+      // arrange
+      when(() => mockRemoteDataSource.getMostRecentImageOfFrame(
+              frameId: any(named: "frameId")))
+          .thenAnswer((_) async => tMockImageFile);
+
+      // act
+      final result = await selectFrameRepositoryImpl.getMostRecentImageOfFrame(
+        frameId: tFrameId,
+      );
+
+      // assert
+      expect(result, Right(tMockImageFile));
+      verify(() => mockRemoteDataSource.getMostRecentImageOfFrame(
+            frameId: tFrameId,
+          ));
+    });
+
+    test("should re-map [DioException]s to [Failure]s if they are thrown",
+        () async {
+      // arrange
+      when(() => mockRemoteDataSource.getMostRecentImageOfFrame(
+          frameId: any(named: "frameId"))).thenThrow(tDioException);
+      when(() => mockFailureHandler.dioExceptionMapper(tDioException))
+          .thenReturn(tMappedDioFailure);
+
+      // act
+      final result = await selectFrameRepositoryImpl.getMostRecentImageOfFrame(
+        frameId: tFrameId,
+      );
+
+      // assert
+      expect(result, const Left(tMappedDioFailure));
+      verify(() => mockFailureHandler.dioExceptionMapper(tDioException));
+    });
+  });
+
   group("getPairedFramesInfo()", () {
     test("should return a list of [PairedFrameInfo]s", () async {
       // arrange

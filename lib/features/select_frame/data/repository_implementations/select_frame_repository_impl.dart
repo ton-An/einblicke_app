@@ -46,8 +46,21 @@ class SelectFrameRepositoryImpl extends SelectFrameRepository {
   }
 
   @override
-  Future<Either<Failure, List<PairedFrameInfo>>> getPairedFramesInfo() {
-    // TODO: implement getPairedFramesInfo
-    throw UnimplementedError();
+  Future<Either<Failure, List<PairedFrameInfo>>> getPairedFramesInfo() async {
+    try {
+      final List<PairedFrameInfo> pairedFrameInfos =
+          await selectFrameRemoteDataSource.getPairedFramesInfo();
+
+      return Right(pairedFrameInfos);
+    } catch (exception) {
+      if (exception is DatabaseReadFailure ||
+          exception is UnauthorizedFailure) {
+        return Left(exception as Failure);
+      } else if (exception is DioException) {
+        return Left(failureHandler.dioExceptionMapper(exception));
+      }
+
+      rethrow;
+    }
   }
 }
