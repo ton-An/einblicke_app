@@ -16,7 +16,7 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// - [String]: frameId
 ///
 /// Returns:
-/// - [File]: the most recent image of the frame
+/// - [Uint8List]: the most recent image of the frame
 ///
 /// Failures:
 /// - [DatabaseReadFailure]

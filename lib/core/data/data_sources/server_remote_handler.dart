@@ -4,6 +4,11 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
+/* To-Do
+    - [ ] Maybe handle route not found
+    - [ ] Internal Server Error emited by dart_frog is not caught
+*/
+
 /// {@template server_remote_handler}
 /// __Server Remote Handler__ is a Einblicke specific wrapper for [Dio] to handle server requests and responses.
 /// {@endtemplate}
@@ -151,11 +156,14 @@ class ServerRemoteHandler {
       if (accessToken != null) "Authorization": "Bearer $accessToken",
     };
 
-    final Response response =
-        await dio.get(path, options: Options(headers: headers));
+    final Response response = await dio.get(path,
+        options: Options(
+          headers: headers,
+          responseType: ResponseType.bytes,
+        ));
 
     if (response.statusCode == 200) {
-      return response.data;
+      return response.data as Uint8List;
     } else {
       final Map<String, dynamic> responseBody = jsonDecode(response.data);
       final Failure failure =

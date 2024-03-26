@@ -2,14 +2,14 @@ part of frame_card;
 
 /// The background image of the [FrameCard]
 class _BackgroundImage extends StatelessWidget {
-  const _BackgroundImage({required this.imgPath});
+  const _BackgroundImage({required this.imageBytes});
 
-  final String imgPath;
+  final Uint8List imageBytes;
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      imgPath,
+    return Image.memory(
+      imageBytes,
       fit: BoxFit.cover,
     );
   }

@@ -39,7 +39,7 @@ void main() {
       // assert
       verify(
         () => mockServerRemoteHandler.getBytes(
-          path: "/curator/latest_image_of_frame?frame_id=$tFrameId",
+          path: "/latest_image_of_frame?frame_id=$tFrameId",
           accessToken: tAccessToken.token,
         ),
       );
@@ -68,7 +68,7 @@ void main() {
       expect(result, tPairedFrameInfos);
       verify(
         () => mockServerRemoteHandler.get(
-          path: "/curator/paired_frames",
+          path: "/paired_frames",
           accessToken: tAccessToken.token,
         ),
       );

@@ -27,7 +27,7 @@ abstract class SelectFrameRemoteDataSource {
   /// - [String]: frameId
   ///
   /// Returns:
-  /// - [File]: the most recent image of the frame
+  /// - [Uint8List]: the most recent image of the frame
   ///
   /// Failures:
   /// - [DatabaseReadFailure]
@@ -61,7 +61,7 @@ class SelectFrameRemoteDataSourceImpl implements SelectFrameRemoteDataSource {
     required AuthenticationToken accessToken,
   }) async {
     final Uint8List response = await serverRemoteHandler.getBytes(
-      path: "/curator/latest_image_of_frame?frame_id=$frameId",
+      path: "/latest_image_of_frame?frame_id=$frameId",
       accessToken: accessToken.token,
     );
 
@@ -73,7 +73,7 @@ class SelectFrameRemoteDataSourceImpl implements SelectFrameRemoteDataSource {
     required AuthenticationToken accessToken,
   }) async {
     final Map<String, dynamic> response = await serverRemoteHandler.get(
-      path: "/curator/paired_frames",
+      path: "/paired_frames",
       accessToken: accessToken.token,
     );
 

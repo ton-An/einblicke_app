@@ -1,8 +1,24 @@
+library select_frame_page;
+
+import 'package:einblicke_app/core/dependency_injector.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_states.dart';
 import 'package:einblicke_app/features/select_frame/presentation/widgets/frame_card/frame_card.dart';
 import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
+import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
+
+part '_carousel.dart';
+
+/* 
+  To-Dos:
+  - [ ] Maybe make the carousel scrollable via touchpad
+*/
 
 /// __Select Frame Page__
 ///
@@ -11,59 +27,51 @@ import 'package:go_router/go_router.dart';
 ///
 /// Main contents:
 /// - [FrameCard]s
-class SelectFramePage extends StatelessWidget {
+class SelectFramePage extends StatefulWidget {
   const SelectFramePage({super.key});
 
   static const String pageName = "select_frame";
   static const String route = "/$pageName";
 
-  static const List<_PictureFrameModel> _frames = [
-    _PictureFrameModel(
-        title: "Home", imgPath: "assets/images/unlicensed/dummy_image2.jpeg"),
-    _PictureFrameModel(
-        title: "Oskar", imgPath: "assets/images/unlicensed/dummy_image1.jpeg"),
-  ];
+  @override
+  State<SelectFramePage> createState() => _SelectFramePageState();
+}
+
+class _SelectFramePageState extends State<SelectFramePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<SelectFrameCubit>().loadFrames();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FlutterCarousel.builder(
-            itemCount: _frames.length,
-            options: CarouselOptions(
-              enlargeCenterPage: true,
-              viewportFraction: .6,
-              scrollDirection: Axis.horizontal,
-              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              enableInfiniteScroll: true,
-              showIndicator: false,
-            ),
-            itemBuilder: (context, i, _) {
-              return Center(
-                child: FrameCard(
-                  imgPath: _frames[i].imgPath,
-                  title: _frames[i].title,
-                  onPressed: () {
-                    context.push(SelectImageModal.route);
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+      child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
+        listener: (context, state) {
+          if (state is SelectFrameFailure) {
+            context
+                .read<InAppNotificationCubit>()
+                .sendFailureNotification(state.failure);
+          }
+        },
+        builder: (context, state) {
+          if (state is SelectFrameInitialState) {
+            return const Center(child: CupertinoActivityIndicator());
+          }
+
+          if (state is SelectFrameLoaded) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _Carousel(frames: state.framesInfo),
+              ],
+            );
+          }
+
+          return Container();
+        },
       ),
     );
   }
-}
-
-class _PictureFrameModel {
-  const _PictureFrameModel({
-    required this.title,
-    required this.imgPath,
-  });
-
-  final String title;
-  final String imgPath;
 }

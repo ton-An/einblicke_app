@@ -30,7 +30,7 @@ abstract class SelectFrameRepository {
   /// - [String]: frameId
   ///
   /// Returns:
-  /// - [File]: the most recent image of the frame
+  /// - [Uint8List]: the most recent image of the frame
   ///
   /// Failures:
   /// - [DatabaseReadFailure]
