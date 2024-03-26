@@ -13,7 +13,6 @@ import 'package:einblicke_app/features/authentication/presentation/cubits/sign_i
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
-import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +60,7 @@ class _SignInPageState extends State<SignInPage> {
       bloc: context.read<SignInCubit>(),
       listener: (context, state) {
         if (state is SignInSuccess) {
-          context.push(SelectImageModal.route);
+          context.push(SelectFramePage.route);
         } else if (state is SignInFailure) {
           context
               .read<InAppNotificationCubit>()

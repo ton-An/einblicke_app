@@ -32,6 +32,7 @@ void initGetIt() {
     () => Dio(
       BaseOptions(
         baseUrl: "${getIt<Secrets>().serverUrl}/curator",
+        validateStatus: (status) => true,
         // validateStatus: (_) => true,
       ),
     ),

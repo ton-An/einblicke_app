@@ -1,5 +1,7 @@
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_states.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
+import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,16 +38,16 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocListener<AuthenticationStatusCubit, AuthenticationState>(
       bloc: context.read<AuthenticationStatusCubit>(),
       listener: (context, state) {
-        // if (state is AuthenticationSignedIn) {
-        context.go(SelectFramePage.route);
-        // } else if (state is AuthenticationSignedOut) {
-        //   context.go(SignInPage.route);
-        // } else if (state is AuthenticationFailureState) {
-        //   context
-        //       .read<InAppNotificationCubit>()
-        //       .sendFailureNotification(state.failure);
-        //   context.go(SignInPage.route);
-        // }
+        if (state is AuthenticationSignedIn) {
+          context.go(SelectFramePage.route);
+        } else if (state is AuthenticationSignedOut) {
+          context.go(SignInPage.route);
+        } else if (state is AuthenticationFailureState) {
+          context
+              .read<InAppNotificationCubit>()
+              .sendFailureNotification(state.failure);
+          context.go(SignInPage.route);
+        }
       },
       child: const CupertinoPageScaffold(
         child: Center(
