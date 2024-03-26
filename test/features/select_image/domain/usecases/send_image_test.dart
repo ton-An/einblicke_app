@@ -15,24 +15,23 @@ import '../../../../mocks.dart';
 void main() {
   late SendImage sendImage;
   late MockSelectImageRepository mockSelectImageRepository;
-  late MockRefreshTokenBundle mockRefreshTokenBundle;
-  late MockAuthenticationRepository mockAuthenticationRepository;
+  late MockServerAuthWrapper<None> mockServerAuthWrapper;
 
   setUp(() {
     // -- Definitions
     mockSelectImageRepository = MockSelectImageRepository();
-    mockRefreshTokenBundle = MockRefreshTokenBundle();
-    mockAuthenticationRepository = MockAuthenticationRepository();
+    mockServerAuthWrapper = MockServerAuthWrapper();
     sendImage = SendImage(
       selectImageRepository: mockSelectImageRepository,
-      refreshTokenBundle: mockRefreshTokenBundle,
-      authenticationRepository: mockAuthenticationRepository,
+      serverAuthWrapper: mockServerAuthWrapper,
     );
 
     // -- Stubs
     when(
-      () => mockAuthenticationRepository.getTokenBundleFromStorage(),
-    ).thenAnswer((_) => Future.value(Right(tTokenBundle)));
+      () => mockServerAuthWrapper(
+        serverCall: any(named: "serverCall"),
+      ),
+    ).thenAnswer((invocation) => Future.value(const Right(None())));
     when(
       () => mockSelectImageRepository.sendImage(
         imagePath: any(named: "imagePath"),
@@ -47,34 +46,21 @@ void main() {
     registerFallbackValue(tAccessToken);
   });
 
-  test("should get the [TokenBundle] from the [AuthenticationRepository]",
-      () async {
-    // act
-    await sendImage(imagePath: tImagePath, frameId: tFrameId);
-
-    // assert
-    verify(() => mockAuthenticationRepository.getTokenBundleFromStorage());
-  });
-
-  test("should relay [Failure]s", () async {
-    // arrange
-    when(
-      () => mockAuthenticationRepository.getTokenBundleFromStorage(),
-    ).thenAnswer((_) => Future.value(const Left(SecureStorageReadFailure())));
-
-    // act
-    final result = await sendImage(imagePath: tImagePath, frameId: tFrameId);
-
-    // assert
-    expect(result, const Left(SecureStorageReadFailure()));
-  });
-
   test("should send the image to the server and return [None]", () async {
-    // act
+    // act & assert
     final result = await sendImage(imagePath: tImagePath, frameId: tFrameId);
 
+    final verificationResult = verify(
+      () => mockServerAuthWrapper(
+        serverCall: captureAny(named: "serverCall"),
+      ),
+    );
+
+    final Function serverCallClosure = verificationResult.captured[0];
+
+    await serverCallClosure(tAccessToken);
+
     // assert
-    expect(result, const Right(None()));
     verify(
       () => mockSelectImageRepository.sendImage(
         imagePath: tImagePath,
@@ -82,62 +68,22 @@ void main() {
         accessToken: tAccessToken,
       ),
     );
+    expect(result, const Right(None()));
   });
 
   test("should relay [Failure]s", () async {
     // arrange
     when(
-      () => mockSelectImageRepository.sendImage(
-        imagePath: any(named: "imagePath"),
-        frameId: any(named: "frameId"),
-        accessToken: any(named: "accessToken"),
+      () => mockServerAuthWrapper(
+        serverCall: any(named: "serverCall"),
       ),
     ).thenAnswer(
         (invocation) => Future.value(const Left(DatabaseReadFailure())));
-  });
 
-  group("if sending the [Image] returns a [UnauthorizedFailure]", () {
-    setUp(() {
-      // -- Stubs
-      when(
-        () => mockSelectImageRepository.sendImage(
-          imagePath: any(named: "imagePath"),
-          frameId: any(named: "frameId"),
-          accessToken: any(named: "accessToken"),
-        ),
-      ).thenAnswer(
-        (invocation) => Future.value(const Left(UnauthorizedFailure())),
-      );
-      when(
-        () => mockRefreshTokenBundle(),
-      ).thenAnswer((invocation) => Future.value(const Right(None())));
-    });
+    // act
+    final result = await sendImage(imagePath: tImagePath, frameId: tFrameId);
 
-    test(
-        "should get a new [TokenBundle] if a [UnauthorizedFailure] was returned",
-        () async {
-      // act
-      await sendImage(imagePath: tImagePath, frameId: tFrameId);
-
-      // assert
-      verify(() => mockRefreshTokenBundle());
-    });
-
-    test("should relay [Failure]s", () async {
-      // arrange
-      when(
-        () => mockRefreshTokenBundle(),
-      ).thenAnswer(
-          (invocation) => Future.value(const Left(UnauthorizedFailure())));
-
-      // act
-      final result = await sendImage(
-        imagePath: tImagePath,
-        frameId: tFrameId,
-      );
-
-      // arrange
-      expect(result, const Left(UnauthorizedFailure()));
-    });
+    // assert
+    expect(result, const Left(DatabaseReadFailure()));
   });
 }

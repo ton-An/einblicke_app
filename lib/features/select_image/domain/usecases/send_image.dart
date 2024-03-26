@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:einblicke_app/core/domain/usecases/server_auth_wrapper.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
-import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
-import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
-import 'package:einblicke_app/features/authentication/domain/usecases/refresh_token_bundle.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
@@ -25,65 +23,32 @@ class SendImage {
   /// {@macro send_image}
   SendImage({
     required this.selectImageRepository,
-    required this.refreshTokenBundle,
-    required this.authenticationRepository,
+    required this.serverAuthWrapper,
   });
 
   final SelectImageRepository selectImageRepository;
-  final RefreshTokenBundle refreshTokenBundle;
-  final AuthenticationRepository authenticationRepository;
+  final ServerAuthWrapper<None> serverAuthWrapper;
 
   /// {@macro send_image}
   Future<Either<Failure, None>> call(
       {required String imagePath, required String frameId}) {
-    return _getAccessToken(imagePath: imagePath, frameId: frameId);
-  }
-
-  Future<Either<Failure, None>> _getAccessToken({
-    required String imagePath,
-    required String frameId,
-  }) async {
-    final Either<Failure, TokenBundle> tokenBundle =
-        await authenticationRepository.getTokenBundleFromStorage();
-
-    return tokenBundle.fold(
-      (Failure failure) {
-        return Left(failure);
-      },
-      (TokenBundle tokenBundle) {
-        final AuthenticationToken accessToken = tokenBundle.accessToken;
-
-        return _sendImage(
-            imagePath: imagePath, frameId: frameId, accessToken: accessToken);
-      },
-    );
+    return _sendImage(imagePath: imagePath, frameId: frameId);
   }
 
   Future<Either<Failure, None>> _sendImage({
     required String imagePath,
     required String frameId,
-    required AuthenticationToken accessToken,
   }) async {
-    final Either<Failure, None> sendImageEither =
-        await selectImageRepository.sendImage(
-      imagePath: imagePath,
-      frameId: frameId,
-      accessToken: accessToken,
-    );
-
-    return sendImageEither.fold(
-      (Failure failure) {
-        if (failure is UnauthorizedFailure) {
-          return _refreshTokenBundle();
-        }
-
-        return Left(failure);
+    final Either<Failure, None> sendImageEither = await serverAuthWrapper(
+      serverCall: (AuthenticationToken accessToken) {
+        return selectImageRepository.sendImage(
+          imagePath: imagePath,
+          frameId: frameId,
+          accessToken: accessToken,
+        );
       },
-      Right.new,
     );
-  }
 
-  Future<Either<Failure, None>> _refreshTokenBundle() async {
-    return refreshTokenBundle();
+    return sendImageEither;
   }
 }
