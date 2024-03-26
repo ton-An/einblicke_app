@@ -31,8 +31,17 @@ class ServerRemoteHandler {
   Future<Map<String, dynamic>> post({
     required String path,
     required Map<String, dynamic> body,
-    Map<String, dynamic>? headers,
+    String? clientSecret,
+    String? clientId,
+    String? accessToken,
   }) async {
+    final Map<String, String> headers = {
+      "Content-Type": "application/json",
+      if (clientSecret != null) "client_secret": clientSecret,
+      if (clientId != null) "client_id": clientId,
+      if (accessToken != null) "Authorization": "Bearer $accessToken"
+    };
+
     final String requestDataString = jsonEncode(body);
 
     final Response response = await dio.post(path,
@@ -63,9 +72,13 @@ class ServerRemoteHandler {
   Future<void> multipartPost({
     required String path,
     required FormData formData,
-    Map<String, dynamic> headers = const {},
+    String? accessToken,
   }) async {
-    headers["Content-Type"] = "multipart/form-data";
+    // headers["Content-Type"] = "multipart/form-data";
+    final Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      if (accessToken != null) "Authorization": "Bearer $accessToken"
+    };
 
     final Response response = await dio.post(path,
         data: formData, options: Options(headers: headers));

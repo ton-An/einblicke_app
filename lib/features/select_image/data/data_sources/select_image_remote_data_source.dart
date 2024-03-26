@@ -68,15 +68,11 @@ class SelectImageRemoteDataSourceImpl extends SelectImageRemoteDataSource {
       "frame_id": frameId,
     });
 
-    final Map<String, dynamic> headers = {
-      "Authorization": "Bearer ${accessToken.token}",
-    };
-
     // create new method file upload in serverRemoteHandler
     await serverRemoteHandler.multipartPost(
       path: "/curator/upload_image",
       formData: formData,
-      headers: headers,
+      accessToken: accessToken.token,
     );
   }
 }

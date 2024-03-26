@@ -53,7 +53,8 @@ void main() {
         () => mockServerRemoteHandler.post(
           path: any(named: "path"),
           body: any(named: "body"),
-          headers: any(named: "headers"),
+          clientId: any(named: "clientId"),
+          clientSecret: any(named: "clientSecret"),
         ),
       ).thenAnswer((_) async => tTokenBundleMap);
 
@@ -68,9 +69,11 @@ void main() {
       expect(result, tTokenBundle);
       verify(
         () => mockServerRemoteHandler.post(
-            path: "/sign_in",
-            body: tSignInRequestMap,
-            headers: tSignInRequestHeaders),
+          path: "/sign_in",
+          body: tSignInRequestMap,
+          clientId: tFakeSecrets.clientId,
+          clientSecret: tFakeSecrets.clientSecret,
+        ),
       );
     });
   });

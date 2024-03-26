@@ -69,11 +69,6 @@ class AuthenticationRemoteDataSourceImpl
       {required String username,
       required String password,
       required Secrets secrets}) async {
-    final Map<String, dynamic> headers = {
-      "client_id": secrets.clientId,
-      "client_secret": secrets.clientSecret,
-    };
-
     final Map<String, String> requestMap = {
       "username": username,
       "password": password,
@@ -82,7 +77,8 @@ class AuthenticationRemoteDataSourceImpl
     final Map<String, dynamic> response = await serverRemoteHandler.post(
       path: "/sign_in",
       body: requestMap,
-      headers: headers,
+      clientId: secrets.clientId,
+      clientSecret: secrets.clientSecret,
     );
 
     return TokenBundle.fromJson(response);

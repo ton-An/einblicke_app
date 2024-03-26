@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,17 +38,26 @@ void main() {
       await serverRemoteHandler.post(
         path: tGetNewTokenBundleRequestPath,
         body: tGetNewTokenBundleRequestMap,
-        headers: tHeadersMap,
+        clientId: tFakeSecrets.clientId,
+        clientSecret: tFakeSecrets.clientSecret,
+        accessToken: tAccessToken.token,
       );
 
       // assert
-      verify(
+      final capturedOptions = verify(
         () => mockDio.post(
-          tGetNewTokenBundleRequestPath,
-          data: tGetNewTokenBundleRequestString,
-          options: any(named: "options"),
+          any(),
+          data: any(named: "data"),
+          options: captureAny(named: "options"),
         ),
-      );
+      ).captured.single as Options;
+
+      expect(capturedOptions.headers, {
+        "Content-Type": "application/json",
+        "client_id": tFakeSecrets.clientId,
+        "client_secret": tFakeSecrets.clientSecret,
+        "Authorization": "Bearer ${tAccessToken.token}",
+      });
     });
 
     test("should return the response data if the request was successful",
@@ -56,7 +66,6 @@ void main() {
       final result = await serverRemoteHandler.post(
         path: tGetNewTokenBundleRequestPath,
         body: tGetNewTokenBundleRequestMap,
-        headers: tHeadersMap,
       );
 
       // assert
@@ -83,7 +92,6 @@ void main() {
       call() => serverRemoteHandler.post(
             path: tGetNewTokenBundleRequestPath,
             body: tGetNewTokenBundleRequestMap,
-            headers: tHeadersMap,
           );
 
       // assert
@@ -109,17 +117,22 @@ void main() {
       await serverRemoteHandler.multipartPost(
         path: tUploadImageRequestPath,
         formData: tFormData,
-        headers: tHeadersMap,
+        accessToken: tAccessToken.token,
       );
 
       // assert
-      verify(
+      final capturedOptions = verify(
         () => mockDio.post(
-          tUploadImageRequestPath,
-          data: tFormData,
-          options: any(named: "options"),
+          any(),
+          data: any(named: "data"),
+          options: captureAny(named: "options"),
         ),
-      );
+      ).captured.single as Options;
+
+      expect(capturedOptions.headers, {
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer ${tAccessToken.token}",
+      });
     });
 
     test(
@@ -141,7 +154,6 @@ void main() {
       call() => serverRemoteHandler.multipartPost(
             path: tUploadImageRequestPath,
             formData: tFormData,
-            headers: tHeadersMap,
           );
 
       // assert
