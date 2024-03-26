@@ -127,8 +127,8 @@ void main() {
       // assert
       final capturedOptions = verify(
         () => mockDio.post(
-          any(),
-          data: any(named: "data"),
+          tUploadImageRequestPath,
+          data: tFormData,
           options: captureAny(named: "options"),
         ),
       ).captured.single as Options;
@@ -183,7 +183,7 @@ void main() {
       // assert
       final capturedOptions = verify(
         () => mockDio.get(
-          any(),
+          tSampleGetRequestPath,
           options: captureAny(named: "options"),
         ),
       ).captured.single as Options;
@@ -221,6 +221,71 @@ void main() {
 
       // act
       call() => serverRemoteHandler.get(
+            path: tSampleGetRequestPath,
+            accessToken: tAccessToken.token,
+          );
+
+      // assert
+      expect(call(), throwsA(const DatabaseReadFailure()));
+    });
+  });
+
+  group("downloadBytes()", () {
+    setUp(() {
+      when(() => mockDio.get(
+            any(),
+            options: any(named: "options"),
+          )).thenAnswer((invocation) => Future.value(tImageBytesResponse));
+    });
+
+    test("should call the server with the provided path and headers", () async {
+      // act
+      await serverRemoteHandler.getBytes(
+        path: tSampleGetRequestPath,
+        accessToken: tAccessToken.token,
+      );
+
+      // assert
+      final capturedOptions = verify(
+        () => mockDio.get(
+          tSampleGetRequestPath,
+          options: captureAny(named: "options"),
+        ),
+      ).captured.single as Options;
+
+      expect(capturedOptions.headers, {
+        "Authorization": "Bearer ${tAccessToken.token}",
+      });
+    });
+
+    test("should return the response data if the request was successful",
+        () async {
+      // act
+      final result = await serverRemoteHandler.getBytes(
+        path: tSampleGetRequestPath,
+        accessToken: tAccessToken.token,
+      );
+
+      // assert
+      expect(result, tImageBytes);
+    });
+
+    test(
+        "should throw the corresponding [Failure] if the request was unsuccessful",
+        () async {
+      // arrange
+      when(
+        () => mockDio.get(
+          any(),
+          options: any(named: "options"),
+        ),
+      ).thenAnswer((invocation) => Future.value(tEmptyUnsuccessfulResponse));
+      when(
+        () => mockFailureMapper.mapCodeToFailure(any()),
+      ).thenAnswer((invocation) => const DatabaseReadFailure());
+
+      // act
+      call() => serverRemoteHandler.getBytes(
             path: tSampleGetRequestPath,
             accessToken: tAccessToken.token,
           );

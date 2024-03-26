@@ -35,7 +35,7 @@ void main() {
       when(() => mockServerRemoteHandler.multipartPost(
             path: any(named: "path"),
             formData: any(named: "formData"),
-            headers: any(named: "headers"),
+            accessToken: any(named: "accessToken"),
           )).thenAnswer(
         (_) async => Future.value(),
       );
@@ -66,9 +66,7 @@ void main() {
         () => mockServerRemoteHandler.multipartPost(
           path: "/curator/upload_image",
           formData: any(named: "formData", that: isA<FormData>()),
-          headers: {
-            "Authorization": "Bearer $tAccessTokenString",
-          },
+          accessToken: tAccessTokenString,
         ),
       );
     });

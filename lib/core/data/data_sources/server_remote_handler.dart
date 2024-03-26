@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -122,6 +123,41 @@ class ServerRemoteHandler {
     if (response.statusCode == 200) {
       return responseBody;
     } else {
+      final Failure failure =
+          failureMapper.mapCodeToFailure(responseBody["code"]);
+
+      throw failure;
+    }
+  }
+
+  /// Sends a GET request to the server to download a file
+  ///
+  /// Parameters:
+  /// - [String]: path on the server
+  /// - [String]: accessToken
+  ///
+  /// Returns:
+  /// - [File]: the downloaded file
+  ///
+  /// Throws:
+  /// - [Failure]
+  /// - [DioException]
+  /// - TBD
+  Future<Uint8List> getBytes({
+    required String path,
+    String? accessToken,
+  }) async {
+    final Map<String, String> headers = {
+      if (accessToken != null) "Authorization": "Bearer $accessToken",
+    };
+
+    final Response response =
+        await dio.get(path, options: Options(headers: headers));
+
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      final Map<String, dynamic> responseBody = jsonDecode(response.data);
       final Failure failure =
           failureMapper.mapCodeToFailure(responseBody["code"]);
 

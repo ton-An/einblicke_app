@@ -143,6 +143,12 @@ const List<PairedFrameInfo> tPairedFrameInfos = [
   ),
 ];
 
+final Response tImageBytesResponse = Response(
+  data: tImageBytes,
+  requestOptions: RequestOptions(path: tImagePath),
+  statusCode: 200,
+);
+
 // -- Exceptions
 final PlatformException tPlatformException = PlatformException(
   code: "i_am_a_teapot",
