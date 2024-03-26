@@ -9,6 +9,7 @@ import 'package:einblicke_app/features/authentication/domain/models/authenticati
 import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
 import 'package:einblicke_app/features/authentication/domain/usecases/refresh_token_bundle.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
+import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -49,6 +50,8 @@ class MockSelectImageRemoteDataSource extends Mock
     implements SelectImageRemoteDataSource {}
 
 // -- Select Frame
+class MockSelectFrameRepository extends Mock implements SelectFrameRepository {}
+
 class MockSelectFrameRemoteDataSource extends Mock
     implements SelectFrameRemoteDataSource {}
 

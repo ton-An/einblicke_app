@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/data/repository_impl/repository_failure_handler.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
@@ -23,11 +24,14 @@ class SelectFrameRepositoryImpl extends SelectFrameRepository {
   final RepositoryFailureHandler failureHandler;
 
   @override
-  Future<Either<Failure, File>> getMostRecentImageOfFrame(
-      {required String frameId}) async {
+  Future<Either<Failure, File>> getMostRecentImageOfFrame({
+    required String frameId,
+    required AuthenticationToken accessToken,
+  }) async {
     try {
-      final File image = await selectFrameRemoteDataSource
-          .getMostRecentImageOfFrame(frameId: frameId);
+      final File image =
+          await selectFrameRemoteDataSource.getMostRecentImageOfFrame(
+              frameId: frameId, accessToken: accessToken);
 
       return Right(image);
     } catch (exception) {
@@ -46,10 +50,13 @@ class SelectFrameRepositoryImpl extends SelectFrameRepository {
   }
 
   @override
-  Future<Either<Failure, List<PairedFrameInfo>>> getPairedFramesInfo() async {
+  Future<Either<Failure, List<PairedFrameInfo>>> getPairedFramesInfo({
+    required AuthenticationToken accessToken,
+  }) async {
     try {
       final List<PairedFrameInfo> pairedFrameInfos =
-          await selectFrameRemoteDataSource.getPairedFramesInfo();
+          await selectFrameRemoteDataSource.getPairedFramesInfo(
+              accessToken: accessToken);
 
       return Right(pairedFrameInfos);
     } catch (exception) {

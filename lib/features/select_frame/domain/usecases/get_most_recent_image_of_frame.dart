@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:einblicke_app/core/domain/usecases/server_auth_wrapper.dart';
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
@@ -26,19 +27,25 @@ import 'package:einblicke_shared/einblicke_shared.dart';
 /// - {@macro converted_dio_exceptions}
 /// {@endtemplate}
 class GetMostRecentImageOfFrame {
-  final SelectFrameRepository selectFrameRepository;
-
   /// {@macro get_most_recent_image_of_frame}
   const GetMostRecentImageOfFrame({
     required this.selectFrameRepository,
+    required this.serverAuthWrapper,
   });
+
+  final SelectFrameRepository selectFrameRepository;
+  final ServerAuthWrapper<File> serverAuthWrapper;
 
   /// {@macro get_most_recent_image_of_frame}
   Future<Either<Failure, File>> call({
     required String frameId,
   }) async {
-    return await selectFrameRepository.getMostRecentImageOfFrame(
-      frameId: frameId,
+    return serverAuthWrapper(
+      serverCall: (accessToken) =>
+          selectFrameRepository.getMostRecentImageOfFrame(
+        frameId: frameId,
+        accessToken: accessToken,
+      ),
     );
   }
 }

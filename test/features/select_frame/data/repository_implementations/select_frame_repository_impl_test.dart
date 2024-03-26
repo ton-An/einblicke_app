@@ -21,22 +21,30 @@ void main() {
     );
   });
 
+  setUpAll(() {
+    // -- Fallbacks
+    registerFallbackValue(tAccessToken);
+  });
+
   group("getMostRecentImageOfFrame()", () {
     test("should return a [File]", () async {
       // arrange
       when(() => mockRemoteDataSource.getMostRecentImageOfFrame(
-              frameId: any(named: "frameId")))
+              frameId: any(named: "frameId"),
+              accessToken: any(named: "accessToken")))
           .thenAnswer((_) async => tMockImageFile);
 
       // act
       final result = await selectFrameRepositoryImpl.getMostRecentImageOfFrame(
         frameId: tFrameId,
+        accessToken: tAccessToken,
       );
 
       // assert
       expect(result, Right(tMockImageFile));
       verify(() => mockRemoteDataSource.getMostRecentImageOfFrame(
             frameId: tFrameId,
+            accessToken: tAccessToken,
           ));
     });
 
@@ -44,13 +52,16 @@ void main() {
         () async {
       // arrange
       when(() => mockRemoteDataSource.getMostRecentImageOfFrame(
-          frameId: any(named: "frameId"))).thenThrow(tDioException);
+            frameId: any(named: "frameId"),
+            accessToken: any(named: "accessToken"),
+          )).thenThrow(tDioException);
       when(() => mockFailureHandler.dioExceptionMapper(tDioException))
           .thenReturn(tMappedDioFailure);
 
       // act
       final result = await selectFrameRepositoryImpl.getMostRecentImageOfFrame(
         frameId: tFrameId,
+        accessToken: tAccessToken,
       );
 
       // assert
@@ -62,27 +73,33 @@ void main() {
   group("getPairedFramesInfo()", () {
     test("should return a list of [PairedFrameInfo]s", () async {
       // arrange
-      when(() => mockRemoteDataSource.getPairedFramesInfo())
+      when(() => mockRemoteDataSource.getPairedFramesInfo(
+              accessToken: any(named: "accessToken")))
           .thenAnswer((_) async => tPairedFrameInfos);
 
       // act
-      final result = await selectFrameRepositoryImpl.getPairedFramesInfo();
+      final result = await selectFrameRepositoryImpl.getPairedFramesInfo(
+        accessToken: tAccessToken,
+      );
 
       // assert
       expect(result, const Right(tPairedFrameInfos));
-      verify(() => mockRemoteDataSource.getPairedFramesInfo());
+      verify(() =>
+          mockRemoteDataSource.getPairedFramesInfo(accessToken: tAccessToken));
     });
 
     test("should re-map [DioException]s to [Failure]s if they are thrown",
         () async {
       // arrange
-      when(() => mockRemoteDataSource.getPairedFramesInfo())
-          .thenThrow(tDioException);
+      when(() => mockRemoteDataSource.getPairedFramesInfo(
+          accessToken: any(named: "accessToken"))).thenThrow(tDioException);
       when(() => mockFailureHandler.dioExceptionMapper(tDioException))
           .thenReturn(tMappedDioFailure);
 
       // act
-      final result = await selectFrameRepositoryImpl.getPairedFramesInfo();
+      final result = await selectFrameRepositoryImpl.getPairedFramesInfo(
+        accessToken: tAccessToken,
+      );
 
       // assert
       expect(result, const Left(tMappedDioFailure));
