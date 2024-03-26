@@ -20,7 +20,9 @@ class ServerRemoteHandler {
   /// Parameters:
   /// - [String]: path on the server
   /// - [Map<String, dynamic>]: body
-  /// - [Map<String, dynamic>]: headers
+  /// - [String]: clientSecret
+  /// - [String]: clientId
+  /// - [String]: accessToken
   ///
   /// Returns:
   /// - [Map<String, dynamic>?]: response body (if any)
@@ -64,7 +66,7 @@ class ServerRemoteHandler {
   /// Parameters:
   /// - [String]: path on the server
   /// - [FormData]: formData
-  /// - [Map<String, dynamic>]: headers
+  /// - [String]: accessToken
   ///
   /// Throws:
   /// - [Failure]
@@ -85,6 +87,41 @@ class ServerRemoteHandler {
 
     if (response.statusCode != 200) {
       final Map<String, dynamic> responseBody = jsonDecode(response.data);
+      final Failure failure =
+          failureMapper.mapCodeToFailure(responseBody["code"]);
+
+      throw failure;
+    }
+  }
+
+  /// Sends a GET request to the server
+  ///
+  /// Parameters:
+  /// - [String]: path on the server
+  /// - [String]: accessToken
+  ///
+  /// Returns:
+  /// - [Map<String, dynamic>?]: response body (if any)
+  ///
+  /// Throws:
+  /// - [Failure]
+  /// - [DioException]
+  Future<Map<String, dynamic>> get({
+    required String path,
+    String? accessToken,
+  }) async {
+    final Map<String, String> headers = {
+      if (accessToken != null) "Authorization": "Bearer $accessToken",
+    };
+
+    final Response response =
+        await dio.get(path, options: Options(headers: headers));
+
+    final Map<String, dynamic> responseBody = jsonDecode(response.data);
+
+    if (response.statusCode == 200) {
+      return responseBody;
+    } else {
       final Failure failure =
           failureMapper.mapCodeToFailure(responseBody["code"]);
 

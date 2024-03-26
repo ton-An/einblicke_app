@@ -7,6 +7,10 @@ import 'package:mocktail/mocktail.dart';
 import '../../../fixtures.dart';
 import '../../../mocks.dart';
 
+/* To-Do:
+      - [ ] Re-do "should throw the corresponding [Failure] if the request was unsuccessful" tests
+*/
+
 void main() {
   late ServerRemoteHandler serverRemoteHandler;
   late MockDio mockDio;
@@ -154,6 +158,71 @@ void main() {
       call() => serverRemoteHandler.multipartPost(
             path: tUploadImageRequestPath,
             formData: tFormData,
+          );
+
+      // assert
+      expect(call(), throwsA(const DatabaseReadFailure()));
+    });
+  });
+
+  group("get()", () {
+    setUp(() {
+      when(() => mockDio.get(
+            any(),
+            options: any(named: "options"),
+          )).thenAnswer((_) async => tSampleGetResponse);
+    });
+
+    test("should call the server with the provided path and headers", () async {
+      // act
+      await serverRemoteHandler.get(
+        path: tSampleGetRequestPath,
+        accessToken: tAccessToken.token,
+      );
+
+      // assert
+      final capturedOptions = verify(
+        () => mockDio.get(
+          any(),
+          options: captureAny(named: "options"),
+        ),
+      ).captured.single as Options;
+
+      expect(capturedOptions.headers, {
+        "Authorization": "Bearer ${tAccessToken.token}",
+      });
+    });
+
+    test("should return the response data if the request was successful",
+        () async {
+      // act
+      final result = await serverRemoteHandler.get(
+        path: tSampleGetRequestPath,
+        accessToken: tAccessToken.token,
+      );
+
+      // assert
+      expect(result, tSampleGetResponseMap);
+    });
+
+    test(
+        "should throw the corresponding [Failure] if the request was unsuccessful",
+        () async {
+      // arrange
+      when(
+        () => mockDio.get(
+          any(),
+          options: any(named: "options"),
+        ),
+      ).thenAnswer((invocation) => Future.value(tEmptyUnsuccessfulResponse));
+      when(
+        () => mockFailureMapper.mapCodeToFailure(any()),
+      ).thenAnswer((invocation) => const DatabaseReadFailure());
+
+      // act
+      call() => serverRemoteHandler.get(
+            path: tSampleGetRequestPath,
+            accessToken: tAccessToken.token,
           );
 
       // assert

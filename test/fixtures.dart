@@ -9,6 +9,18 @@ import 'package:flutter/services.dart';
 
 import 'mocks.dart';
 
+// -- Core
+const String tSampleGetRequestPath = "/sample";
+final Response tSampleGetResponse = Response(
+  data: tSampleGetResponseJsonString,
+  requestOptions: RequestOptions(path: tSampleGetRequestPath),
+  statusCode: 200,
+);
+const Map<String, dynamic> tSampleGetResponseMap = {
+  "data": "I am a reasonably big fudge",
+};
+final String tSampleGetResponseJsonString = jsonEncode(tSampleGetResponseMap);
+
 // -- Authentication
 const String tUsername = "big-fudge";
 const String tAnotherUsername = "small-fudge";
