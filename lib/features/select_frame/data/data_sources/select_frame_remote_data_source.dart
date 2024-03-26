@@ -1,5 +1,7 @@
-import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
+import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
 /// {@template select_frame_remote_data_source}
@@ -15,7 +17,9 @@ abstract class SelectFrameRemoteDataSource {
   /// - [DatabaseReadFailure]
   /// - [UnauthorizedFailure]
   /// - {@macro converted_dio_exceptions}
-  Future<List<PairedFrameInfo>> getPairedFramesInfo();
+  Future<List<PairedFrameInfo>> getPairedFramesInfo({
+    required AuthenticationToken accessToken,
+  });
 
   /// Gets the most recent image of a frame
   ///
@@ -32,7 +36,53 @@ abstract class SelectFrameRemoteDataSource {
   /// - [NotPairedFailure]
   /// - [NoImagesFoundFailure]
   /// - {@macro converted_dio_exceptions}
-  Future<File> getMostRecentImageOfFrame({
+  Future<Uint8List> getMostRecentImageOfFrame({
     required String frameId,
+    required AuthenticationToken accessToken,
+    // required AuthenticationToken accessToken,
   });
+}
+
+/// {@template select_frame_remote_data_source_impl}
+/// __Select Frame Remote Data Source Impl__ is a concrete implementation of [SelectFrameRemoteDataSource]
+/// and is responsible for selecting a frame to send an image to.
+/// {@endtemplate}
+class SelectFrameRemoteDataSourceImpl implements SelectFrameRemoteDataSource {
+  /// {@macro select_frame_remote_data_source_impl}
+  const SelectFrameRemoteDataSourceImpl({
+    required this.serverRemoteHandler,
+  });
+
+  final ServerRemoteHandler serverRemoteHandler;
+
+  @override
+  Future<Uint8List> getMostRecentImageOfFrame({
+    required String frameId,
+    required AuthenticationToken accessToken,
+  }) async {
+    final Uint8List response = await serverRemoteHandler.getBytes(
+      path: "/curator/latest_image_of_frame?frame_id=$frameId",
+      accessToken: accessToken.token,
+    );
+
+    return response;
+  }
+
+  @override
+  Future<List<PairedFrameInfo>> getPairedFramesInfo({
+    required AuthenticationToken accessToken,
+  }) async {
+    final Map<String, dynamic> response = await serverRemoteHandler.get(
+      path: "/curator/paired_frames",
+      accessToken: accessToken.token,
+    );
+
+    final List pairedFramesInfoJsonList = response["paired_frames"] as List;
+
+    final List<PairedFrameInfo> pairedFramesInfo = pairedFramesInfoJsonList
+        .map((dynamic e) => PairedFrameInfo.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return pairedFramesInfo;
+  }
 }

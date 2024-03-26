@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
@@ -39,7 +39,7 @@ abstract class SelectFrameRepository {
   /// - [NotPairedFailure]
   /// - [NoImagesFoundFailure]
   /// - {@macro converted_dio_exceptions}
-  Future<Either<Failure, File>> getMostRecentImageOfFrame({
+  Future<Either<Failure, Uint8List>> getMostRecentImageOfFrame({
     required String frameId,
     required AuthenticationToken accessToken,
   });

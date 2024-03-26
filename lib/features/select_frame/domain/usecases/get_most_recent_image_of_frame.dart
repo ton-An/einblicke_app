@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:einblicke_app/core/domain/usecases/server_auth_wrapper.dart';
@@ -34,10 +34,10 @@ class GetMostRecentImageOfFrame {
   });
 
   final SelectFrameRepository selectFrameRepository;
-  final ServerAuthWrapper<File> serverAuthWrapper;
+  final ServerAuthWrapper<Uint8List> serverAuthWrapper;
 
   /// {@macro get_most_recent_image_of_frame}
-  Future<Either<Failure, File>> call({
+  Future<Either<Failure, Uint8List>> call({
     required String frameId,
   }) async {
     return serverAuthWrapper(

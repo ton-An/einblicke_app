@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -24,12 +24,12 @@ class SelectFrameRepositoryImpl extends SelectFrameRepository {
   final RepositoryFailureHandler failureHandler;
 
   @override
-  Future<Either<Failure, File>> getMostRecentImageOfFrame({
+  Future<Either<Failure, Uint8List>> getMostRecentImageOfFrame({
     required String frameId,
     required AuthenticationToken accessToken,
   }) async {
     try {
-      final File image =
+      final Uint8List image =
           await selectFrameRemoteDataSource.getMostRecentImageOfFrame(
               frameId: frameId, accessToken: accessToken);
 

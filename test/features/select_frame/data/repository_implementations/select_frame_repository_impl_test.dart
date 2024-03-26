@@ -27,12 +27,12 @@ void main() {
   });
 
   group("getMostRecentImageOfFrame()", () {
-    test("should return a [File]", () async {
+    test("should return the [Uint8List] image bytes", () async {
       // arrange
       when(() => mockRemoteDataSource.getMostRecentImageOfFrame(
               frameId: any(named: "frameId"),
               accessToken: any(named: "accessToken")))
-          .thenAnswer((_) async => tMockImageFile);
+          .thenAnswer((_) async => tImageBytes);
 
       // act
       final result = await selectFrameRepositoryImpl.getMostRecentImageOfFrame(
@@ -41,7 +41,7 @@ void main() {
       );
 
       // assert
-      expect(result, Right(tMockImageFile));
+      expect(result, Right(tImageBytes));
       verify(() => mockRemoteDataSource.getMostRecentImageOfFrame(
             frameId: tFrameId,
             accessToken: tAccessToken,

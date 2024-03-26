@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:einblicke_app/features/select_frame/domain/usecases/get_most_recent_image_of_frame.dart';
@@ -12,7 +12,7 @@ import '../../../../mocks.dart';
 void main() {
   late GetMostRecentImageOfFrame getMostRecentImageOfFrame;
   late MockSelectFrameRepository mockSelectFrameRepository;
-  late MockServerAuthWrapper<File> mockServerAuthWrapper;
+  late MockServerAuthWrapper<Uint8List> mockServerAuthWrapper;
 
   setUp(() {
     // -- Definitions
@@ -28,13 +28,13 @@ void main() {
       () => mockServerAuthWrapper(
         serverCall: any(named: "serverCall"),
       ),
-    ).thenAnswer((invocation) => Future.value(Right(tMockImageFile)));
+    ).thenAnswer((invocation) => Future.value(Right(tImageBytes)));
     when(
       () => mockSelectFrameRepository.getMostRecentImageOfFrame(
         frameId: any(named: "frameId"),
         accessToken: any(named: "accessToken"),
       ),
-    ).thenAnswer((_) => Future.value(Right(tMockImageFile)));
+    ).thenAnswer((_) => Future.value(Right(tImageBytes)));
   });
 
   setUpAll(() {
@@ -42,7 +42,8 @@ void main() {
     registerFallbackValue(tAccessToken);
   });
 
-  test("should get the most recent image of a frame and return the [File]",
+  test(
+      "should get the most recent image of a frame and return the [Uint8List] image bytes",
       () async {
     // act & assert
     final result = await getMostRecentImageOfFrame(frameId: tFrameId);
@@ -64,7 +65,7 @@ void main() {
         accessToken: tAccessToken,
       ),
     );
-    expect(result, Right(tMockImageFile));
+    expect(result, Right(tImageBytes));
   });
 
   test("should relay [Failure]s", () async {

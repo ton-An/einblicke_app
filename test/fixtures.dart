@@ -143,6 +143,19 @@ const List<PairedFrameInfo> tPairedFrameInfos = [
   ),
 ];
 
+const Map<String, dynamic> tPairedFrameInfosJson = {
+  "paired_frames": [
+    {
+      "id": tPictureFrameId,
+      "name": tUsername,
+    },
+    {
+      "id": tPictureFrameId2,
+      "name": tAnotherUsername,
+    },
+  ],
+};
+
 final Response tImageBytesResponse = Response(
   data: tImageBytes,
   requestOptions: RequestOptions(path: tImagePath),
