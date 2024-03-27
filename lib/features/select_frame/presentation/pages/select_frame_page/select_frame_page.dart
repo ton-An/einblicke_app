@@ -9,6 +9,7 @@ import 'package:einblicke_app/features/select_frame/presentation/widgets/frame_c
 import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -41,36 +42,60 @@ class _SelectFramePageState extends State<SelectFramePage> {
   @override
   void initState() {
     super.initState();
-    context.read<SelectFrameCubit>().loadFrames();
+    Future.delayed(
+      const Duration(milliseconds: 500),
+    ).then((value) => context.read<SelectFrameCubit>().loadFrames());
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
-        listener: (context, state) {
-          if (state is SelectFrameFailure) {
-            context
-                .read<InAppNotificationCubit>()
-                .sendFailureNotification(state.failure);
-          }
-        },
-        builder: (context, state) {
-          if (state is SelectFrameInitialState) {
-            return const Center(child: CupertinoActivityIndicator());
-          }
+      child: SafeArea(
+        child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
+          listener: (context, state) {
+            if (state is SelectFrameFailure) {
+              context
+                  .read<InAppNotificationCubit>()
+                  .sendFailureNotification(state.failure);
+            }
+          },
+          builder: (context, state) {
+            if (state is SelectFrameLoaded ||
+                state is SelectFrameInitialState) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 600),
+                switchInCurve: Curves.easeIn,
+                switchOutCurve: Curves.easeIn,
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                child: state is SelectFrameLoaded
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _Carousel(frames: state.framesInfo),
+                        ],
+                      )
+                    : Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          padding: const EdgeInsets.all(5.5),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const CupertinoActivityIndicator(),
+                        ),
+                      ),
+              );
+            }
 
-          if (state is SelectFrameLoaded) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _Carousel(frames: state.framesInfo),
-              ],
-            );
-          }
-
-          return Container();
-        },
+            return Container();
+          },
+        ),
       ),
     );
   }

@@ -18,10 +18,13 @@ class FrameImageLoaderCubit extends Cubit<FrameImageLoaderState> {
   }) async {
     final Either<Failure, Uint8List> imageBytesEither =
         await getMostRecentImageOfFrame(frameId: frameId);
-
     imageBytesEither.fold(
       (failure) => emit(FrameImageLoaderFailure(failure: failure)),
-      (imageBytes) => emit(FrameImageLoaded(imageBytes: imageBytes)),
+      (imageBytes) => emit(FrameImagePreCacheLoaded(imageBytes: imageBytes)),
     );
+  }
+
+  void setFrameImageCached(Uint8List imageBytes) {
+    emit(FrameImageLoaded(imageBytes: imageBytes));
   }
 }

@@ -10,6 +10,12 @@ class FrameImageLoaderInitial extends FrameImageLoaderState {
   const FrameImageLoaderInitial();
 }
 
+class FrameImagePreCacheLoaded extends FrameImageLoaderState {
+  final Uint8List imageBytes;
+
+  const FrameImagePreCacheLoaded({required this.imageBytes});
+}
+
 class FrameImageLoaded extends FrameImageLoaderState {
   final Uint8List imageBytes;
 

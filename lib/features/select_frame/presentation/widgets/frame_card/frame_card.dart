@@ -1,6 +1,5 @@
 library frame_card;
 
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:einblicke_app/core/ios_properties.dart';
@@ -44,7 +43,6 @@ class FrameCard extends StatefulWidget {
 class _FrameCardState extends State<FrameCard> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<FrameImageLoaderCubit>().loadFrameImage(
           frameId: widget.frameInfo.id,
@@ -57,6 +55,12 @@ class _FrameCardState extends State<FrameCard> {
       onPressed: widget.onPressed,
       child: BlocConsumer<FrameImageLoaderCubit, FrameImageLoaderState>(
         listener: (context, state) {
+          if (state is FrameImagePreCacheLoaded) {
+            precacheImage(MemoryImage(state.imageBytes), context).then(
+                (value) => context
+                    .read<FrameImageLoaderCubit>()
+                    .setFrameImageCached(state.imageBytes));
+          }
           if (state is FrameImageLoaderFailure) {
             context
                 .read<InAppNotificationCubit>()
@@ -67,18 +71,9 @@ class _FrameCardState extends State<FrameCard> {
           return Stack(
             children: [
               // -- Background Image --
-              if (state is FrameImageLoaded)
-                Positioned.fill(
-                  child: _BackgroundImage(
-                    imageBytes: state.imageBytes,
-                  ),
-                ),
-
-              if (state is! FrameImageLoaded)
-                Container(
-                  color: Colors.white.withOpacity(.95),
-                  child: const Center(child: CupertinoActivityIndicator()),
-                ),
+              const Positioned.fill(
+                child: _BackgroundImage(),
+              ),
 
               // -- Overlay --
               Align(
