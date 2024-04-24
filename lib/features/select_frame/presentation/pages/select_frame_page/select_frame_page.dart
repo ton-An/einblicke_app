@@ -15,12 +15,15 @@ import 'package:einblicke_app/features/select_frame/presentation/cubits/single_i
 import 'package:einblicke_app/features/select_frame/presentation/widgets/frame_card/frame_card.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:sprung/sprung.dart';
 
 part '_fade_switcher.dart';
 part '_frame_carousel.dart';
 part '_loaded_frames.dart';
+part '_pull_to_refresh.dart';
 
 /* 
   To-Dos:
@@ -60,34 +63,36 @@ class _SelectFramePageState extends State<SelectFramePage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: SafeArea(
-        left: false,
-        right: false,
-        child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
-          listener: (context, state) {
-            if (state is SelectFrameFailure) {
-              context
-                  .read<InAppNotificationCubit>()
-                  .sendFailureNotification(state.failure);
-            }
-          },
-          builder: (context, state) {
-            if (state is SelectFrameLoaded ||
-                state is SelectFrameInitialState) {
-              return _FadeSwitcher(
-                child: state is SelectFrameLoaded
-                    ? _LoadedFrames(
-                        frames: state.frames,
-                      )
-                    : const Align(
-                        alignment: Alignment.center,
-                        child: Loader(),
-                      ),
-              );
-            }
+      child: _PullToRefresh(
+        child: SafeArea(
+          left: false,
+          right: false,
+          child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
+            listener: (context, state) {
+              if (state is SelectFrameFailure) {
+                context
+                    .read<InAppNotificationCubit>()
+                    .sendFailureNotification(state.failure);
+              }
+            },
+            builder: (context, state) {
+              if (state is SelectFrameLoaded ||
+                  state is SelectFrameInitialState) {
+                return _FadeSwitcher(
+                  child: state is SelectFrameLoaded
+                      ? _LoadedFrames(
+                          frames: state.frames,
+                        )
+                      : const Align(
+                          alignment: Alignment.center,
+                          child: Loader(),
+                        ),
+                );
+              }
 
-            return Container();
-          },
+              return Container();
+            },
+          ),
         ),
       ),
     );

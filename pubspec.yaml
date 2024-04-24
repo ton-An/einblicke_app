@@ -39,6 +39,7 @@ dependencies:
   json_annotation: ^4.8.1
   file: ^7.0.0
   sprung: ^3.0.1
+  custom_refresh_indicator: ^3.1.0
 
 dev_dependencies:
   flutter_test:

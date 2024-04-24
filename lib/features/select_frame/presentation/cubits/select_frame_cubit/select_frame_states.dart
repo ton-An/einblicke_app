@@ -14,6 +14,10 @@ class SelectFrameLoaded extends SelectFrameState {
   const SelectFrameLoaded(this.frames);
 }
 
+class SelectFrameReloaded extends SelectFrameLoaded {
+  const SelectFrameReloaded(super.frames);
+}
+
 class SelectFrameFailure extends SelectFrameState {
   final Failure failure;
 

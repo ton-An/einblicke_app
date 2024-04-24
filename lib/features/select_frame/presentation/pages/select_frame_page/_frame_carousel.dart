@@ -24,29 +24,41 @@ class _FrameCarouselState extends State<_FrameCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterCarousel.builder(
-      itemCount: _frameCards.length,
-      options: CarouselOptions(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        height: double.infinity,
-        viewportFraction: 1,
-        padEnds: true,
-        indicatorMargin: IOSTheme.of(context).spacing.xMedium,
-        slideIndicator: CircularSlideIndicator(
-          currentIndicatorColor: IOSTheme.of(context).colors.backgroundContrast,
-          indicatorBackgroundColor: IOSTheme.of(context).colors.disabledButton,
-        ),
-        floatingIndicator: false,
-      ),
-      itemBuilder: (context, i, _) {
-        return _frameCards[i];
+    return BlocListener<SelectFrameCubit, SelectFrameState>(
+      listener: (context, state) {
+        if (state is SelectFrameReloaded) {
+          _preBuildFrameCards();
+        }
       },
+      child: FlutterCarousel.builder(
+        itemCount: _frameCards.length,
+        options: CarouselOptions(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          height: double.infinity,
+          viewportFraction: 1,
+          padEnds: true,
+          indicatorMargin: IOSTheme.of(context).spacing.xMedium,
+          slideIndicator: CircularSlideIndicator(
+            currentIndicatorColor:
+                IOSTheme.of(context).colors.backgroundContrast,
+            indicatorBackgroundColor:
+                IOSTheme.of(context).colors.disabledButton,
+          ),
+          floatingIndicator: false,
+        ),
+        itemBuilder: (context, i, _) {
+          return _frameCards[i];
+        },
+      ),
     );
   }
 
   /// Pre-builds the frame cards to avoid the frame cards being disposed when using the carousel
   void _preBuildFrameCards() {
+    _frameCards.clear();
+    imageCache.clear();
+
     for (PairedFrameInfo frame in widget.frames) {
       final SingleImageLoaderCubit singleImageLoaderCubit =
           getIt<SingleImageLoaderCubit>();
@@ -63,6 +75,7 @@ class _FrameCarouselState extends State<_FrameCarousel> {
       );
 
       final Widget frameWidget = BlocProvider(
+        key: UniqueKey(),
         create: (context) => singleImageLoaderCubit,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -76,6 +89,7 @@ class _FrameCarouselState extends State<_FrameCarousel> {
 
       _frameCards.add(frameWidget);
     }
+    setState(() {});
   }
 
   /// Checks if the the [SingleImageLoaderCubit] has loaded the image and caches

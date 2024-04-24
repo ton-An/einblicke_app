@@ -35,7 +35,7 @@ class _Overlay extends StatelessWidget {
               // ),
 
               // -- Title --
-              _Title(title: title)
+              _Title(title: title),
             ],
           ),
         ),

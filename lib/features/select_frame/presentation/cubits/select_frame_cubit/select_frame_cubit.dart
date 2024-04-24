@@ -28,4 +28,23 @@ class SelectFrameCubit extends Cubit<SelectFrameState> {
       emit(SelectFrameLoaded(framesInfo));
     });
   }
+
+  void reloadFrames() async {
+    final Either<Failure, List<PairedFrameInfo>> pairedFramesInfoEither =
+        await getPairedFramesInfo();
+
+    pairedFramesInfoEither.fold((Failure failure) {
+      emit(SelectFrameFailure(failure));
+    }, (List<PairedFrameInfo> framesInfo) {
+      framesInfo = framesInfo +
+          framesInfo +
+          framesInfo +
+          framesInfo +
+          framesInfo +
+          framesInfo +
+          framesInfo +
+          framesInfo;
+      emit(SelectFrameReloaded(framesInfo));
+    });
+  }
 }
