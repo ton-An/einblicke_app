@@ -1,5 +1,7 @@
 import 'package:einblicke_app/core/dependency_injector.dart';
 import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/widgets/ios_modal/ios_modal_page.dart';
+import 'package:einblicke_app/core/widgets/ios_modal/ios_page.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
@@ -16,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart' as l10n;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sheet/route.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,23 +69,28 @@ class EinblickeApp extends StatelessWidget {
         routes: [
           GoRoute(
             path: SplashScreen.route,
-            pageBuilder: (context, state) => const CupertinoExtendedPage(
+            pageBuilder: (context, state) => const IOSModalPage(
               child: SplashScreen(),
             ),
           ),
           GoRoute(
             path: SelectFramePage.route,
-            pageBuilder: (context, state) => CupertinoExtendedPage(
-                child: BlocProvider(
-                    create: (context) => getIt<SelectFrameCubit>(),
-                    child: const SelectFramePage())),
+            pageBuilder: (context, state) => IOSPage(
+              child: BlocProvider(
+                create: (context) => getIt<SelectFrameCubit>(),
+                child: const SelectFramePage(),
+              ),
+            ),
             routes: [
               GoRoute(
                 path: SelectImageModal.pageName,
-                pageBuilder: (context, state) => CupertinoSheetPage(
+                name: SelectImageModal.pageName,
+                pageBuilder: (context, state) => IOSModalPage(
                   child: BlocProvider(
                     create: (context) => getIt<SelectImageCubit>(),
-                    child: const SelectImageModal(),
+                    child: SelectImageModal(
+                      frameId: state.extra as String,
+                    ),
                   ),
                 ),
               ),
@@ -92,7 +98,7 @@ class EinblickeApp extends StatelessWidget {
           ),
           GoRoute(
             path: SignInPage.route,
-            pageBuilder: (context, state) => CupertinoExtendedPage(
+            pageBuilder: (context, state) => IOSModalPage(
               child: BlocProvider(
                 create: (context) => getIt<SignInCubit>(),
                 child: const SignInPage(),
@@ -101,7 +107,7 @@ class EinblickeApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: WelcomeModal.pageName,
-                pageBuilder: (context, state) => const CupertinoSheetPage(
+                pageBuilder: (context, state) => const IOSModalPage(
                   child: WelcomeModal(),
                 ),
               ),

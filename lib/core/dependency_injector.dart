@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
 import 'package:einblicke_app/core/data/repository_impl/repository_failure_handler.dart';
@@ -22,8 +23,14 @@ import 'package:einblicke_app/features/select_frame/domain/usecases/get_most_rec
 import 'package:einblicke_app/features/select_frame/domain/usecases/get_paired_frames_info.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
+import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
+import 'package:einblicke_app/features/select_image/data/repository_implementation/select_image_repository_impl.dart';
+import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
+import 'package:einblicke_app/features/select_image/domain/usecases/send_image.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:file/file.dart';
+import 'package:file/local.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,6 +56,7 @@ void initGetIt() {
     ),
   );
   getIt.registerLazySingleton(() => const FlutterSecureStorage());
+  getIt.registerLazySingleton<FileSystem>(() => const LocalFileSystem());
 
   // =+=+ Shared +=+= //
   getIt.registerLazySingleton(() => const FailureMapper());
@@ -61,6 +69,9 @@ void initGetIt() {
 
   // =+=+ Select Frame +=+= //
   _registerSelectFrame();
+
+  // =+=+ Select Image +=+= //
+  _registerSelectImage();
 }
 
 void _registerCore() {
@@ -112,13 +123,6 @@ void _registerAuthentication() {
       signInUsecase: getIt(),
     ),
   );
-  getIt.registerFactory(
-    () => SelectImageCubit(
-      dio: getIt(),
-      secureStorage: getIt(),
-      secrets: getIt(),
-    ),
-  );
 }
 
 void _registerSelectFrame() {
@@ -156,7 +160,46 @@ void _registerSelectFrame() {
 
   // -- Presentation -- //
   getIt.registerFactory(() => SelectFrameCubit(getPairedFramesInfo: getIt()));
-  getIt.registerFactory(() => FrameImageLoaderCubit(
-        getMostRecentImageOfFrame: getIt(),
-      ));
+  getIt.registerFactory(
+    () => FrameImageLoaderCubit(
+      getMostRecentImageOfFrame: getIt(),
+    ),
+  );
+}
+
+void _registerSelectImage() {
+  // -- Data -- //
+  getIt.registerLazySingleton<SelectImageRemoteDataSource>(
+    () => SelectImageRemoteDataSourceImpl(
+      serverRemoteHandler: getIt(),
+      fileSystem: getIt(),
+    ),
+  );
+  getIt.registerLazySingleton<SelectImageRepository>(
+    () => SelectImageRepositoryImpl(
+      selectImageRemoteDataSource: getIt(),
+      failureHandler: getIt(),
+    ),
+  );
+
+  // -- Domain -- //
+  getIt.registerFactory(
+    () => SendImage(
+      selectImageRepository: getIt(),
+      serverAuthWrapper: getIt(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => ServerAuthWrapper<None>(
+      authenticationRepository: getIt(),
+      refreshTokenBundle: getIt(),
+    ),
+  );
+
+  // -- Presentation -- //
+  getIt.registerFactory(
+    () => SelectImageCubit(
+      sendImageUsecase: getIt(),
+    ),
+  );
 }
