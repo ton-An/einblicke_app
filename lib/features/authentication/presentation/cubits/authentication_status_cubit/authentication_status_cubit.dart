@@ -15,7 +15,7 @@ class AuthenticationStatusCubit extends Cubit<AuthenticationState> {
 
   final IsSingnedIn isSignedIn;
 
-  void ceckAuthenticationStatus() async {
+  void checkAuthenticationStatus() async {
     final Either<Failure, bool> isSignedInResult = await isSignedIn();
 
     isSignedInResult.fold(

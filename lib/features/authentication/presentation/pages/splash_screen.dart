@@ -1,3 +1,4 @@
+import 'package:einblicke_app/core/widgets/loader.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_states.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<AuthenticationStatusCubit>().ceckAuthenticationStatus();
+    context.read<AuthenticationStatusCubit>().checkAuthenticationStatus();
   }
 
   @override
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
       },
       child: const CupertinoPageScaffold(
         child: Center(
-          child: CupertinoActivityIndicator(),
+          child: Loader(),
         ),
       ),
     );
