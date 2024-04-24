@@ -6,6 +6,7 @@ part of frame_card;
 */
 
 /// The online indicator of the [FrameCard]
+// ignore: unused_element
 class _OnlineIndicator extends StatelessWidget {
   const _OnlineIndicator();
 

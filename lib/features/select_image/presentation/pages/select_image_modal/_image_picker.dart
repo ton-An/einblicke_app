@@ -100,7 +100,7 @@ class _ImagePickerState extends State<_ImagePicker>
       ).then((CroppedFile? croppedImage) {
         if (croppedImage == null) return;
 
-        context.read<SelectImageCubit>().selectImage(File(croppedImage!.path));
+        context.read<SelectImageCubit>().selectImage(File(croppedImage.path));
       });
     });
   }

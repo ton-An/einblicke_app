@@ -2,7 +2,6 @@ part of in_app_notification;
 
 class _Content extends StatelessWidget {
   const _Content({
-    super.key,
     required this.failure,
   });
 

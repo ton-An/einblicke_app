@@ -30,7 +30,7 @@ class IOSTextField extends StatelessWidget {
         placeholder: hint,
         obscureText: obscureText,
         style: obscureText
-            ? TextStyle(
+            ? const TextStyle(
                 inherit: false,
                 fontFamily: '.SF Pro Display',
                 fontSize: 23.0,
