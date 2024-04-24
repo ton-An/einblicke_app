@@ -1,7 +1,8 @@
+import 'package:apple_product_name/apple_product_name.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal_route.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_page.dart';
 import 'package:flutter/material.dart';
-
 /*
   To-Do:
     - [ ] Add documentation
@@ -27,7 +28,14 @@ class CustomCupertinoRoute<T> extends PageRouteBuilder<T> {
 
   final Widget child;
 
+  double? screenCornerRadius;
   CustomCupertinoModalRoute? nextModalRoute;
+
+  @override
+  void install() {
+    _setScreenCornerRadius();
+    super.install();
+  }
 
   @override
   void didChangeNext(Route? nextRoute) {
@@ -85,4 +93,63 @@ class CustomCupertinoRoute<T> extends PageRouteBuilder<T> {
   double _calculateOffset(
           BuildContext context, double secondaryAnimationValue) =>
       secondaryAnimationValue * MediaQuery.of(context).padding.top;
+
+  /// This is a temporary solution to get the screen corner radius of the device.
+  /// I am terribly sorry for this :)
+  void _setScreenCornerRadius() async {
+    final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+    final IosDeviceInfo deviceInfo = await deviceInfoPlugin.iosInfo;
+    final String deviceName = deviceInfo.utsname.productName;
+
+    const List<String> thitrtyNine = [
+      "iPhone X",
+      "iPhone Xs",
+      "iPhone Xs Max",
+      "iPhone 11 Pro",
+      "iPhone 11 Pro Max"
+    ];
+    const List<String> fortyOne = [
+      "iPhone Xr",
+      "iPhone 11",
+    ];
+    const List<String> fortyFour = [
+      "iPhone 12 mini",
+      "iPhone 13 mini",
+    ];
+    const List<String> fourtySeven = [
+      "iPhone 12",
+      "iPhone 12 Pro",
+      "iPhone 13 Pro",
+      "iPhone 14"
+    ];
+    const List<String> fiftyThree = [
+      "iPhone 12 Pro Max",
+      "iPhone 13 Pro Max",
+      "iPhone 14 Plus"
+    ];
+    const List<String> fiftyFive = [
+      "iPhone 14 Pro",
+      "iPhone 14 Pro Max",
+      "iPhone 15",
+      "iPhone 15 Plus",
+      "iPhone 15 Pro",
+      "iPhone 15 Pro Max",
+    ];
+
+    if (thitrtyNine.contains(deviceName)) {
+      screenCornerRadius = 39;
+    } else if (fortyOne.contains(deviceName)) {
+      screenCornerRadius = 41.5;
+    } else if (fortyFour.contains(deviceName)) {
+      screenCornerRadius = 44;
+    } else if (fourtySeven.contains(deviceName)) {
+      screenCornerRadius = 47.33;
+    } else if (fiftyThree.contains(deviceName)) {
+      screenCornerRadius = 53.33;
+    } else if (fiftyFive.contains(deviceName)) {
+      screenCornerRadius = 55;
+    } else {
+      screenCornerRadius = 0;
+    }
+  }
 }
