@@ -9,10 +9,12 @@ part of select_image_modal;
 /// The send button of the [_ImagePicker] which initiates
 /// the server request to send an image to the selected frame.
 class _SendImageButton extends StatelessWidget {
-  const _SendImageButton();
+  const _SendImageButton({required this.frameId});
+
+  final String frameId;
 
   void onSendImagePressed(BuildContext context) {
-    context.read<SelectImageCubit>().sendImage();
+    context.read<SelectImageCubit>().sendImage(frameId: frameId);
   }
 
   @override

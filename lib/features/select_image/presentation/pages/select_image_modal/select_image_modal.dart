@@ -9,8 +9,11 @@ import 'package:einblicke_app/core/theme/ios_theme.dart';
 import 'package:einblicke_app/core/widgets/gaps/small_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/core/widgets/ios_button.dart';
+import 'package:einblicke_app/core/widgets/ios_modal/ios_modal.dart';
+import 'package:einblicke_app/core/widgets/ios_modal/ios_modal_top_bar.dart';
+import 'package:einblicke_app/core/widgets/ios_small_text_button.dart';
 import 'package:einblicke_app/core/widgets/ios_text_button.dart';
-import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_states.dart';
@@ -23,6 +26,10 @@ import 'package:image_picker/image_picker.dart';
 part '_image_picker.dart';
 part '_send_image_button.dart';
 
+/* To-Do:
+  - [ ] Probably convert this to a normal Page instead of a Modal
+*/
+
 /// __Select Image Modal__
 /// The modal that allows the user to select an image from their device
 /// and send it to the selected picture frame.
@@ -31,55 +38,42 @@ part '_send_image_button.dart';
 /// - [_ImagePicker]
 /// - [_SendImageButton]
 class SelectImageModal extends StatelessWidget {
-  const SelectImageModal({super.key});
+  const SelectImageModal({super.key, required this.frameId});
 
   static const String pageName = "select_image";
-  // static const String route = "/select_frame/$pageName";
   static const String route = "${SelectFramePage.route}/$pageName";
+
+  final String frameId;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<SelectImageCubit, SelectImageState>(
       listener: (context, state) {
-        if (state is SelectImageAuthFailure) {
-          context.go(SignInPage.route);
+        if (state is SelectImageFailure) {
+          context
+              .read<InAppNotificationCubit>()
+              .sendFailureNotification(state.failure);
         }
       },
-      child: const _TempScaffold(
-        // const IOSModal(
+      child: IOSModal(
+        topBar: IOSModalTopBar(
+          leadingTextButton: IOSSmallTextButton(
+            text: AppLocalizations.of(context)!.cancel,
+            onPressed: () => context.pop(),
+          ),
+          title: AppLocalizations.of(context)!.imageSelection,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // -- Image Picker --
-            Expanded(child: Center(child: _ImagePicker())),
-            XMediumGap(),
+            const Expanded(child: _ImagePicker()),
+            const XMediumGap(),
 
             // -- Send Image Button --
-            _SendImageButton(),
+            _SendImageButton(frameId: frameId),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _TempScaffold extends StatelessWidget {
-  const _TempScaffold({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(
-            left: IOSTheme.of(context).spacing.xMedium,
-            right: IOSTheme.of(context).spacing.xMedium,
-            bottom: IOSTheme.of(context).spacing.xLarge,
-          ),
-          child: child,
         ),
       ),
     );

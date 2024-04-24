@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:einblicke_shared/einblicke_shared.dart';
+
 abstract class SelectImageState {
   const SelectImageState();
 }
 
-class SelectImageStateWithFile extends SelectImageState {
+abstract class SelectImageStateWithFile extends SelectImageState {
   const SelectImageStateWithFile({required this.image});
   final File image;
 }
@@ -26,9 +28,7 @@ class SelectImageSuccess extends SelectImageStateWithFile {
 }
 
 class SelectImageFailure extends SelectImageState {
-  const SelectImageFailure();
-}
+  const SelectImageFailure({required this.failure});
 
-class SelectImageAuthFailure extends SelectImageFailure {
-  const SelectImageAuthFailure();
+  final Failure failure;
 }

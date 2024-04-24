@@ -64,7 +64,7 @@ void main() {
       // assert
       verify(
         () => mockServerRemoteHandler.multipartPost(
-          path: "/curator/upload_image",
+          path: "/upload_image",
           formData: any(named: "formData", that: isA<FormData>()),
           accessToken: tAccessTokenString,
         ),
