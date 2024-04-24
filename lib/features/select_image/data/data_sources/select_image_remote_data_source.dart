@@ -60,6 +60,7 @@ class SelectImageRemoteDataSourceImpl extends SelectImageRemoteDataSource {
 
     final MultipartFile image = MultipartFile.fromBytes(
       imageBytes,
+      filename: imagePath.split("/").last,
       contentType: MediaType("image", "jpg"),
     );
 
@@ -68,9 +69,8 @@ class SelectImageRemoteDataSourceImpl extends SelectImageRemoteDataSource {
       "frame_id": frameId,
     });
 
-    // create new method file upload in serverRemoteHandler
     await serverRemoteHandler.multipartPost(
-      path: "/curator/upload_image",
+      path: "/upload_image",
       formData: formData,
       accessToken: accessToken.token,
     );
