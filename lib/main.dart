@@ -23,6 +23,9 @@ import 'package:go_router/go_router.dart';
 /*
   To-Do:
   - [ ] Find a better solution for enabling blur for the edges of modals
+
+  General To-Dos:
+  - [ ] Standardize animation durations
 */
 
 void main() {
