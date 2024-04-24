@@ -21,12 +21,12 @@ class _SignInButton extends StatelessWidget {
     return BlocBuilder<SignInCubit, SignInState>(
       builder: (context, state) {
         if (state is SignInLoading) {
-          return const IOSButton(
+          return const CustomCupertinoButton(
             child: CupertinoActivityIndicator(),
           );
         }
 
-        return IOSTextButton(
+        return CustomCupertinoTextButton(
           text: AppLocalizations.of(context)!.continueLabel,
           onPressed: () => onLoginPressed(context),
         );

@@ -9,7 +9,7 @@ class _Title extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.left,
       text: TextSpan(
-        style: IOSTheme.of(context).text.largeTitle,
+        style: CustomCupertinoTheme.of(context).text.largeTitle,
         children: [
           TextSpan(text: AppLocalizations.of(context)!.login),
         ],

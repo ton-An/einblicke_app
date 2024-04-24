@@ -6,7 +6,7 @@ class _UsernameTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IOSTextField(
+    return CustomCupertinoTextField(
       hint: AppLocalizations.of(context)!.username,
       // hint: "Email or Phone Number",
       onChanged: (String username) =>

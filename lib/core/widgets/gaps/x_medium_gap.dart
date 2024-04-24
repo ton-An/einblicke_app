@@ -1,4 +1,4 @@
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
@@ -8,7 +8,7 @@ class XMediumGap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Gap(
-      IOSTheme.of(context).spacing.xMedium,
+      CustomCupertinoTheme.of(context).spacing.xMedium,
     );
   }
 }

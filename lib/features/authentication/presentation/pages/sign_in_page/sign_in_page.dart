@@ -1,13 +1,13 @@
 library sign_in_page;
 
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_button.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_text_field.dart';
 import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
-import 'package:einblicke_app/core/widgets/ios_button.dart';
-import 'package:einblicke_app/core/widgets/ios_text_button.dart';
-import 'package:einblicke_app/core/widgets/ios_text_field.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_states.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
@@ -73,9 +73,9 @@ class _SignInPageState extends State<SignInPage> {
           top: false,
           child: Container(
             padding: EdgeInsets.only(
-              left: IOSTheme.of(context).spacing.xMedium,
-              right: IOSTheme.of(context).spacing.xMedium,
-              bottom: IOSTheme.of(context).spacing.xLarge,
+              left: CustomCupertinoTheme.of(context).spacing.xMedium,
+              right: CustomCupertinoTheme.of(context).spacing.xMedium,
+              bottom: CustomCupertinoTheme.of(context).spacing.xLarge,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -84,7 +84,9 @@ class _SignInPageState extends State<SignInPage> {
                   child: ListView(
                     children: [
                       SizedBox(
-                        height: IOSTheme.of(context).spacing.xLarge + 30,
+                        height:
+                            CustomCupertinoTheme.of(context).spacing.xLarge +
+                                30,
                       ),
 
                       // -- Cover Artwork --

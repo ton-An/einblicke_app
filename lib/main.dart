@@ -1,7 +1,7 @@
 import 'package:einblicke_app/core/dependency_injector.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
-import 'package:einblicke_app/core/widgets/ios_modal/ios_modal_page.dart';
-import 'package:einblicke_app/core/widgets/ios_modal/ios_page.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal_page.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_page.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
@@ -62,7 +62,7 @@ class EinblickeApp extends StatelessWidget {
           Locale("en"),
         ],
         theme: const CupertinoThemeData(
-          scaffoldBackgroundColor: IOSColors.white,
+          scaffoldBackgroundColor: CustomCupertinoColors.white,
         ),
         routerConfig: _router,
       ),
@@ -93,7 +93,7 @@ class EinblickeApp extends StatelessWidget {
               ),
               GoRoute(
                 path: SelectFramePage.pageName,
-                pageBuilder: (context, state) => IOSPage(
+                pageBuilder: (context, state) => CustomCupertinoPage(
                   child: BlocProvider(
                     create: (context) => getIt<SelectFrameCubit>(),
                     child: const SelectFramePage(),
@@ -103,7 +103,7 @@ class EinblickeApp extends StatelessWidget {
                   GoRoute(
                     path: SelectImageModal.pageName,
                     name: SelectImageModal.pageName,
-                    pageBuilder: (context, state) => IOSModalPage(
+                    pageBuilder: (context, state) => CustomCupertinoModalPage(
                       child: BlocProvider(
                         create: (context) => getIt<SelectImageCubit>(),
                         child: SelectImageModal(
@@ -116,7 +116,7 @@ class EinblickeApp extends StatelessWidget {
               ),
               GoRoute(
                 path: SignInPage.pageName,
-                pageBuilder: (context, state) => IOSPage(
+                pageBuilder: (context, state) => CustomCupertinoPage(
                   child: BlocProvider(
                     create: (context) => getIt<SignInCubit>(),
                     child: const SignInPage(),
@@ -126,7 +126,8 @@ class EinblickeApp extends StatelessWidget {
                   GoRoute(
                     path: WelcomeModal.pageName,
                     name: WelcomeModal.pageName,
-                    pageBuilder: (context, state) => const IOSModalPage(
+                    pageBuilder: (context, state) =>
+                        const CustomCupertinoModalPage(
                       child: WelcomeModal(),
                     ),
                   ),

@@ -1,10 +1,10 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
-/// __IOS Text Theme Data__
+/// __Custom Cupertino Text Theme Data__
 ///
-/// A collection of iOS text styles for the [IOSTheme].
-class IOSTextThemeData {
-  const IOSTextThemeData({
+/// A collection of Cupertino text styles for the [CustomCupertinoTheme].
+class CustomCupertinoTextThemeData {
+  const CustomCupertinoTextThemeData({
     TextStyle? buttonLabel,
     TextStyle? title,
     TextStyle? smallLabel,
@@ -14,8 +14,8 @@ class IOSTextThemeData {
     TextStyle? textField,
   }) : this._raw(
           const _TextThemeDefaultsBuilder(
-            IOSColors.black,
-            IOSColors.description,
+            CustomCupertinoColors.black,
+            CustomCupertinoColors.description,
           ),
           buttonLabel,
           smallLabel,
@@ -25,7 +25,7 @@ class IOSTextThemeData {
           textField,
         );
 
-  const IOSTextThemeData._raw(
+  const CustomCupertinoTextThemeData._raw(
     this._defaults,
     this._buttonLabel,
     this._smallLabel,
@@ -55,10 +55,10 @@ class IOSTextThemeData {
 
   TextStyle get textField => _textField ?? _defaults.textField;
 
-  /// Returns a copy of the current [IOSTextThemeData] with all the colors
+  /// Returns a copy of the current [CustomCupertinoTextThemeData] with all the colors
   /// resolved against the given [BuildContext].
-  IOSTextThemeData resolveFrom(BuildContext context) {
-    return IOSTextThemeData._raw(
+  CustomCupertinoTextThemeData resolveFrom(BuildContext context) {
+    return CustomCupertinoTextThemeData._raw(
       _defaults.resolveFrom(context),
       _resolveTextStyle(_buttonLabel, context),
       _resolveTextStyle(_smallLabel, context),
@@ -71,7 +71,7 @@ class IOSTextThemeData {
 
   TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
     return style?.copyWith(
-      color: style.color ?? IOSTheme.of(context).colors.text,
+      color: style.color ?? CustomCupertinoTheme.of(context).colors.text,
     );
   }
 }

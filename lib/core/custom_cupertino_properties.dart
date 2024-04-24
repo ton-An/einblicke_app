@@ -1,10 +1,10 @@
 /*
  To-Dos:
-  - [ ] Remove this file and move the remaning properties to the [IOSTheme]
+  - [ ] Remove this file and move the remaning properties to the [CustomCupertinoTheme]
 */
 
-class IOSProperties {
-  const IOSProperties();
+class CustomCupertinoProperties {
+  const CustomCupertinoProperties();
 
   static const double buttonBorderRadius = 14;
   static const double smallBorderRadius = 8;

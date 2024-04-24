@@ -1,4 +1,4 @@
-part of 'ios_theme.dart';
+part of custom_cupertino_theme;
 
 /*
 To-Dos:
@@ -7,7 +7,7 @@ To-Dos:
 
 /// __Default Spacing__
 ///
-/// The default spacing values for the [IOSTheme].
+/// The default spacing values for the [CustomCupertinoTheme].
 class _DefaultSpacing {
   static const double tiny = 1;
   static const double xTiny = 2;

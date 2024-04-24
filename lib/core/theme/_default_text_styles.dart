@@ -1,8 +1,8 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
 /// __Default Text Syles__
 ///
-/// The default text styles for the [IOSTheme].
+/// The default text styles for the [CustomCupertinoTheme].
 class _DefaultTextSyles {
   static const TextStyle buttonLabel = TextStyle(
     inherit: false,

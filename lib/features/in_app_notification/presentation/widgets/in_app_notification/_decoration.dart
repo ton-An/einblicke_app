@@ -13,8 +13,10 @@ class _Decroation extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color:
-                IOSTheme.of(context).colors.backgroundContrast.withOpacity(.11),
+            color: CustomCupertinoTheme.of(context)
+                .colors
+                .backgroundContrast
+                .withOpacity(.11),
             blurRadius: 20,
             spreadRadius: 9,
           )
@@ -22,7 +24,7 @@ class _Decroation extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(
-          IOSProperties.borderRadius,
+          CustomCupertinoProperties.borderRadius,
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(
@@ -31,11 +33,18 @@ class _Decroation extends StatelessWidget {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: IOSTheme.of(context).colors.background.withOpacity(.7),
-              borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
+              color: CustomCupertinoTheme.of(context)
+                  .colors
+                  .background
+                  .withOpacity(.7),
+              borderRadius:
+                  BorderRadius.circular(CustomCupertinoProperties.borderRadius),
               border: Border.all(
                 width: .3,
-                color: IOSTheme.of(context).colors.border.withOpacity(.3),
+                color: CustomCupertinoTheme.of(context)
+                    .colors
+                    .border
+                    .withOpacity(.3),
               ),
             ),
             child: child,

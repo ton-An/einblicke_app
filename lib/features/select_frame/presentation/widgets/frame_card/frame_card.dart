@@ -2,8 +2,8 @@ library frame_card;
 
 import 'dart:ui';
 
-import 'package:einblicke_app/core/ios_properties.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/custom_cupertino_properties.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_states.dart';
 import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';

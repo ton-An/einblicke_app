@@ -2,8 +2,8 @@ library in_app_notification;
 
 import 'dart:ui';
 
-import 'package:einblicke_app/core/ios_properties.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/custom_cupertino_properties.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/small_gap.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
@@ -50,14 +50,15 @@ class InAppNotification extends StatelessWidget {
               bottom: false,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: IOSTheme.of(context).spacing.medium,
-                  vertical: IOSTheme.of(context).spacing.small,
+                  horizontal: CustomCupertinoTheme.of(context).spacing.medium,
+                  vertical: CustomCupertinoTheme.of(context).spacing.small,
                 ),
                 child: _Decroation(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: IOSTheme.of(context).spacing.xMedium,
-                      vertical: IOSTheme.of(context).spacing.medium,
+                      horizontal:
+                          CustomCupertinoTheme.of(context).spacing.xMedium,
+                      vertical: CustomCupertinoTheme.of(context).spacing.medium,
                     ),
                     child: _Content(
                       failure: failure,

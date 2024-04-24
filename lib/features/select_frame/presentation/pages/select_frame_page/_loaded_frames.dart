@@ -12,7 +12,7 @@ class _LoadedFrames extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: IOSTheme.of(context).spacing.medium,
+        top: CustomCupertinoTheme.of(context).spacing.medium,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,11 +20,11 @@ class _LoadedFrames extends StatelessWidget {
           // -- Title --
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: IOSTheme.of(context).spacing.xMedium,
+              horizontal: CustomCupertinoTheme.of(context).spacing.xMedium,
             ),
             child: Text(
               AppLocalizations.of(context)!.yourFrames,
-              style: IOSTheme.of(context).text.largeTitle,
+              style: CustomCupertinoTheme.of(context).text.largeTitle,
             ),
           ),
           const XMediumGap(),

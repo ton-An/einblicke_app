@@ -9,7 +9,7 @@ class _Description extends StatelessWidget {
     return Text(
       AppLocalizations.of(context)!.welcomeDescription,
       textAlign: TextAlign.center,
-      style: IOSTheme.of(context).text.body,
+      style: CustomCupertinoTheme.of(context).text.body,
     );
   }
 }

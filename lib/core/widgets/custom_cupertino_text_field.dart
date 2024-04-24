@@ -1,5 +1,5 @@
-import 'package:einblicke_app/core/ios_properties.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/custom_cupertino_properties.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 /*
@@ -7,11 +7,11 @@ import 'package:flutter/cupertino.dart';
   - [ ] Check spacing and border radius
 */
 
-/// __IOS Text Field__
+/// __Custom Cupertino Text Field__
 ///
-/// A text field that is styled like an iOS text field.
-class IOSTextField extends StatelessWidget {
-  const IOSTextField({
+/// A text field that is styled like a Cupertino text field.
+class CustomCupertinoTextField extends StatelessWidget {
+  const CustomCupertinoTextField({
     required this.hint,
     required this.onChanged,
     this.obscureText = false,
@@ -37,16 +37,18 @@ class IOSTextField extends StatelessWidget {
                 fontWeight: FontWeight.w900,
                 letterSpacing: -1.1,
                 color: CupertinoColors.label)
-            : IOSTheme.of(context).text.textField,
-        placeholderStyle: IOSTheme.of(context).text.textField.copyWith(
-              color: IOSTheme.of(context).colors.hint,
-            ),
+            : CustomCupertinoTheme.of(context).text.textField,
+        placeholderStyle:
+            CustomCupertinoTheme.of(context).text.textField.copyWith(
+                  color: CustomCupertinoTheme.of(context).colors.hint,
+                ),
         cursorHeight: 20,
         padding: EdgeInsets.symmetric(
-            horizontal: IOSTheme.of(context).spacing.medium + 2),
+            horizontal: CustomCupertinoTheme.of(context).spacing.medium + 2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(IOSProperties.fieldBorderRadius),
-          color: IOSTheme.of(context).colors.fieldColor,
+          borderRadius: BorderRadius.circular(
+              CustomCupertinoProperties.fieldBorderRadius),
+          color: CustomCupertinoTheme.of(context).colors.fieldColor,
         ),
         onChanged: onChanged,
       ),

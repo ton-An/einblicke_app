@@ -1,14 +1,14 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
 /*
   To-Dos:
   - [ ] Organize colors
 */
 
-/// __IOS Colors__
+/// __Custom Cupertino Colors__
 ///
-/// A collection of iOS colors
-class IOSColors {
+/// A collection of Cupertino colors
+class CustomCupertinoColors {
   static const Color primary = Color(0xFF007AFF);
   static const Color translucentBackground = Color(0x73000000);
   static const Color cameraViewBackground = Color(0xFF000000);

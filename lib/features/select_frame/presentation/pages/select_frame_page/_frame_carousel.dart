@@ -38,12 +38,12 @@ class _FrameCarouselState extends State<_FrameCarousel> {
           height: double.infinity,
           viewportFraction: 1,
           padEnds: true,
-          indicatorMargin: IOSTheme.of(context).spacing.xMedium,
+          indicatorMargin: CustomCupertinoTheme.of(context).spacing.xMedium,
           slideIndicator: CircularSlideIndicator(
             currentIndicatorColor:
-                IOSTheme.of(context).colors.backgroundContrast,
+                CustomCupertinoTheme.of(context).colors.backgroundContrast,
             indicatorBackgroundColor:
-                IOSTheme.of(context).colors.disabledButton,
+                CustomCupertinoTheme.of(context).colors.disabledButton,
           ),
           floatingIndicator: false,
         ),
@@ -79,7 +79,7 @@ class _FrameCarouselState extends State<_FrameCarousel> {
         create: (context) => singleImageLoaderCubit,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: IOSTheme.of(context).spacing.xMedium,
+            horizontal: CustomCupertinoTheme.of(context).spacing.xMedium,
           ),
           child: FrameCard(
             frameInfo: frame,

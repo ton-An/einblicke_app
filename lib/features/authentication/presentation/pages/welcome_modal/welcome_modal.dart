@@ -1,12 +1,12 @@
 library welcome_modal;
 
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/xx_medium_gap.dart';
-import 'package:einblicke_app/core/widgets/ios_modal/ios_modal.dart';
-import 'package:einblicke_app/core/widgets/ios_text_button.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -40,7 +40,7 @@ class WelcomeModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IOSModal(
+    return CustomCupertinoModal(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -52,7 +52,8 @@ class WelcomeModal extends StatelessWidget {
 
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: IOSTheme.of(context).spacing.xMedium,
+                    horizontal:
+                        CustomCupertinoTheme.of(context).spacing.xMedium,
                   ),
                   child: const Column(
                     children: [

@@ -12,8 +12,8 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: IOSTheme.of(context).text.xLargeTitle.copyWith(
-            color: IOSTheme.of(context).colors.background,
+      style: CustomCupertinoTheme.of(context).text.xLargeTitle.copyWith(
+            color: CustomCupertinoTheme.of(context).colors.background,
           ),
     );
   }

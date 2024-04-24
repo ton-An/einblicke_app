@@ -22,18 +22,19 @@ class _SendImageButton extends StatelessWidget {
     return BlocBuilder<SelectImageCubit, SelectImageState>(
       builder: (context, state) {
         if (state is SelectImageInitial) {
-          return IOSTextButton(
+          return CustomCupertinoTextButton(
             text: AppLocalizations.of(context)!.sendImage,
           );
         }
 
         if (state is SelectImageLoading) {
-          return const IOSButton(child: CupertinoActivityIndicator());
+          return const CustomCupertinoButton(
+              child: CupertinoActivityIndicator());
         }
 
         if (state is SelectImageSuccess) {
-          return IOSButton(
-            disabledColor: IOSTheme.of(context).colors.success,
+          return CustomCupertinoButton(
+            disabledColor: CustomCupertinoTheme.of(context).colors.success,
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 0),
               child: Icon(
@@ -45,13 +46,13 @@ class _SendImageButton extends StatelessWidget {
         }
 
         if (state is SelectImageFailure) {
-          return IOSButton(
-            disabledColor: IOSTheme.of(context).colors.error,
+          return CustomCupertinoButton(
+            disabledColor: CustomCupertinoTheme.of(context).colors.error,
             child: const Icon(CupertinoIcons.xmark_circle_fill),
           );
         }
 
-        return IOSTextButton(
+        return CustomCupertinoTextButton(
           text: AppLocalizations.of(context)!.sendImage,
           onPressed: () => onSendImagePressed(context),
         );

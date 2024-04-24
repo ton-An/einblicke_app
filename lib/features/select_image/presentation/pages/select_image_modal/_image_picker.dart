@@ -37,7 +37,8 @@ class _ImagePickerState extends State<_ImagePicker>
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
+      borderRadius:
+          BorderRadius.circular(CustomCupertinoProperties.borderRadius),
       child: SizedBox(
         width: double.infinity,
         child: BlocBuilder<SelectImageCubit, SelectImageState>(
@@ -54,7 +55,7 @@ class _ImagePickerState extends State<_ImagePicker>
               child: Opacity(
                 opacity: _animation.value,
                 child: ColoredBox(
-                  color: IOSTheme.of(context).colors.fieldColor,
+                  color: CustomCupertinoTheme.of(context).colors.fieldColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -64,9 +65,12 @@ class _ImagePickerState extends State<_ImagePicker>
                       const SmallGap(),
                       Text(
                         AppLocalizations.of(context)!.selectImage,
-                        style: IOSTheme.of(context).text.body.copyWith(
-                              color: IOSTheme.of(context).colors.primary,
-                            ),
+                        style:
+                            CustomCupertinoTheme.of(context).text.body.copyWith(
+                                  color: CustomCupertinoTheme.of(context)
+                                      .colors
+                                      .primary,
+                                ),
                       ),
                     ],
                   ),

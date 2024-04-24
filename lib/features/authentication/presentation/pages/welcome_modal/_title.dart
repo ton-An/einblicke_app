@@ -9,7 +9,7 @@ class _Title extends StatelessWidget {
     return Text(
       "${AppLocalizations.of(context)!.welcomeTo} ${AppLocalizations.of(context)!.appName}",
       textAlign: TextAlign.center,
-      style: IOSTheme.of(context).text.largeTitle,
+      style: CustomCupertinoTheme.of(context).text.largeTitle,
     );
   }
 }

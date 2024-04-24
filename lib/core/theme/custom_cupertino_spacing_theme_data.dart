@@ -1,10 +1,10 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
-/// __IOS Spacing Theme Data__
+/// __Custom Cupertino Spacing Theme Data__
 ///
-/// A collection of iOS spacing values for the [IOSTheme].
-class IOSSpacingThemeData {
-  const IOSSpacingThemeData({
+/// A collection of Cupertino spacing values for the [CustomCupertinoTheme].
+class CustomCupertinoSpacingThemeData {
+  const CustomCupertinoSpacingThemeData({
     double? tiny,
     double? xTiny,
     double? small,
@@ -30,7 +30,7 @@ class IOSSpacingThemeData {
           xxLarge,
         );
 
-  const IOSSpacingThemeData._(
+  const CustomCupertinoSpacingThemeData._(
     this._tiny,
     this._xTiny,
     this._small,

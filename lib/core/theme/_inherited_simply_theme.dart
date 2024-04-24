@@ -1,18 +1,18 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
-/// __IOS Theme__
+/// __Custom Cupertino Theme__
 ///
-/// A wrapper for the [Theme] widget that provides an [IOSThemeData] to its
+/// A wrapper for the [Theme] widget that provides an [CustomCupertinoThemeData] to its
 /// children via [InheritedWidget].
-class _InheritedIOSTheme extends InheritedWidget {
-  const _InheritedIOSTheme({
+class _InheritedCustomCupertinoTheme extends InheritedWidget {
+  const _InheritedCustomCupertinoTheme({
     required this.theme,
     required super.child,
   });
 
-  final IOSTheme theme;
+  final CustomCupertinoTheme theme;
 
   @override
-  bool updateShouldNotify(_InheritedIOSTheme old) =>
+  bool updateShouldNotify(_InheritedCustomCupertinoTheme old) =>
       theme.data != old.theme.data;
 }

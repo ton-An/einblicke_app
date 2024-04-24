@@ -18,7 +18,7 @@ class _ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IOSTextButton(
+    return CustomCupertinoTextButton(
       text: AppLocalizations.of(context)!.continueLabel,
       onPressed: () => onContinuePressed(context),
     );

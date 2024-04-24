@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:einblicke_app/core/dependency_injector.dart';
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/core/widgets/loader.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';

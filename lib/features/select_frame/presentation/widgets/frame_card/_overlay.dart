@@ -13,8 +13,11 @@ class _Overlay extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            IOSTheme.of(context).colors.transparent,
-            IOSTheme.of(context).colors.backgroundContrast.withOpacity(.2),
+            CustomCupertinoTheme.of(context).colors.transparent,
+            CustomCupertinoTheme.of(context)
+                .colors
+                .backgroundContrast
+                .withOpacity(.2),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -23,7 +26,8 @@ class _Overlay extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Padding(
-          padding: EdgeInsets.all(IOSTheme.of(context).spacing.xxSmall),
+          padding:
+              EdgeInsets.all(CustomCupertinoTheme.of(context).spacing.xxSmall),
           child: Stack(
             clipBehavior: Clip.none,
             children: [

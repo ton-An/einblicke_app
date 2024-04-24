@@ -9,7 +9,7 @@ class _BackgroundImage extends StatelessWidget {
     return BlocBuilder<SingleImageLoaderCubit, FrameImageLoaderState>(
       builder: (context, state) {
         return Container(
-          color: IOSTheme.of(context).colors.background,
+          color: CustomCupertinoTheme.of(context).colors.background,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 550),
             switchInCurve: Curves.easeIn,

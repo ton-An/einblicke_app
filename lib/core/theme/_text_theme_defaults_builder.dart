@@ -1,4 +1,4 @@
-part of ios_theme;
+part of custom_cupertino_theme;
 
 @immutable
 class _TextThemeDefaultsBuilder {
@@ -14,8 +14,8 @@ class _TextThemeDefaultsBuilder {
     return original.color == color ? original : original.copyWith(color: color);
   }
 
-  TextStyle get buttonLabel =>
-      _applyLabelColor(_DefaultTextSyles.buttonLabel, IOSColors.primary);
+  TextStyle get buttonLabel => _applyLabelColor(
+      _DefaultTextSyles.buttonLabel, CustomCupertinoColors.primary);
 
   TextStyle get smallLabel =>
       _applyLabelColor(_DefaultTextSyles.smallLabel, color);
@@ -23,8 +23,8 @@ class _TextThemeDefaultsBuilder {
   TextStyle get largeTitle =>
       _applyLabelColor(_DefaultTextSyles.largeTitle, color);
 
-  TextStyle get xLargeTitle =>
-      _applyLabelColor(_DefaultTextSyles.xLargeTitle, IOSColors.white);
+  TextStyle get xLargeTitle => _applyLabelColor(
+      _DefaultTextSyles.xLargeTitle, CustomCupertinoColors.white);
 
   TextStyle get body => _applyLabelColor(_DefaultTextSyles.body, color);
 
@@ -32,9 +32,9 @@ class _TextThemeDefaultsBuilder {
       _applyLabelColor(_DefaultTextSyles.textField, color);
 
   _TextThemeDefaultsBuilder resolveFrom(BuildContext context) {
-    final Color resolvedColor = IOSTheme.of(context).colors.text;
+    final Color resolvedColor = CustomCupertinoTheme.of(context).colors.text;
     final Color resolvedDescriptionColor =
-        IOSTheme.of(context).colors.description;
+        CustomCupertinoTheme.of(context).colors.description;
 
     return resolvedColor == color &&
             resolvedDescriptionColor == descriptionColor

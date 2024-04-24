@@ -1,24 +1,24 @@
-import 'package:einblicke_app/core/widgets/ios_modal/ios_modal_route.dart';
-import 'package:einblicke_app/core/widgets/ios_modal/ios_page.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal_route.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_page.dart';
 import 'package:flutter/material.dart';
 
 /*
   To-Do:
     - [ ] Add documentation
     - [ ] Calculate the border radius (at 0.0 for the secondary animation) based on the phone model
-    - [ ] Prevent weird behaviour if the nextRoute is not an IOSModalRoute
+    - [ ] Prevent weird behaviour if the nextRoute is not an [CustomCupertinoModalRoute]
 */
 
-/// __IOS Route__
+/// __Custom Cupertino Route__
 ///
-/// {@template ios_route}
+/// {@template custom_cupertino_route}
 /// A route with no special functions, except for when it is the previous route of a modal.
 /// In that case it will scale down, move down on the y-axis and have a border radius applied.
 /// {@endtemplate}
-class IOSRoute<T> extends PageRouteBuilder<T> {
-  IOSRoute({
+class CustomCupertinoRoute<T> extends PageRouteBuilder<T> {
+  CustomCupertinoRoute({
     required this.child,
-    required IOSPage<T> page,
+    required CustomCupertinoPage<T> page,
   }) : super(
           pageBuilder: (context, animation, secondaryAnimation) => child,
           settings: page,
@@ -27,11 +27,11 @@ class IOSRoute<T> extends PageRouteBuilder<T> {
 
   final Widget child;
 
-  IOSModalRoute? nextModalRoute;
+  CustomCupertinoModalRoute? nextModalRoute;
 
   @override
   void didChangeNext(Route? nextRoute) {
-    if (nextRoute is IOSModalRoute) {
+    if (nextRoute is CustomCupertinoModalRoute) {
       nextModalRoute = nextRoute;
     } else {
       nextModalRoute = null;

@@ -1,5 +1,5 @@
-import 'package:einblicke_app/core/widgets/ios_modal/ios_modal_page.dart';
-import 'package:einblicke_app/core/widgets/ios_modal/split_curve.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal_page.dart';
+import 'package:einblicke_app/core/widgets/custom_cupertino_modal/split_curve.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sprung/sprung.dart';
@@ -11,17 +11,17 @@ import 'package:sprung/sprung.dart';
     - [ ] _arePopConditionsMet should use the page size and not the screen size
 */
 
-/// __IOS Modal Route__
+/// __Custom Cupertino Modal Route__
 ///
-/// {@template ios_modal_route}
-/// A Route that has the properties of a modal on IOS.
+/// {@template custom_cupertino_modal_route}
+/// A Route that has the properties of a Cupertino modal.
 ///
 /// It uses physics-based animations, a shadow and the ability to drag the modal to dismiss it.
 /// {@endtemplate}
-class IOSModalRoute<T> extends PageRouteBuilder<T> {
-  IOSModalRoute({
+class CustomCupertinoModalRoute<T> extends PageRouteBuilder<T> {
+  CustomCupertinoModalRoute({
     required this.child,
-    required IOSModalPage page,
+    required CustomCupertinoModalPage page,
   }) : super(
           pageBuilder: (context, animation, secondaryAnimation) => child,
           settings: page,

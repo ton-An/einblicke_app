@@ -1,8 +1,8 @@
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:flutter/material.dart';
 
-class IOSSmallTextButton extends StatelessWidget {
-  const IOSSmallTextButton({
+class CustomCupertinoSmallTextButton extends StatelessWidget {
+  const CustomCupertinoSmallTextButton({
     super.key,
     required this.text,
     required this.onPressed,
@@ -17,13 +17,14 @@ class IOSSmallTextButton extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.all(IOSTheme.of(context).spacing.xSmall),
+        padding:
+            EdgeInsets.all(CustomCupertinoTheme.of(context).spacing.xSmall),
         child: Text(
           text,
-          style: IOSTheme.of(context)
+          style: CustomCupertinoTheme.of(context)
               .text
               .body
-              .copyWith(color: IOSTheme.of(context).colors.primary),
+              .copyWith(color: CustomCupertinoTheme.of(context).colors.primary),
         ),
       ),
     );

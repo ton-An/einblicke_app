@@ -13,7 +13,7 @@ class _Content extends StatelessWidget {
       children: [
         Icon(
           CupertinoIcons.exclamationmark_triangle,
-          color: IOSTheme.of(context).colors.error,
+          color: CustomCupertinoTheme.of(context).colors.error,
           size: 24,
         ),
         const MediumGap(),
@@ -24,15 +24,16 @@ class _Content extends StatelessWidget {
             children: [
               Text(
                 failure.name,
-                style: IOSTheme.of(context).text.buttonLabel.copyWith(
-                      color: IOSTheme.of(context).colors.error,
-                    ),
+                style:
+                    CustomCupertinoTheme.of(context).text.buttonLabel.copyWith(
+                          color: CustomCupertinoTheme.of(context).colors.error,
+                        ),
                 overflow: TextOverflow.ellipsis,
               ),
               const SmallGap(),
               Text(
                 failure.message,
-                style: IOSTheme.of(context).text.body,
+                style: CustomCupertinoTheme.of(context).text.body,
                 overflow: TextOverflow.ellipsis,
               ),
             ],

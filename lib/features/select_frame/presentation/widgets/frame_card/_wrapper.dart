@@ -50,7 +50,8 @@ class _WrapperState extends State<_Wrapper>
     return Opacity(
       opacity: _animation.value,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(IOSProperties.borderRadius * 2),
+        borderRadius:
+            BorderRadius.circular(CustomCupertinoProperties.borderRadius * 2),
         child: GestureDetector(
           onTap: () {
             _controller.forward().then((_) => _controller.reverse());

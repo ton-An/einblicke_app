@@ -1,4 +1,4 @@
-import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
@@ -7,6 +7,6 @@ class XXLargeGap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Gap(IOSTheme.of(context).spacing.xxLarge);
+    return Gap(CustomCupertinoTheme.of(context).spacing.xxLarge);
   }
 }
