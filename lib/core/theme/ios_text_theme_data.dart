@@ -9,6 +9,7 @@ class IOSTextThemeData {
     TextStyle? title,
     TextStyle? smallLabel,
     TextStyle? largeTitle,
+    TextStyle? xLargeTitle,
     TextStyle? body,
     TextStyle? textField,
   }) : this._raw(
@@ -19,6 +20,7 @@ class IOSTextThemeData {
           buttonLabel,
           smallLabel,
           largeTitle,
+          xLargeTitle,
           body,
           textField,
         );
@@ -28,6 +30,7 @@ class IOSTextThemeData {
     this._buttonLabel,
     this._smallLabel,
     this._largeTitle,
+    this._xLargeTitle,
     this._body,
     this._textField,
   );
@@ -36,6 +39,7 @@ class IOSTextThemeData {
   final TextStyle? _buttonLabel;
   final TextStyle? _smallLabel;
   final TextStyle? _largeTitle;
+  final TextStyle? _xLargeTitle;
   final TextStyle? _body;
   final TextStyle? _textField;
 
@@ -44,6 +48,8 @@ class IOSTextThemeData {
   TextStyle get smallLabel => _smallLabel ?? _defaults.smallLabel;
 
   TextStyle get largeTitle => _largeTitle ?? _defaults.largeTitle;
+
+  TextStyle get xLargeTitle => _xLargeTitle ?? _defaults.xLargeTitle;
 
   TextStyle get body => _body ?? _defaults.body;
 
@@ -57,6 +63,7 @@ class IOSTextThemeData {
       _resolveTextStyle(_buttonLabel, context),
       _resolveTextStyle(_smallLabel, context),
       _resolveTextStyle(_largeTitle, context),
+      _resolveTextStyle(_xLargeTitle, context),
       _resolveTextStyle(_body, context),
       _resolveTextStyle(_textField, context),
     );

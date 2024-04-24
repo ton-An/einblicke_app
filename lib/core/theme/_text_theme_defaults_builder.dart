@@ -23,6 +23,9 @@ class _TextThemeDefaultsBuilder {
   TextStyle get largeTitle =>
       _applyLabelColor(_DefaultTextSyles.largeTitle, color);
 
+  TextStyle get xLargeTitle =>
+      _applyLabelColor(_DefaultTextSyles.xLargeTitle, IOSColors.white);
+
   TextStyle get body => _applyLabelColor(_DefaultTextSyles.body, color);
 
   TextStyle get textField =>

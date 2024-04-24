@@ -41,6 +41,17 @@ class _DefaultTextSyles {
     color: CupertinoColors.label,
   );
 
+  static const TextStyle xLargeTitle = TextStyle(
+    inherit: false,
+    fontFamily: '.SF Pro Display',
+    fontSize: 56.0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -1.25,
+    wordSpacing: -1.1,
+    height: 1.2,
+    color: CupertinoColors.white,
+  );
+
   static const TextStyle body = TextStyle(
     inherit: false,
     fontFamily: '.SF Pro Text',
