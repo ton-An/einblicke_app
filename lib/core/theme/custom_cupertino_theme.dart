@@ -13,6 +13,9 @@ part 'custom_cupertino_spacing_theme_data.dart';
 part 'custom_cupertino_text_theme_data.dart';
 part 'custom_cupertino_theme_data.dart';
 
+/// __Custom Cupertino Theme__
+///
+/// A theme that configures the color, spacing, and text styles of a Cupertino app.
 class CustomCupertinoTheme extends StatelessWidget {
   const CustomCupertinoTheme({
     super.key,
