@@ -16,5 +16,6 @@
     "welcomeDescription": "This app lets you send your favourite moments right to your loved ones picture frames.\n\nYou can send photos along with personal messages to your friends and family. The only thing they need is a disptach frame.",
     "selectImage": "Select Image",
     "imageSelection": "Image Selection",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "yourFrames": "Your Frames"
 }

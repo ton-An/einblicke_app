@@ -2,12 +2,12 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:einblicke_app/features/select_frame/domain/usecases/get_most_recent_image_of_frame.dart';
-import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_states.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_states.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FrameImageLoaderCubit extends Cubit<FrameImageLoaderState> {
-  FrameImageLoaderCubit({
+class SingleImageLoaderCubit extends Cubit<FrameImageLoaderState> {
+  SingleImageLoaderCubit({
     required this.getMostRecentImageOfFrame,
   }) : super(const FrameImageLoaderInitial());
 

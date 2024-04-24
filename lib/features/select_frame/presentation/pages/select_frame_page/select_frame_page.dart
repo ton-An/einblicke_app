@@ -1,24 +1,31 @@
 library select_frame_page;
 
+import 'dart:async';
+
 import 'package:einblicke_app/core/dependency_injector.dart';
+import 'package:einblicke_app/core/l10n/app_localizations.dart';
+import 'package:einblicke_app/core/theme/ios_theme.dart';
+import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
+import 'package:einblicke_app/core/widgets/loader.dart';
 import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
-import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_states.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_states.dart';
 import 'package:einblicke_app/features/select_frame/presentation/widgets/frame_card/frame_card.dart';
-import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:go_router/go_router.dart';
 
-part '_carousel.dart';
+part '_fade_switcher.dart';
+part '_frame_carousel.dart';
+part '_loaded_frames.dart';
 
 /* 
   To-Dos:
   - [ ] Maybe make the carousel scrollable via touchpad
+  - [ ] Atm it can happen that only a Container is shown (e.g. on error), maybe show a message or something similar
 */
 
 /// __Select Frame Page__
@@ -42,6 +49,9 @@ class _SelectFramePageState extends State<SelectFramePage> {
   @override
   void initState() {
     super.initState();
+
+    /// Loads the frames after a delay to ease the transition between the
+    /// loader and the frames
     Future.delayed(
       const Duration(milliseconds: 500),
     ).then((value) => context.read<SelectFrameCubit>().loadFrames());
@@ -51,6 +61,8 @@ class _SelectFramePageState extends State<SelectFramePage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SafeArea(
+        left: false,
+        right: false,
         child: BlocConsumer<SelectFrameCubit, SelectFrameState>(
           listener: (context, state) {
             if (state is SelectFrameFailure) {
@@ -62,33 +74,14 @@ class _SelectFramePageState extends State<SelectFramePage> {
           builder: (context, state) {
             if (state is SelectFrameLoaded ||
                 state is SelectFrameInitialState) {
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 600),
-                switchInCurve: Curves.easeIn,
-                switchOutCurve: Curves.easeIn,
-                transitionBuilder: (child, animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
+              return _FadeSwitcher(
                 child: state is SelectFrameLoaded
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _Carousel(frames: state.framesInfo),
-                        ],
+                    ? _LoadedFrames(
+                        frames: state.frames,
                       )
-                    : Align(
+                    : const Align(
                         alignment: Alignment.center,
-                        child: Container(
-                          padding: const EdgeInsets.all(5.5),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const CupertinoActivityIndicator(),
-                        ),
+                        child: Loader(),
                       ),
               );
             }

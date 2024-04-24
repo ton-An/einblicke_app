@@ -4,13 +4,13 @@ import 'dart:ui';
 
 import 'package:einblicke_app/core/ios_properties.dart';
 import 'package:einblicke_app/core/theme/ios_theme.dart';
-import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
-import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_cubit.dart';
-import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_states.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_states.dart';
+import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 part '_background_image.dart';
 part '_online_indicator.dart';
@@ -26,63 +26,31 @@ part '_wrapper.dart';
 /// - [_Overlay]
 ///   - [_Title]
 ///   - [_OnlineIndicator]
-class FrameCard extends StatefulWidget {
+class FrameCard extends StatelessWidget {
   const FrameCard({
     super.key,
     required this.frameInfo,
-    required this.onPressed,
   });
 
   final PairedFrameInfo frameInfo;
-  final VoidCallback onPressed;
-
-  @override
-  State<FrameCard> createState() => _FrameCardState();
-}
-
-class _FrameCardState extends State<FrameCard> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<FrameImageLoaderCubit>().loadFrameImage(
-          frameId: widget.frameInfo.id,
-        );
-  }
 
   @override
   Widget build(BuildContext context) {
     return _Wrapper(
-      onPressed: widget.onPressed,
-      child: BlocConsumer<FrameImageLoaderCubit, FrameImageLoaderState>(
-        listener: (context, state) {
-          if (state is FrameImagePreCacheLoaded) {
-            precacheImage(MemoryImage(state.imageBytes), context).then(
-                (value) => context
-                    .read<FrameImageLoaderCubit>()
-                    .setFrameImageCached(state.imageBytes));
-          }
-          if (state is FrameImageLoaderFailure) {
-            context
-                .read<InAppNotificationCubit>()
-                .sendFailureNotification(state.failure);
-          }
-        },
-        builder: (context, state) {
-          return Stack(
-            children: [
-              // -- Background Image --
-              const Positioned.fill(
-                child: _BackgroundImage(),
-              ),
+      frameId: frameInfo.id,
+      child: Stack(
+        children: [
+          // -- Background Image --
+          const Positioned.fill(
+            child: _BackgroundImage(),
+          ),
 
-              // -- Overlay --
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: _Overlay(title: widget.frameInfo.name),
-              ),
-            ],
-          );
-        },
+          // -- Overlay --
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _Overlay(title: frameInfo.name),
+          ),
+        ],
       ),
     );
   }

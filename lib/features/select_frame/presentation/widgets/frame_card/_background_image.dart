@@ -6,7 +6,7 @@ class _BackgroundImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FrameImageLoaderCubit, FrameImageLoaderState>(
+    return BlocBuilder<SingleImageLoaderCubit, FrameImageLoaderState>(
       builder: (context, state) {
         return Container(
           color: IOSTheme.of(context).colors.background,
@@ -24,6 +24,8 @@ class _BackgroundImage extends StatelessWidget {
                     child: Image.memory(
                       state.imageBytes,
                       fit: BoxFit.cover,
+                      gaplessPlayback: true,
+                      cacheHeight: 2000,
                     ),
                   )
                 : const Center(child: CupertinoActivityIndicator()),

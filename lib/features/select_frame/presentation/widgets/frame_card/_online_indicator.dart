@@ -20,19 +20,19 @@ class _OnlineIndicator extends StatelessWidget {
             sigmaY: 6,
           ),
           child: Padding(
-            padding: EdgeInsets.all(IOSTheme.of(context).spacing.xTiny),
+            padding: EdgeInsets.all(IOSTheme.of(context).spacing.small),
             child: Container(
-              width: 12,
-              height: 12,
+              width: 22,
+              height: 22,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: IOSTheme.of(context).colors.success,
-                  width: 1,
+                  width: 2,
                 ),
                 shape: BoxShape.circle,
               ),
               child: Container(
-                margin: EdgeInsets.all(IOSTheme.of(context).spacing.xTiny),
+                margin: EdgeInsets.all(IOSTheme.of(context).spacing.small),
                 decoration: BoxDecoration(
                   color: IOSTheme.of(context).colors.success,
                   shape: BoxShape.circle,

@@ -9,9 +9,9 @@ class SelectFrameInitialState extends SelectFrameState {
 }
 
 class SelectFrameLoaded extends SelectFrameState {
-  final List<PairedFrameInfo> framesInfo;
+  final List<PairedFrameInfo> frames;
 
-  const SelectFrameLoaded(this.framesInfo);
+  const SelectFrameLoaded(this.frames);
 }
 
 class SelectFrameFailure extends SelectFrameState {

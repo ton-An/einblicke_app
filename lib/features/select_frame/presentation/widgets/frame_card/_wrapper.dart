@@ -10,11 +10,11 @@ part of frame_card;
 class _Wrapper extends StatefulWidget {
   const _Wrapper({
     required this.child,
-    required this.onPressed,
+    required this.frameId,
   });
 
   final Widget child;
-  final VoidCallback onPressed;
+  final String frameId;
 
   @override
   State<_Wrapper> createState() => _WrapperState();
@@ -49,32 +49,15 @@ class _WrapperState extends State<_Wrapper>
   Widget build(BuildContext context) {
     return Opacity(
       opacity: _animation.value,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: IOSTheme.of(context)
-                  .colors
-                  .backgroundContrast
-                  .withOpacity(.2),
-              blurRadius: 10,
-              spreadRadius: 5,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
-          child: GestureDetector(
-            onTap: () {
-              _controller.forward().then((_) => _controller.reverse());
-              widget.onPressed();
-            },
-            child: SizedBox(
-              width: 200,
-              height: 270,
-              child: widget.child,
-            ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(IOSProperties.borderRadius * 2),
+        child: GestureDetector(
+          onTap: () {
+            _controller.forward().then((_) => _controller.reverse());
+            context.go(SelectImageModal.route, extra: widget.frameId);
+          },
+          child: SizedBox(
+            child: widget.child,
           ),
         ),
       ),

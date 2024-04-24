@@ -28,11 +28,11 @@ class _Overlay extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               // -- Online Indicator --
-              const Positioned(
-                right: -9,
-                top: 2,
-                child: _OnlineIndicator(),
-              ),
+              // const Positioned(
+              //   right: -9,
+              //   top: 2,
+              //   child: _OnlineIndicator(),
+              // ),
 
               // -- Title --
               _Title(title: title)
