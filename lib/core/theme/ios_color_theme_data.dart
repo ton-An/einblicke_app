@@ -20,7 +20,7 @@ class IOSColorThemeData {
     this.description = IOSColors.description,
     this.activityIndicator = IOSColors.white,
     this.fieldColor = IOSColors.lightGray,
-    this.background = IOSColors.lightGray,
+    this.background = IOSColors.white,
     this.error = IOSColors.red,
     this.success = IOSColors.green,
     this.border = IOSColors.border,
