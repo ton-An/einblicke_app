@@ -14,10 +14,16 @@ import 'package:einblicke_app/features/select_frame/presentation/pages/select_fr
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/pages/select_image_modal/select_image_modal.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart' as l10n;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+
+/*
+  To-Do:
+  - [ ] Find a better solution for enabling blur for the edges of modals
+*/
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,54 +68,66 @@ class EinblickeApp extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     initialLocation: SplashScreen.route,
-    routes: <RouteBase>[
+    routes: [
       ShellRoute(
         builder: (context, state, child) =>
             InAppNotificationListener(child: child),
         routes: [
           GoRoute(
-            path: SplashScreen.route,
-            pageBuilder: (context, state) => const IOSModalPage(
-              child: SplashScreen(),
-            ),
-          ),
-          GoRoute(
-            path: SelectFramePage.route,
-            pageBuilder: (context, state) => IOSPage(
-              child: BlocProvider(
-                create: (context) => getIt<SelectFrameCubit>(),
-                child: const SelectFramePage(),
-              ),
+            path: "/",
+
+            /// This base route is necessary for the edges of the modal to be blurred
+            /// when an [InAppNotification] is shown.
+            pageBuilder: (context, state) => const CupertinoPage(
+              child: ColoredBox(color: Colors.black),
             ),
             routes: [
               GoRoute(
-                path: SelectImageModal.pageName,
-                name: SelectImageModal.pageName,
-                pageBuilder: (context, state) => IOSModalPage(
+                path: SplashScreen.pageName,
+                pageBuilder: (context, state) => const CupertinoPage(
+                  child: SplashScreen(),
+                ),
+              ),
+              GoRoute(
+                path: SelectFramePage.pageName,
+                pageBuilder: (context, state) => IOSPage(
                   child: BlocProvider(
-                    create: (context) => getIt<SelectImageCubit>(),
-                    child: SelectImageModal(
-                      frameId: state.extra as String,
-                    ),
+                    create: (context) => getIt<SelectFrameCubit>(),
+                    child: const SelectFramePage(),
                   ),
                 ),
+                routes: [
+                  GoRoute(
+                    path: SelectImageModal.pageName,
+                    name: SelectImageModal.pageName,
+                    pageBuilder: (context, state) => IOSModalPage(
+                      child: BlocProvider(
+                        create: (context) => getIt<SelectImageCubit>(),
+                        child: SelectImageModal(
+                          frameId: state.extra as String,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          GoRoute(
-            path: SignInPage.route,
-            pageBuilder: (context, state) => IOSModalPage(
-              child: BlocProvider(
-                create: (context) => getIt<SignInCubit>(),
-                child: const SignInPage(),
-              ),
-            ),
-            routes: <RouteBase>[
               GoRoute(
-                path: WelcomeModal.pageName,
-                pageBuilder: (context, state) => const IOSModalPage(
-                  child: WelcomeModal(),
+                path: SignInPage.pageName,
+                pageBuilder: (context, state) => IOSPage(
+                  child: BlocProvider(
+                    create: (context) => getIt<SignInCubit>(),
+                    child: const SignInPage(),
+                  ),
                 ),
+                routes: <RouteBase>[
+                  GoRoute(
+                    path: WelcomeModal.pageName,
+                    name: WelcomeModal.pageName,
+                    pageBuilder: (context, state) => const IOSModalPage(
+                      child: WelcomeModal(),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
