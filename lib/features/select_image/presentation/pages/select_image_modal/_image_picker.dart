@@ -36,12 +36,10 @@ class _ImagePickerState extends State<_ImagePicker>
 
   @override
   Widget build(BuildContext context) {
-    final double displayWidth = MediaQuery.of(context).size.width;
     return ClipRRect(
       borderRadius: BorderRadius.circular(IOSProperties.borderRadius),
       child: SizedBox(
-        width: displayWidth * .8,
-        height: 400,
+        width: double.infinity,
         child: BlocBuilder<SelectImageCubit, SelectImageState>(
           builder: (context, state) {
             if (state is SelectImageStateWithFile) {
