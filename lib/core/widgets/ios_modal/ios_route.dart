@@ -22,6 +22,7 @@ class IOSRoute<T> extends PageRouteBuilder<T> {
   }) : super(
           pageBuilder: (context, animation, secondaryAnimation) => child,
           settings: page,
+          opaque: false,
         );
 
   final Widget child;

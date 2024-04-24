@@ -19,7 +19,7 @@ class IOSColors {
   static const Color lightGray = Color.fromARGB(255, 243, 242, 248);
   static const Color accent = Color.fromARGB(255, 222, 154, 28);
   static const Color red = Color.fromARGB(255, 255, 59, 48);
-  static const Color green = Color.fromARGB(255, 47, 229, 40);
+  static const Color green = Color.fromARGB(255, 52, 199, 89);
   static const Color border = Color.fromARGB(255, 134, 134, 139);
   static const Color hint = Color.fromARGB(255, 142, 142, 147);
   static const Color disabled = Color.fromARGB(20, 116, 116, 128);
