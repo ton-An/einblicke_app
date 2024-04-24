@@ -21,8 +21,8 @@ import 'package:einblicke_app/features/select_frame/data/repository_implementati
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_app/features/select_frame/domain/usecases/get_most_recent_image_of_frame.dart';
 import 'package:einblicke_app/features/select_frame/domain/usecases/get_paired_frames_info.dart';
-import 'package:einblicke_app/features/select_frame/presentation/cubits/frame_image_loader_cubit/frame_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
 import 'package:einblicke_app/features/select_image/data/repository_implementation/select_image_repository_impl.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
@@ -161,7 +161,7 @@ void _registerSelectFrame() {
   // -- Presentation -- //
   getIt.registerFactory(() => SelectFrameCubit(getPairedFramesInfo: getIt()));
   getIt.registerFactory(
-    () => FrameImageLoaderCubit(
+    () => SingleImageLoaderCubit(
       getMostRecentImageOfFrame: getIt(),
     ),
   );
