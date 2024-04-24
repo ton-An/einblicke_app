@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -34,13 +33,7 @@ class SelectImageCubit extends Cubit<SelectImageState> {
       (Failure failure) => emit(SelectImageFailure(failure: failure)),
       (_) {
         emit(SelectImageSuccess(image: selectedImage));
-        _resetForm();
       },
     );
-  }
-
-  void _resetForm() async {
-    await Future.delayed(const Duration(milliseconds: 1400));
-    emit(const SelectImageInitial());
   }
 }

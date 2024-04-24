@@ -83,13 +83,23 @@ class _ImagePickerState extends State<_ImagePicker>
     _controller.forward().then((_) => _controller.reverse());
     await getIt<ImagePicker>()
         .pickImage(source: ImageSource.gallery)
-        .then((image) async {
-      await ImageCropper()
-          .cropImage(
-        sourcePath: image!.path,
+        .then((XFile? image) async {
+      if (image == null) return;
+
+      await ImageCropper().cropImage(
+        uiSettings: [
+          IOSUiSettings(
+            rotateButtonsHidden: true,
+            aspectRatioPickerButtonHidden: true,
+            resetButtonHidden: true,
+            aspectRatioLockEnabled: true,
+          )
+        ],
+        sourcePath: image.path,
         aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 3),
-      )
-          .then((CroppedFile? croppedImage) {
+      ).then((CroppedFile? croppedImage) {
+        if (croppedImage == null) return;
+
         context.read<SelectImageCubit>().selectImage(File(croppedImage!.path));
       });
     });

@@ -28,6 +28,8 @@ part '_send_image_button.dart';
 
 /* To-Do:
   - [ ] Probably convert this to a normal Page instead of a Modal
+  - [ ] Add a success sound
+  - [ ] Better ui error handling. Currently the user needs to close the modal to retry (and the error notifiaction obscures the cancel button)
 */
 
 /// __Select Image Modal__
@@ -53,6 +55,11 @@ class SelectImageModal extends StatelessWidget {
           context
               .read<InAppNotificationCubit>()
               .sendFailureNotification(state.failure);
+        }
+
+        if (state is SelectImageSuccess) {
+          Future.delayed(const Duration(milliseconds: 1500))
+              .then((value) => context.pop());
         }
       },
       child: IOSModal(

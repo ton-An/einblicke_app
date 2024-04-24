@@ -32,16 +32,22 @@ class _SendImageButton extends StatelessWidget {
         }
 
         if (state is SelectImageSuccess) {
-          return IOSTextButton(
-            text: AppLocalizations.of(context)!.success,
+          return IOSButton(
             disabledColor: IOSTheme.of(context).colors.success,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 0),
+              child: Icon(
+                CupertinoIcons.check_mark_circled_solid,
+                size: 22,
+              ),
+            ),
           );
         }
 
         if (state is SelectImageFailure) {
-          return IOSTextButton(
-            text: AppLocalizations.of(context)!.error,
+          return IOSButton(
             disabledColor: IOSTheme.of(context).colors.error,
+            child: const Icon(CupertinoIcons.xmark_circle_fill),
           );
         }
 
