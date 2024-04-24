@@ -1,11 +1,11 @@
 library welcome_modal;
 
-import 'package:einblicke_app/core/ios_properties.dart';
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
 import 'package:einblicke_app/core/theme/ios_theme.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/xx_medium_gap.dart';
+import 'package:einblicke_app/core/widgets/ios_modal/ios_modal.dart';
 import 'package:einblicke_app/core/widgets/ios_text_button.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +15,6 @@ part '_continue_button.dart';
 part '_cover_artwork.dart';
 part '_description.dart';
 part '_title.dart';
-part '_wrapper.dart';
 
 /*
   To-Dos:
@@ -41,42 +40,43 @@ class WelcomeModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _Wrapper(
-      children: [
-        Expanded(
-          child: ListView(
-            children: [
-              const XLargeGap(),
+    return IOSModal(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ListView(
+              children: [
+                // -- Cover Artwork --
+                const _CoverArtwork(),
 
-              // -- Cover Artwork --
-              const _CoverArtwork(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: IOSTheme.of(context).spacing.xMedium,
+                  ),
+                  child: const Column(
+                    children: [
+                      XXMediumGap(),
 
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: IOSTheme.of(context).spacing.xMedium,
+                      // -- Title --
+                      _Title(),
+                      XMediumGap(),
+
+                      // -- Description --
+                      _Description(),
+                      XLargeGap(),
+                    ],
+                  ),
                 ),
-                child: const Column(
-                  children: [
-                    XXMediumGap(),
-
-                    // -- Title --
-                    _Title(),
-                    XMediumGap(),
-
-                    // -- Description --
-                    _Description(),
-                    XLargeGap(),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const XMediumGap(),
+          const XMediumGap(),
 
-        // -- Continue button --
-        const _ContinueButton(),
-      ],
+          // -- Continue button --
+          const _ContinueButton(),
+        ],
+      ),
     );
   }
 }
