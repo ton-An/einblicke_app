@@ -51,7 +51,8 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _showWelcomeModal() {
-    context.go(WelcomeModal.route);
+    Future.delayed(const Duration(milliseconds: 200))
+        .then((value) => context.go(WelcomeModal.route));
   }
 
   @override
