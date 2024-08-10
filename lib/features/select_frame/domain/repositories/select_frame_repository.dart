@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
-import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
 /// {@template select_frame_repository}

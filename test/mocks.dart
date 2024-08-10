@@ -1,13 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
-import 'package:einblicke_app/core/data/repository_impl/repository_failure_handler.dart';
-import 'package:einblicke_app/core/domain/usecases/server_auth_wrapper.dart';
-import 'package:einblicke_app/features/authentication/data/data_sources/authentication_local_data_source.dart';
-import 'package:einblicke_app/features/authentication/data/data_sources/authentication_remote_data_source.dart';
-import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
-import 'package:einblicke_app/features/authentication/domain/repositories/authentication_repository.dart';
-import 'package:einblicke_app/features/authentication/domain/usecases/refresh_token_bundle.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';

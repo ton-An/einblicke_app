@@ -1,7 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:einblicke_app/core/data/data_sources/server_remote_handler.dart';
-import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 
 /// {@template select_frame_remote_data_source}

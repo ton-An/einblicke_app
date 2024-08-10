@@ -1,9 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:einblicke_app/core/secrets.dart';
-import 'package:einblicke_app/features/authentication/domain/models/authentication_token.dart';
-import 'package:einblicke_app/features/authentication/domain/models/token_bundle.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:flutter/services.dart';
 
