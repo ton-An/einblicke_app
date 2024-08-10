@@ -35,7 +35,7 @@ class _DefaultTextSyles {
     fontFamily: '.SF Pro Display',
     fontSize: 34.0,
     fontWeight: FontWeight.w700,
-    letterSpacing: -1.25,
+    letterSpacing: -1.6,
     wordSpacing: -1.1,
     height: 1.2,
     color: CupertinoColors.label,
@@ -56,7 +56,7 @@ class _DefaultTextSyles {
     inherit: false,
     fontFamily: '.SF Pro Text',
     fontSize: 17.0,
-    letterSpacing: -0.4,
+    letterSpacing: -0.3,
     height: 1.29,
     color: CupertinoColors.label,
   );

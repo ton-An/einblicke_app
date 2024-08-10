@@ -1,5 +1,4 @@
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal_page.dart';
-import 'package:einblicke_app/core/widgets/custom_cupertino_modal/split_curve.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sprung/sprung.dart';

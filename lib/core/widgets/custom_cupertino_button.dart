@@ -32,7 +32,7 @@ class CustomCupertinoButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(
         CustomCupertinoProperties.buttonBorderRadius,
       ),
-      minSize: 50,
+      minSize: 52,
       onPressed: onPressed,
       child: child,
     );

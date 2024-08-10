@@ -4,6 +4,7 @@ import 'package:einblicke_app/core/l10n/app_localizations.dart';
 import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
+import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/core/widgets/gaps/xx_medium_gap.dart';
@@ -49,7 +50,7 @@ class WelcomeModal extends StatelessWidget {
               children: [
                 // -- Cover Artwork --
                 const _CoverArtwork(),
-
+                XXMediumGap(), _Title(),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal:
@@ -57,11 +58,8 @@ class WelcomeModal extends StatelessWidget {
                   ),
                   child: const Column(
                     children: [
-                      XXMediumGap(),
-
                       // -- Title --
-                      _Title(),
-                      XMediumGap(),
+                      MediumGap(),
 
                       // -- Description --
                       _Description(),

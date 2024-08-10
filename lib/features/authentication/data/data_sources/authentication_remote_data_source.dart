@@ -49,6 +49,7 @@ class AuthenticationRemoteDataSourceImpl
   });
 
   final ServerRemoteHandler serverRemoteHandler;
+
   @override
   Future<TokenBundle> getNewTokenBundle(
       {required AuthenticationToken refreshToken}) async {
