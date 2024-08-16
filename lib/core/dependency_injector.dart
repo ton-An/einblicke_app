@@ -3,9 +3,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/secrets.dart';
-import 'package:einblicke_app/features/authentication/presentation/cubits/authentication_status_cubit/authentication_status_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
 import 'package:einblicke_app/features/select_frame/data/repository_implementations/select_frame_repository_impl.dart';
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
@@ -19,6 +17,7 @@ import 'package:einblicke_app/features/select_image/domain/repositories/select_i
 import 'package:einblicke_app/features/select_image/domain/usecases/send_image.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

@@ -5,6 +5,7 @@ import 'package:einblicke_app/features/select_frame/domain/repositories/select_f
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:file/file.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mocktail/mocktail.dart';

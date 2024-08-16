@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 
 /// {@template select_frame_remote_data_source}
 /// __Select Frame Remote Data Source__ is a contract for remote data source operations helping select a frame to send an image to.

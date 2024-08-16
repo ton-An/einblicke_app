@@ -1,5 +1,4 @@
-import 'package:einblicke_app/core/custom_cupertino_properties.dart';
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/cupertino.dart';
 
 /*

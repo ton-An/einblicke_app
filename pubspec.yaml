@@ -32,6 +32,8 @@ dependencies:
   equatable: ^2.0.5
   einblicke_shared:
     path: ../einblicke_shared/
+  einblicke_shared_clients:
+    path: ../einblicke_shared_clients/
   dartz: ^0.10.1
   mocktail: ^1.0.3
   shared_preferences: ^2.2.2

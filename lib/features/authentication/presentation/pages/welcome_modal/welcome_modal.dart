@@ -1,14 +1,10 @@
 library welcome_modal;
 
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
-import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/xx_medium_gap.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 

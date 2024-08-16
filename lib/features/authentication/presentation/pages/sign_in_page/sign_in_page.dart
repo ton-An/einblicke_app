@@ -1,18 +1,14 @@
 library sign_in_page;
 
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_button.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_field.dart';
-import 'package:einblicke_app/core/widgets/gaps/medium_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/x_large_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_states.dart';
 import 'package:einblicke_app/features/authentication/presentation/pages/welcome_modal/welcome_modal.dart';
-import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

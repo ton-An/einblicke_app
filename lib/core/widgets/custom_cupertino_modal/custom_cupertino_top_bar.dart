@@ -1,6 +1,6 @@
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_small_text_button.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/material.dart';
 
 /// __Custom Cupertino Modal Top Bar__

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:file/file.dart';
 import 'package:http_parser/http_parser.dart';
 

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
 import 'package:einblicke_app/features/select_frame/domain/repositories/select_frame_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 
 /// {@template select_frame_repository}
 /// __Select Frame Repository Implementation__ is the concrete implementation of

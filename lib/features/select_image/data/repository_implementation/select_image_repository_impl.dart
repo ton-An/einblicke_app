@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:einblicke_app/features/select_image/data/data_sources/select_image_remote_data_source.dart';
 import 'package:einblicke_app/features/select_image/domain/repositories/select_image_repository.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 
 /// {@template select_image_repository_impl}
 /// __Select Image Repository Implementation__ is the concrete implementation of

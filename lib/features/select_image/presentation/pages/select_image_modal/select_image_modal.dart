@@ -2,21 +2,17 @@ library select_image_modal;
 
 import 'dart:io';
 
-import 'package:einblicke_app/core/custom_cupertino_properties.dart';
 import 'package:einblicke_app/core/dependency_injector.dart';
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_button.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_modal.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_top_bar.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_small_text_button.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
-import 'package:einblicke_app/core/widgets/gaps/small_gap.dart';
-import 'package:einblicke_app/core/widgets/gaps/x_medium_gap.dart';
-import 'package:einblicke_app/features/in_app_notification/presentation/cubit/in_app_notification_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_states.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +26,7 @@ part '_send_image_button.dart';
   - [ ] Probably convert this to a normal Page instead of a Modal
   - [ ] Add a success sound
   - [ ] Better ui error handling. Currently the user needs to close the modal to retry (and the error notifiaction obscures the cancel button)
+  - [ ] Avoid using context across async gaps
 */
 
 /// __Select Image Modal__

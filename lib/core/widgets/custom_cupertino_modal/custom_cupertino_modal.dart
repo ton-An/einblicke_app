@@ -1,8 +1,7 @@
 library welcome_modal;
 
-import 'package:einblicke_app/core/custom_cupertino_properties.dart';
-import 'package:einblicke_app/core/theme/custom_cupertino_theme.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_top_bar.dart';
+import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
 import 'package:flutter/cupertino.dart';
 
 /// __Custom Cupertino Modal__
