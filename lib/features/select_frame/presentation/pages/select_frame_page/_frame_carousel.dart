@@ -32,7 +32,7 @@ class _FrameCarouselState extends State<_FrameCarousel> {
       },
       child: FlutterCarousel.builder(
         itemCount: _frameCards.length,
-        options: CarouselOptions(
+        options: FlutterCarouselOptions(
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
           height: double.infinity,
@@ -40,10 +40,12 @@ class _FrameCarouselState extends State<_FrameCarousel> {
           padEnds: true,
           indicatorMargin: CustomCupertinoTheme.of(context).spacing.xMedium,
           slideIndicator: CircularSlideIndicator(
-            currentIndicatorColor:
-                CustomCupertinoTheme.of(context).colors.backgroundContrast,
-            indicatorBackgroundColor:
-                CustomCupertinoTheme.of(context).colors.disabledButton,
+            slideIndicatorOptions: SlideIndicatorOptions(
+              currentIndicatorColor:
+                  CustomCupertinoTheme.of(context).colors.backgroundContrast,
+              indicatorBackgroundColor:
+                  CustomCupertinoTheme.of(context).colors.disabledButton,
+            ),
           ),
           floatingIndicator: false,
         ),

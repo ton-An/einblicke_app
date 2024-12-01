@@ -11,19 +11,11 @@ class _CoverArtwork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Image.asset(
+      "assets/images/unlicensed/cover.png",
       width: 240,
       height: 292,
-      decoration: BoxDecoration(
-        color: CustomCupertinoTheme.of(context).colors.fieldColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
+      fit: BoxFit.contain,
     );
-    // Image.asset(
-    //   "assets/images/unlicensed/cover.png",
-    //   width: 240,
-    //   height: 240,
-    //   fit: BoxFit.contain,
-    // );
   }
 }

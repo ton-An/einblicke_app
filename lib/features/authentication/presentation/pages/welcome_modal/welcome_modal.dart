@@ -46,7 +46,8 @@ class WelcomeModal extends StatelessWidget {
               children: [
                 // -- Cover Artwork --
                 const _CoverArtwork(),
-                XXMediumGap(), _Title(),
+                const XXMediumGap(),
+                const _Title(),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal:
