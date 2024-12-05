@@ -2,11 +2,7 @@ part of select_frame_page;
 
 /// The carousel for displaying the frames on the [SelectFramePage]
 class _FrameCarousel extends StatefulWidget {
-  const _FrameCarousel({
-    required this.frames,
-  });
-
-  final List<PairedFrameInfo> frames;
+  const _FrameCarousel();
 
   @override
   State<_FrameCarousel> createState() => _FrameCarouselState();
@@ -19,15 +15,18 @@ class _FrameCarouselState extends State<_FrameCarousel> {
   void initState() {
     super.initState();
 
-    _preBuildFrameCards();
+    SelectFrameState state = context.read<SelectFrameCubit>().state;
+    if (state is SelectFrameLoaded) {
+      _preBuildFrameCards(state.frames);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<SelectFrameCubit, SelectFrameState>(
       listener: (context, state) {
-        if (state is SelectFrameReloaded) {
-          _preBuildFrameCards();
+        if (state is SelectFrameLoaded) {
+          _preBuildFrameCards(state.frames);
         }
       },
       child: FlutterCarousel.builder(
@@ -50,6 +49,8 @@ class _FrameCarouselState extends State<_FrameCarousel> {
           floatingIndicator: false,
         ),
         itemBuilder: (context, i, _) {
+          print("Length");
+          print(_frameCards.length);
           return _frameCards[i];
         },
       ),
@@ -57,11 +58,11 @@ class _FrameCarouselState extends State<_FrameCarousel> {
   }
 
   /// Pre-builds the frame cards to avoid the frame cards being disposed when using the carousel
-  void _preBuildFrameCards() {
+  void _preBuildFrameCards(List<PairedFrameInfo> frames) {
     _frameCards.clear();
     imageCache.clear();
 
-    for (PairedFrameInfo frame in widget.frames) {
+    for (PairedFrameInfo frame in frames) {
       final SingleImageLoaderCubit singleImageLoaderCubit =
           getIt<SingleImageLoaderCubit>();
 
@@ -91,6 +92,16 @@ class _FrameCarouselState extends State<_FrameCarousel> {
 
       _frameCards.add(frameWidget);
     }
+
+    _frameCards.add(
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: CustomCupertinoTheme.of(context).spacing.xMedium,
+        ),
+        child: AddFrameCard(),
+      ),
+    );
+
     setState(() {});
   }
 

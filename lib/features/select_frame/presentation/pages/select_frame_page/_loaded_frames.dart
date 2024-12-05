@@ -2,11 +2,7 @@ part of select_frame_page;
 
 /// The content of the loaded [SelectFramePage]
 class _LoadedFrames extends StatelessWidget {
-  const _LoadedFrames({
-    required this.frames,
-  });
-
-  final List<PairedFrameInfo> frames;
+  const _LoadedFrames();
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +26,7 @@ class _LoadedFrames extends StatelessWidget {
           const XMediumGap(),
 
           // -- Frame Carousel --
-          Expanded(
-              child: _FrameCarousel(
-            frames: frames,
-          )),
+          Expanded(child: _FrameCarousel()),
         ],
       ),
     );

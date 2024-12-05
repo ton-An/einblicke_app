@@ -9,6 +9,7 @@ import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cuperti
 import 'package:einblicke_app/core/widgets/custom_cupertino_modal/custom_cupertino_top_bar.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_small_text_button.dart';
 import 'package:einblicke_app/core/widgets/custom_cupertino_text_button.dart';
+import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/pages/select_frame_page/select_frame_page.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_cubit.dart';
 import 'package:einblicke_app/features/select_image/presentation/cubits/select_image_states.dart';
@@ -55,8 +56,10 @@ class SelectImageModal extends StatelessWidget {
         }
 
         if (state is SelectImageSuccess) {
-          Future.delayed(const Duration(milliseconds: 1500))
-              .then((value) => context.pop());
+          context.read<SelectFrameCubit>().reloadFrames();
+          Future.delayed(const Duration(milliseconds: 1500)).then(
+            (value) => context.pop(),
+          );
         }
       },
       child: CustomCupertinoModal(

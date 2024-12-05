@@ -35,6 +35,7 @@ class FrameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(frameInfo.name);
     return _Wrapper(
       frameId: frameInfo.id,
       child: Stack(

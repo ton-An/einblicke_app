@@ -43,6 +43,8 @@ dependencies:
   sprung: ^3.0.1
   device_info_plus: ^11.1.1
   apple_product_name: ^3.0.0
+  mobile_scanner: ^6.0.2
+  qr_code_scanner_plus: ^2.0.6
 
 dev_dependencies:
   flutter_test:

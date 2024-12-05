@@ -17,5 +17,9 @@
     "selectImage": "Select Image",
     "imageSelection": "Image Selection",
     "cancel": "Cancel",
-    "yourFrames": "Your Frames"
+    "yourFrames": "Your Frames",
+    "addFrame": "Add Frame",
+    "addFrameDescription": "To add a frame, please scan the QR Code on your not yet configured Einblicke frame",
+    "frameName": "Frame Name",
+    "nameTheFrame": "Name Your Frame"
 }

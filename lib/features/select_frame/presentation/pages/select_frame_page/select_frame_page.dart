@@ -1,13 +1,12 @@
 library select_frame_page;
 
-import 'dart:async';
-
 import 'package:einblicke_app/core/dependency_injector.dart';
 import 'package:einblicke_app/core/l10n/app_localizations.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/select_frame_cubit/select_frame_states.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_cubit.dart';
 import 'package:einblicke_app/features/select_frame/presentation/cubits/single_image_loader_cubit/single_image_loader_states.dart';
+import 'package:einblicke_app/features/select_frame/presentation/widgets/add_frame_card.dart';
 import 'package:einblicke_app/features/select_frame/presentation/widgets/frame_card/frame_card.dart';
 import 'package:einblicke_shared/einblicke_shared.dart';
 import 'package:einblicke_shared_clients/einblicke_shared_clients.dart';
@@ -52,9 +51,7 @@ class _SelectFramePageState extends State<SelectFramePage> {
 
     /// Loads the frames after a delay to ease the transition between the
     /// loader and the frames
-    Future.delayed(
-      const Duration(milliseconds: 500),
-    ).then((value) => context.read<SelectFrameCubit>().loadFrames());
+    context.read<SelectFrameCubit>().loadFrames();
   }
 
   @override
@@ -77,9 +74,7 @@ class _SelectFramePageState extends State<SelectFramePage> {
                   state is SelectFrameInitialState) {
                 return _FadeSwitcher(
                   child: state is SelectFrameLoaded
-                      ? _LoadedFrames(
-                          frames: state.frames,
-                        )
+                      ? _LoadedFrames()
                       : const Align(
                           alignment: Alignment.center,
                           child: Loader(),

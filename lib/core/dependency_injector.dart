@@ -3,6 +3,11 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:einblicke_app/core/secrets.dart';
+import 'package:einblicke_app/features/add_frame/data/datasources/add_frame_remote_data_source.dart';
+import 'package:einblicke_app/features/add_frame/data/repository_implementations/add_frame_repository_impl.dart';
+import 'package:einblicke_app/features/add_frame/domain/repositories/add_frame_repository.dart';
+import 'package:einblicke_app/features/add_frame/domain/usecases/add_frame.dart';
+import 'package:einblicke_app/features/add_frame/presentation/cubit/add_frame_cubit/add_frame_cubit.dart';
 import 'package:einblicke_app/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:einblicke_app/features/select_frame/data/data_sources/select_frame_remote_data_source.dart';
 import 'package:einblicke_app/features/select_frame/data/repository_implementations/select_frame_repository_impl.dart';
@@ -26,7 +31,7 @@ import 'package:image_picker/image_picker.dart';
 
 /*
   To-Dos:
-  - [ ] Revamp to make strucutre clearer (will become more important as the app grows)
+  - [ ] Revamp to make structure clearer (will become more important as the app grows)
 */
 
 final GetIt getIt = GetIt.instance;
@@ -61,6 +66,9 @@ void initGetIt() {
 
   // =+=+ Select Image +=+= //
   _registerSelectImage();
+
+  // =+=+ Add Frame +=+= //
+  _registerAddFrame();
 }
 
 void _registerCore() {
@@ -71,6 +79,14 @@ void _registerCore() {
     () => ServerRemoteHandler(dio: getIt(), failureMapper: getIt()),
   );
   getIt.registerLazySingleton(() => const RepositoryFailureHandler());
+
+  // -- Domain -- //
+  getIt.registerLazySingleton(
+    () => ServerAuthWrapper<None>(
+      authenticationRepository: getIt(),
+      refreshTokenBundle: getIt(),
+    ),
+  );
 
   // -- Presentation -- //
   getIt.registerFactory(() => InAppNotificationCubit());
@@ -178,17 +194,41 @@ void _registerSelectImage() {
       serverAuthWrapper: getIt(),
     ),
   );
-  getIt.registerLazySingleton(
-    () => ServerAuthWrapper<None>(
-      authenticationRepository: getIt(),
-      refreshTokenBundle: getIt(),
-    ),
-  );
 
   // -- Presentation -- //
   getIt.registerFactory(
     () => SelectImageCubit(
       sendImageUsecase: getIt(),
+    ),
+  );
+}
+
+void _registerAddFrame() {
+  // -- Data -- //
+  getIt.registerLazySingleton<AddFrameRemoteDataSource>(
+    () => AddFrameRemoteDataSourceImpl(
+      serverRemoteHandler: getIt(),
+    ),
+  );
+  getIt.registerLazySingleton<AddFrameRepository>(
+    () => AddFrameRepositoryImpl(
+      addFrameRemoteDataSource: getIt(),
+      failureHandler: getIt(),
+    ),
+  );
+
+  // -- Domain -- //
+  getIt.registerLazySingleton(
+    () => AddFrame(
+      addFrameRepository: getIt(),
+      serverAuthWrapper: getIt(),
+    ),
+  );
+
+  // -- Presentation -- //
+  getIt.registerFactory(
+    () => AddFrameCubit(
+      addFrameUsecase: getIt(),
     ),
   );
 }

@@ -17,14 +17,6 @@ class SelectFrameCubit extends Cubit<SelectFrameState> {
     pairedFramesInfoEither.fold((Failure failure) {
       emit(SelectFrameFailure(failure));
     }, (List<PairedFrameInfo> framesInfo) {
-      framesInfo = framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo;
       emit(SelectFrameLoaded(framesInfo));
     });
   }
@@ -36,14 +28,6 @@ class SelectFrameCubit extends Cubit<SelectFrameState> {
     pairedFramesInfoEither.fold((Failure failure) {
       emit(SelectFrameFailure(failure));
     }, (List<PairedFrameInfo> framesInfo) {
-      framesInfo = framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo +
-          framesInfo;
       emit(SelectFrameReloaded(framesInfo));
     });
   }
